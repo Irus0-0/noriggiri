@@ -20,7 +20,13 @@ public class User {
 
     public User() {
         this.userNo = ++sequence;
+    }
 
+    public User(String userId, String userPw, String nickName) {
+        this();
+        this.userId = userId;
+        this.userPw = userPw;
+        this.nickName = nickName;
     }
 }
 

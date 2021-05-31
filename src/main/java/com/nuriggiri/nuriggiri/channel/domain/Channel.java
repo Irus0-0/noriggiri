@@ -15,9 +15,24 @@ import java.util.List;
 public class Channel {
     private static int sequence;
 
-    private int channelNo; //채널번호
-    private List<User> joinUser; //조인유저
+    private int channelNo; //채널번호 PK
+    private String channelName; //채널이름
+    private String channelInfo; //채널 설명
+    private List<User> joinUser; // 채널에 들어와 있는 유저
     private String userId; //생성한 유저 아이디
-    private String nickName; //닉네임
+    private String channelPw; //채널 접속시 필요한 패스워드
+//    private String dbName; // 테이블 네임 생성 생각중
+
+    public Channel() {
+        this.channelNo = ++sequence;
+    }
+
+    public Channel(String channelName, String channelInfo , String userId, String channelPw) {
+        this();
+        this.channelName = channelName;
+        this.channelInfo = channelInfo;
+        this.userId = userId;
+        this.channelPw = channelPw;
+    }
 
 }
