@@ -1,4 +1,4 @@
-package com.nuriggiri.noriggiri;
+package com.nuriggiri.nuriggiri;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
