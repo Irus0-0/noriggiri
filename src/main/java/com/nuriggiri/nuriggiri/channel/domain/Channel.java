@@ -20,7 +20,7 @@ public class Channel {
     private String channelName; //채널이름
     private String channelInfo; //채널 설명
     private List<User> joinUser; // 채널에 들어와 있는 유저
-    private String userId; //생성한 유저 아이디
+    private int adminUserNo; //생성한 유저 아이디
     private String channelPw; //채널 접속시 필요한 패스워드
 //    private String dbName; // 테이블 네임 생성 생각중
     private Date creationDate; //채널 생성일
@@ -29,11 +29,10 @@ public class Channel {
         this.channelNo = ++sequence;
     }
 
-    public Channel(String channelName, String channelInfo , String userId, String channelPw) {
+    public Channel(String channelName, String channelInfo ,String channelPw) {
         this();
         this.channelName = channelName;
         this.channelInfo = channelInfo;
-        this.userId = userId;
         this.channelPw = channelPw;
     }
 
