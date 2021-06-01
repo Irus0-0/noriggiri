@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nuriggiri.nuriggiri.user.repository.UserMapper">
+
+    <resultMap id="userMap" type="com.nuriggiri.nuriggiri.user.domain.User">
+        <result property="userNo" column="user_no"/>
+        <result property="userId" column="user_id"/>
+        <result property="userPw" column="user_pw"/>
+        <result property="nickName" column="nick_name"/>
+    </resultMap>
+
+    <!--    회원가입-->
+    <insert id="signUp">
+        INSERT INTO nori_user
+        (user_no, user_id, user_pw, nick_name)
+        VALUES
+        (SEQ_nori_USER.nextval, #{userId}, #{userPw}, #{nickName})
+    </insert>
+
+    <!--    회원 탈퇴-->
+    <delete id="deleteUser">
+        DELETE FROM nori_user
+        WHERE user_no = #{userNo}
+    </delete>
+
+    <!--    로그인-->
+
+    <!--    로그아웃-->
+
+    <!--    내 정보 변경-->
+    <update id="modifyUser">
+        UPDATE nori_user
+        SET
+        user_pw = #{userPw},
+        nick_name = #{nickName}
+        WHERE user_no = #{userNo}
+    </update>
+    <!--    내 정보 보기-->
+    <select id="userInfo" resultMap="userMap">
+        SELECT user_id, user_pw, nick_name
+        FROM nori_user
+        WHERE user_no=#{userNO}
+    </select>
+
+    <!--    중복 아이디 검색-->
+    <select id="searchUserId" resultType="int">
+        SELECT count(user_id)
+        FROM nori_user
+        WHERE user_id = #{userId}
+    </select>
+
+    <!--    중복 닉네임 검색-->
+    <select id="searchUserNickName" resultType="int">
+        SELECT count(nick_name)
+        FROM nori_user
+        WHERE nick_name = #{nickName}
+    </select>
+
+</mapper>
