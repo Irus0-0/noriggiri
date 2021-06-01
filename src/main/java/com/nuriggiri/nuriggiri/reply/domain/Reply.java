@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.Date;
 import java.util.List;
 
 @Setter
@@ -22,6 +23,7 @@ public class Reply {
     private String content; //댓글 내용
     private int recommend; //추천
     private List<User> recommendList; //추천한 사람들 중복추천방지
+    private Date regDate; // 댓글 작성일자
 
     public Reply() {
         this.replyNo = ++sequence;

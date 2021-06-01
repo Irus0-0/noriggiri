@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.Date;
 import java.util.List;
 
 @Setter @Getter
@@ -22,6 +23,7 @@ public class Board {
     private String content; //글내용
     private int recommend; //추천
     private List<User> recommendList; //추천한 사람들
+    private Date regDate; //글 작성일
 
     public Board() {
         this.boardNo = ++sequence;

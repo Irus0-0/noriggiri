@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.Date;
 import java.util.List;
 
 @Setter
@@ -22,6 +23,7 @@ public class Channel {
     private String userId; //생성한 유저 아이디
     private String channelPw; //채널 접속시 필요한 패스워드
 //    private String dbName; // 테이블 네임 생성 생각중
+    private Date creationDate; //채널 생성일
 
     public Channel() {
         this.channelNo = ++sequence;
