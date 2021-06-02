@@ -18,7 +18,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <style>
-        .hide{
+        .hide {
             display: none;
         }
     </style>
@@ -26,43 +26,112 @@
 
 <body>
 
-    <form class="abc" action="/sign/up" method="post">
+    <form action="/sign/up" id="signUpForm" method="post">
         <p id="signInput">
-            # Id: <input type="text" id="userId" name="userId"><br>
+            <input type="hidden" name="userNo" value="0">
+            # Id: <input type="text" id="userId" name="userId">
+            <span id="idChk"></span> <br>
+
             <!-- <button type="button" id="idcheck">아이디 중복확인</button> <br> -->
-            <div class="hide">사용가능!</div>
-            <div class="hide">사용불가!</div>
-            # Pw: <input type="text" name="userPw"><br>
-            # NickName: <input type="text" id="nickName" name="nickName"><br>
-            <input type="submit" value="등록">
+            # Pw: <input id="rowPw" type="text" name="userPw"><br>
+            # repeat_Pw: <input id="repeat-Pw" type="text" name="userRPw"><br>
+            <span id="pwChk"></span> <br>
+            # NickName: <input type="text" id="nickName" name="nickName">
+            <span id="nickChk"></span> <br>
+            <input type="button" id="signup-btn" value="등록">
         </p>
     </form>
 
     <script>
-        $('#userId').on('blur', e => {
-            const userId = $('#userId').val();
-            console.log(userId);
+        $(function () {
+            const $inputId = $('#userId');
 
-            const reqInfo = {
-                method: 'post',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify({
-                    userId: userId
-                })
-            };
-            fetch('/sign/up/'+ userId, reqInfo)
-                .then(res => res.text())
-                .then(msg => {
-                    if (msg === '중복없음') {
-                        alert('사용가능!');
-                    }else{
-                        alert('중복됨!');
+            $inputId.on('blur', e => {
+                if ($inputId.val().trim() === '') {
+                    $inputId.css('background', 'pink');
+                    $('#idchk').htmlhtml(
+                        '<b style="color:red; font-size:14px;">[영문, 숫자 4~14자로 작성하세요]</b>');
+                } else {
+
+                    fetch('/sign/up/idCheck?userId=' + $inputId.val())
+                        .then(res => res.text())
+                        .then(flag => {
+                            console.log(flag);
+                            if (flag === 'false') {
+                                //중복
+                                $inputId.css('background', 'pink');
+                                $('#idChk').html(
+                                    '<b style="color:red; font-size:14px;">[아이디가 중복 되었습니다]</b>');
+                            } else {
+                                //중복안됨
+                                $inputId.css('background', 'aqua');
+                                $('#idChk').html(
+                                    '<b style="color:green; font-size:14px;">[사용가능한 ID 입니다]</b>'
+                                );
+                            }
+                        });
+
+                }
+            })
+
+            const $inputNick = $('#nickName');
+
+            $inputNick.on('blur', e => {
+                if ($inputNick.val().trim() === '') {
+                    $inputNick.css('background', 'pink');
+                    $('#nickChk').htmlhtml(
+                        '<b style="color:red; font-size:14px;">[영문 또는 한글로 작성하세요]</b>');
+                } else {
+
+                    fetch('/sign/up/nickCheck?nickName=' + $inputNick.val())
+                        .then(res => res.text())
+                        .then(flag => {
+                            console.log(flag);
+                            if (flag === 'true') {
+                                //중복
+                                $inputNick.css('background', 'pink');
+                                $('#nickChk').html(
+                                    '<b style="color:red; font-size:14px;">[닉네임이 중복 되었습니다]</b>');
+                            } else {
+                                //중복안됨
+                                $inputNick.css('background', 'aqua');
+                                $('#nickChk').html(
+                                    '<b style="color:green; font-size:14px;">[사용가능한 닉네임 입니다]</b>'
+                                );
+                            }
+                        });
+                }
+            });
+                // 패스워드 일치 체크
+                const $pwInput = $('#repeat-Pw');
+                const $rowPwInput = $('#rowPw');
+                $pwInput.on('blur', e => {
+                    if($pwInput.val() === $rowPwInput.val()) {
+                        $pwInput.css('background', 'aqua');
+                                $('#pwChk').html(
+                                    '<b style="color:green; font-size:14px;">[비밀번호가 같습니다]</b>'
+                                );
+                    }else {
+                        $pwInput.css('background', 'pink');
+                                $('#pwChk').html(
+                                    '<b style="color:red; font-size:14px;">[비밀번호가 다릅니다]</b>');
                     }
                 })
-        });
 
+
+
+
+
+            //회원가입 버튼 클릭 이벤트
+            $('#signup-btn').on('click', e => {
+                //from node
+                $('#signUpForm').submit(); //수동 submit
+
+            });
+
+
+
+        }); //JQUERY END
     </script>
 
 </body>
