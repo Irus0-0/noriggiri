@@ -15,8 +15,8 @@ public class UserService {
     private final UserMapper userMapper;
 
     //회원가입
-   public boolean signUp(User user) {
-        return userMapper.signUp(user) == SUCCESS;
+   public void signUp(User user) {
+        userMapper.signUp(user);
     }
 
     //회원탈퇴
@@ -29,9 +29,9 @@ public class UserService {
        return userMapper.modifyUser(user) == SUCCESS;
     }
 
-    //내 정보 보기
-    public boolean userInfo(User user) {
-       return userMapper.userInfo(user) == SUCCESS;
+    //유저 정보 보기
+    public User userInfo(String userId) {
+        return userMapper.userInfo(userId);
     }
 
     //중복 아이디 검색
@@ -45,6 +45,7 @@ public class UserService {
         int checkNickName = userMapper.searchUserNickName(nickName);
         return checkNickName < 1;
     }
+
 
 
 }

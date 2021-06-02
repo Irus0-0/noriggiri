@@ -19,13 +19,12 @@ public class User {
     private String userId; //유저아이디
     private String userPw; //유저비밀번호
     private String nickName; //닉네임
-    private Date since; //가입일
+    private Date regDate; //가입일
 
-    public User() {
-        this.userNo = ++sequence;
-    }
+
 
     public User(String userId, String userPw, String nickName) {
+
         this.userId = userId;
         this.userPw = userPw;
         this.nickName = nickName;

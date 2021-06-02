@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserMapper {
     //회원가입
-    int signUp(User user);
+    void signUp(User user);
 
     //회원탈퇴
     int deleteUser(int userNo);
@@ -20,8 +20,8 @@ public interface UserMapper {
     //내 정보 변경
     int modifyUser(User user);
 
-    //내 정보 보기
-    int userInfo(User user);
+    //유저 정보 보기
+    User userInfo(String userId);
 
     //중복 아이디 검색
     int searchUserId(String userId);

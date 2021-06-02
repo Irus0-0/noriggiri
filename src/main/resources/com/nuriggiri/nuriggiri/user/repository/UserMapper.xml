@@ -10,52 +10,49 @@
         <result property="userId" column="user_id"/>
         <result property="userPw" column="user_pw"/>
         <result property="nickName" column="nick_name"/>
+        <result property="regDate" column="reg_date"/>
     </resultMap>
 
     <!--    회원가입-->
     <insert id="signUp">
-        INSERT INTO nori_user
+        INSERT INTO nuri_user
         (user_no, user_id, user_pw, nick_name)
         VALUES
-        (SEQ_nori_USER.nextval, #{userId}, #{userPw}, #{nickName})
+        (SEQ_nuri_USER.nextval, #{userId}, #{userPw}, #{nickName})
     </insert>
 
     <!--    회원 탈퇴-->
     <delete id="deleteUser">
-        DELETE FROM nori_user
+        DELETE FROM nuri_user
         WHERE user_no = #{userNo}
     </delete>
 
-    <!--    로그인-->
-
-    <!--    로그아웃-->
-
     <!--    내 정보 변경-->
     <update id="modifyUser">
-        UPDATE nori_user
+        UPDATE nuri_user
         SET
         user_pw = #{userPw},
         nick_name = #{nickName}
         WHERE user_no = #{userNo}
     </update>
-    <!--    내 정보 보기-->
+    <!--    유저 정보 보기-->
     <select id="userInfo" resultMap="userMap">
-        SELECT user_id, user_pw, nick_name
-        FROM nori_user
-        WHERE user_no=#{userNO}
+        SELECT *
+        FROM nuri_user
+        WHERE user_Id=#{userId}
     </select>
 
     <!--    중복 아이디 검색-->
     <select id="searchUserId" resultType="int">
         SELECT count(user_id)
-        FROM nori_user
+        FROM nuri_user
         WHERE user_id = #{userId}
     </select>
 
     <!--    중복 닉네임 검색-->
     <select id="searchUserNickName" resultType="int">
         SELECT count(nick_name)
-        FROM nori_user
+        FROM nuri_user
         WHERE nick_name = #{nickName}
     </select>
 
