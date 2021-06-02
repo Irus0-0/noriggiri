@@ -5,17 +5,17 @@
 <html lang="ko">
 
 <!-- head(meta, link) include -->
-<%@include file="../include/header.jsp" %>
+<%@include file="include/header.jsp" %>
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
 
         <!-- top navbar include -->
-        <%@include file="../include/top-navbar.jsp" %>
+        <%@include file="include/top-navbar.jsp" %>
 
 
         <!-- main sidebar(left menu) include -->
-        <%@include file="../include/main-sidebar.jsp" %>
+        <%@include file="include/main-sidebar.jsp" %>
 
 
         <!-- main content wrapper -->
@@ -160,18 +160,18 @@
 
 
         <!-- right sidebar include -->
-        <%@include file="../include/right-sidebar.jsp" %>
+        <%@include file="include/right-sidebar.jsp" %>
 
 
         <!-- footer include -->
-        <%@include file="../include/footer.jsp" %>
+        <%@include file="include/footer.jsp" %>
 
     </div>
     <!-- // .wrapper end -->
 
 
     <!-- script include -->
-    <%@include file="../include/script.jsp" %>
+    <%@include file="include/script.jsp" %>
 </body>
 
 </html>
