@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @Log4j2
 @CrossOrigin
@@ -23,6 +25,14 @@ public class BoardController {
     @Autowired
     public BoardController(BoardService boardService) {
         this.boardService = boardService;
+    }
+
+    //글 목록 요청
+    @GetMapping("/board/board-list")
+    public String list( Model model ) {
+        List<Board> boardList = boardService.boardList();
+        model.addAttribute("list", boardService.boardList());
+        return "board/board-list";
     }
 
     //게시글 등록 화면 요청

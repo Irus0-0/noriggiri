@@ -3,8 +3,13 @@ package com.nuriggiri.nuriggiri.board.repository;
 import com.nuriggiri.nuriggiri.board.domain.Board;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface BoardMapper {
+
+    //게시글 조회
+    List<Board> boardList();
 
     //게시글 등록
     void create(Board board);
