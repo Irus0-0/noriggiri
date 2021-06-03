@@ -1,7 +1,9 @@
 package com.nuriggiri.nuriggiri.board.controller;
 
 import com.nuriggiri.nuriggiri.board.domain.Board;
+import com.nuriggiri.nuriggiri.board.paging.Criteria;
 import com.nuriggiri.nuriggiri.board.domain.ModifyBoard;
+import com.nuriggiri.nuriggiri.board.paging.PageMaker;
 import com.nuriggiri.nuriggiri.board.service.BoardService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -29,9 +30,10 @@ public class BoardController {
 
     //글 목록 요청
     @GetMapping("/board/board-list")
-    public String list( Model model ) {
-        List<Board> boardList = boardService.boardList();
-        model.addAttribute("list", boardService.boardList());
+    public String list( Model model, Criteria criteria) {
+        List<Board> list = boardService.boardList(criteria);
+        model.addAttribute("list", boardService.boardList(criteria));
+        model.addAttribute("pageMaker", new PageMaker(criteria, boardService.boardList(c)));
         return "board/board-list";
     }
 

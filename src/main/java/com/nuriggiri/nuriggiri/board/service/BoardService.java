@@ -1,6 +1,7 @@
 package com.nuriggiri.nuriggiri.board.service;
 
 import com.nuriggiri.nuriggiri.board.domain.Board;
+import com.nuriggiri.nuriggiri.board.paging.Criteria;
 import com.nuriggiri.nuriggiri.board.repository.BoardMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,8 +14,8 @@ public class BoardService {
 
     public final BoardMapper boardMapper;
 
-    public List<Board> boardList() {
-        return boardMapper.boardList();
+    public List<Board> boardList(Criteria criteria) {
+        return boardMapper.boardList(criteria);
     }
 
     //게시글 등록

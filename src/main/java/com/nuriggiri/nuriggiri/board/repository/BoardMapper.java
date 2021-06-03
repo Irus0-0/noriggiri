@@ -1,6 +1,7 @@
 package com.nuriggiri.nuriggiri.board.repository;
 
 import com.nuriggiri.nuriggiri.board.domain.Board;
+import com.nuriggiri.nuriggiri.board.paging.Criteria;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 public interface BoardMapper {
 
     //게시글 조회
-    List<Board> boardList();
+    List<Board> boardList(Criteria criteria);
 
     //게시글 등록
     void create(Board board);
