@@ -31,8 +31,8 @@ public class User {
     }
 
 
-    public void setUserPw(String userPw) {
-        this.userPw = new BCryptPasswordEncoder().encode(userPw);
-    }
+//    public void setUserPw(String userPw) {
+//        this.userPw = new BCryptPasswordEncoder().encode(userPw);
+//    }
 }
 

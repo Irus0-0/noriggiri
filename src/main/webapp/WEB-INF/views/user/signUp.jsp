@@ -46,9 +46,9 @@
         //아이디 중복 체크
         $(function () {
             const $inputId = $('#userId');
-            var $currectId = false;
-            var $currectNick = false;
-            var $currectPw = false;
+            let $currectId = false;
+            let $currectNick = false;
+            let $currectPw = false;
 
             $inputId.on('blur', e => {
                 if ($inputId.val().trim() === '') {

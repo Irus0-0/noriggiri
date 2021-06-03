@@ -1,5 +1,6 @@
 package com.nuriggiri.nuriggiri.user.api;
 
+import com.nuriggiri.nuriggiri.user.domain.LoginUser;
 import com.nuriggiri.nuriggiri.user.domain.User;
 import com.nuriggiri.nuriggiri.user.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -64,21 +65,11 @@ public class SignApiController {
 
     //로그인
     @PostMapping("/in")
-    public String signIn(User user, HttpSession httpSession) {
-        User login = userService.userInfo(user.getUserId());
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        //id 검사
-        if (userService.searchUserId(user.getUserId()) /*받은 유저정보로 아이디 있는지 검색*/){
-            if(encoder.matches(user.getUserPw(),login.getUserPw())/*암호화된 비밀번호 조회*/) {
-                //로그인 성공
-                httpSession.setAttribute("userLogin",login);
-                Object userLogin = httpSession.getAttribute("UserLogin");
-                log.info("세션 "+userLogin);
-                log.info("받은 것"+login);
-
-                return "/user/signIn";
-            }
-        }return "/user/signIn";
+    public String signIn(LoginUser inputUser, HttpSession httpSession, Model model) {
+        log.info("input 유저"+inputUser);
+        //로그인
+        userService.login(inputUser);
+        return "/";
     }
 
 }
