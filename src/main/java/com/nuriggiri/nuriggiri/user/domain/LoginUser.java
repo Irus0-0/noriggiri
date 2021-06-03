@@ -9,6 +9,6 @@ import lombok.ToString;
 public class LoginUser {
     private String userId; //유저아이디
     private String userPw; //유저비밀번호
-    private boolean autoLogin;
+    private boolean autoLogin; //유저 권한
 
 }

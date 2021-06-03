@@ -11,12 +11,6 @@ public interface UserMapper {
     //회원탈퇴
     int deleteUser(int userNo);
 
-//    //로그인
-//    int signIn(User user);
-//
-//    //로그아웃
-//    int signOut(String userId);
-
     //내 정보 변경
     int modifyUser(User user);
 

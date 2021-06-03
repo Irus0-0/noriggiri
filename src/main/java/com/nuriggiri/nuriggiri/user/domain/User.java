@@ -1,15 +1,13 @@
 package com.nuriggiri.nuriggiri.user.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Date;
 
 @Setter
 @Getter
+@NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class User {
@@ -20,15 +18,8 @@ public class User {
     private String userPw; //유저비밀번호
     private String nickName; //닉네임
     private Date regDate; //가입일
+    private Auth auth; //권한
 
-
-
-    public User(String userId, String userPw, String nickName) {
-
-        this.userId = userId;
-        this.userPw = userPw;
-        this.nickName = nickName;
-    }
 
 
 //    public void setUserPw(String userPw) {
