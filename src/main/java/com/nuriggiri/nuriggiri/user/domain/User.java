@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.Date;
 
 @Setter
 @Getter
@@ -16,17 +19,20 @@ public class User {
     private String userId; //유저아이디
     private String userPw; //유저비밀번호
     private String nickName; //닉네임
+    private Date regDate; //가입일
 
 
-    public User() {
-        this.userNo = ++sequence;
-    }
 
     public User(String userId, String userPw, String nickName) {
-        this();
+
         this.userId = userId;
         this.userPw = userPw;
         this.nickName = nickName;
     }
+
+
+//    public void setUserPw(String userPw) {
+//        this.userPw = new BCryptPasswordEncoder().encode(userPw);
+//    }
 }
 
