@@ -3,9 +3,10 @@ CREATE SEQUENCE SEQ_NURI_USER;
 CREATE TABLE nuri_user(
     user_no NUMBER(10), --유저번호 PK
     user_id VARCHAR2(10)NOT NULL, --유저아이디
-    user_pw VARCHAR2(10)NOT NULL, --유저비밀번호
+    user_pw VARCHAR2(150)NOT NULL, --유저비밀번호
     nick_name VARCHAR2(10)NOT NULL, --닉네임
     reg_date DATE DEFAULT sysdate NOT NULL, --가입일
+    auth VARCHAR2(20) DEFAULT 'COMMON' NOT NULL, --유저권한
 
     CONSTRAINT pk_nuri_user PRIMARY KEY (user_no)
 );

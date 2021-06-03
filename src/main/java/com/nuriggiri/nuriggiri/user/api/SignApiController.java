@@ -68,8 +68,30 @@ public class SignApiController {
     public String signIn(LoginUser inputUser, HttpSession httpSession, Model model) {
         log.info("input 유저"+inputUser);
         //로그인
-        userService.login(inputUser);
-        return "/";
+        String loginMessage = userService.login(inputUser);
+        model.addAttribute("result" ,loginMessage);
+        if (loginMessage.equals("success")) {
+            //로그인 성공할 경우
+            httpSession.setAttribute("loginUser", userService.userInfo(inputUser.getUserId()));
+            return "redirect:/";
+        }
+        //로그인 실패할 경우
+        return "/user/login-result";
+    }
+
+    //로그아웃
+    @GetMapping("/out")
+    public String logout(HttpSession httpSession) {
+        log.info("로그아웃");
+
+        User loginUser = (User) httpSession.getAttribute("loginUser");
+        if (loginUser != null) {
+            //로그인 한 유저들의 세션을 지운다
+            httpSession.removeAttribute("loginUser");
+            httpSession.invalidate();
+            return "redirect:/";
+        }
+        return "redirect:/user/signIn";
     }
 
 }
