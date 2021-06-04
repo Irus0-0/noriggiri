@@ -5,13 +5,13 @@
 <html lang="ko">
 
 <!-- head(meta, link) include -->
-<%@include file="../include/header.jsp" %>
+<%@include file="../include/static-head.jsp" %>
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
 
-        <!-- top navbar include -->
-        <%@include file="../include/top-navbar.jsp" %>
+        <!-- header (top navbar) include -->
+        <%@include file="../include/header.jsp" %>
 
 
         <!-- main sidebar(left menu) include -->
