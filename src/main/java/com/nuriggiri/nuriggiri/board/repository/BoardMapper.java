@@ -24,4 +24,9 @@ public interface BoardMapper {
     //게시글 삭제
     void remove(int boardNo);
 
+    // 총 게시물 수 조회
+    int getTotalCount();
+
+
+
 }

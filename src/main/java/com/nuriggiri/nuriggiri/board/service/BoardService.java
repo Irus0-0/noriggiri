@@ -37,4 +37,11 @@ public class BoardService {
     public void  remove(int boardNo) {
         boardMapper.remove(boardNo);
     }
+
+    // 총 게시물 수 조회
+    public int getTotal() {
+        return boardMapper.getTotalCount();
+    }
+
+
 }

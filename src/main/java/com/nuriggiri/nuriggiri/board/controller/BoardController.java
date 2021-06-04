@@ -12,13 +12,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
 @Controller
 @Log4j2
 @CrossOrigin
-//@RequestMapping("/") 나중에 jsp 파일 생성시 추가
+//@RequestMapping("/board")
+
 public class BoardController {
     //서비스 파일과 연결
     public final BoardService boardService ;
@@ -31,10 +33,10 @@ public class BoardController {
     //글 목록 요청
     @GetMapping("/board/board-list")
     public String list( Model model, Criteria criteria) {
-        List<Board> list = boardService.boardList(criteria);
+        List<Board> boardList = boardService.boardList(criteria);
         model.addAttribute("list", boardService.boardList(criteria));
-        model.addAttribute("pageMaker", new PageMaker(criteria, boardService.boardList(c)));
-        return "board/board-list";
+        model.addAttribute("pageMaker", new PageMaker(criteria, boardService.getTotal()));
+        return "/board/board-list";
     }
 
     //게시글 등록 화면 요청
@@ -56,11 +58,12 @@ public class BoardController {
     }
 
     //게시글 상세보기 요청
-    @GetMapping("/content")
+    @GetMapping("/board/board-content")
     public String content(int boardNo, Model model) {
         Board content = boardService.more(boardNo);
         model.addAttribute("board", content);
-        return "/content"; //jsp 경로 입력
+
+        return "/board/board-content"; //jsp 경로 입력
     }
 
     //게시글 수정하기 화면요청
