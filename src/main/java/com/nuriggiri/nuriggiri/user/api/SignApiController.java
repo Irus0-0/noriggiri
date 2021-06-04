@@ -73,6 +73,8 @@ public class SignApiController {
         if (loginMessage.equals("success")) {
             //로그인 성공할 경우
             httpSession.setAttribute("loginUser", userService.userInfo(inputUser.getUserId()));
+            log.info(loginMessage);
+            log.info(httpSession.getAttribute("loginUser"));
             return "redirect:/";
         }
         //로그인 실패할 경우
