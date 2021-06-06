@@ -56,4 +56,18 @@
         WHERE nick_name = #{nickName}
     </select>
 
+    <!--    쿠키값 저장-->
+    <update id="saveKeepLogin">
+        UPDATE nuri_user
+        SET session_id = #{sid},
+        limit_time = #{lt}
+        WHERE user_id = #{acc}
+    </update>
+
+<!--    쿠키값으로 유저 검색-->
+    <select id="sessionSearchUser" resultMap="userMap">
+        SELECT * FROM nuri_user
+        WHERE session_id = #{sessionId}
+    </select>
+
 </mapper>

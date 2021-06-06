@@ -24,7 +24,7 @@ public class Board {
     private int recommend; //추천
     private List<User> recommendList; //추천한 사람들
     private Date regDate; //글 작성일
-    private boolean notice; //공지 구분 - default false
+    private String notice; //공지 구분 - default false
 
     public Board() {
         this.boardNo = ++sequence;

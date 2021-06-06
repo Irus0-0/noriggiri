@@ -5,20 +5,9 @@
 <html lang="ko">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>누리끼리 signUp</title>
+    <meta charset="UTF-8">
+    <title>Document</title>
 
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-    <!-- icheck bootstrap
-    <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css"> -->
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap JS -->
@@ -26,92 +15,31 @@
     <!-- jQuery CDN -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
 </head>
 
-<body class="hold-transition register-page">
-    <div class="register-box">
-        <div class="register-logo">
-            <a href="/"><b>누리</b>끼리</a>
-        </div>
+<body>
 
-        <div class="card">
-            <div class="card-body register-card-body">
-                <p class="login-box-msg">회원가입</p>
+    <form action="/sign/up" id="signUpForm" method="post">
+        <p id="signInput">
+            <!-- <input type="hidden" name="userNo" value="0"> -->
+            # Id: <input type="text" id="userId" name="userId">
+            <span id="idChk"></span> <br>
 
-                <form action="/sign/up" method="post">
-                    <span id="idChk"></span>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-user"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <span id="nickChk"></span>
-                    <div class="input-group mb-3">
-                        <input type="email" class="form-control" id="nickName" name="nickName" placeholder="닉네임">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <!-- 아이콘 변경 필요 -->
-                                <span class="fas fa-user"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <span id="rowPwChk"></span>
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control" id="rowPw" name="userPw" placeholder="비밀번호">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <span id="pwChk"></span>
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control" id="repeat-Pw" name="userRPw"
-                            placeholder="비밀번호 재확인">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="agreeTerms" name="terms" value="agree">
-                                <label for="agreeTerms">
-                                    회원가입 <a href="#">동의</a>
-                                </label>
-                            </div>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-4">
-                            <input type="button" id="signup-btn" class="btn btn-primary btn-block" value="회원가입">
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                </form>
-
-                <div class="social-auth-links text-center">
-                    <p>- OR -</p>
-                    <a href="#" class="btn btn-block btn-primary">
-                        <i class="fab fa-facebook mr-2"></i>
-                        Sign up using Facebook
-                    </a>
-                    <a href="#" class="btn btn-block btn-danger">
-                        <i class="fab fa-google-plus mr-2"></i>
-                        Sign up using Google+
-                    </a>
-                </div>
-
-                <a href="/sign/in" class="text-center">난 이미 아이디가 있지</a>
-            </div>
-            <!-- /.form-box -->
-        </div><!-- /.card -->
-    </div>
-    <!-- /.register-box -->
+            <!-- <button type="button" id="idcheck">아이디 중복확인</button> <br> -->
+            # Pw: <input id="rowPw" type="text" name="userPw">
+            <span id="rowPwChk"></span> <br>
+            # repeat_Pw: <input id="repeat-Pw" type="text" name="userRPw">
+            <span id="pwChk"></span> <br>
+            # NickName: <input type="text" id="nickName" name="nickName">
+            <span id="nickChk"></span> <br>
+            <input type="button" id="signup-btn" value="회원가입">
+        </p>
+    </form>
 
     <script>
         //아이디 중복 체크
@@ -268,6 +196,7 @@
 
         }); //JQUERY END
     </script>
+
 </body>
 
 </html>
