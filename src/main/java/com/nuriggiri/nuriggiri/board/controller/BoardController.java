@@ -1,9 +1,9 @@
 package com.nuriggiri.nuriggiri.board.controller;
 
+import com.nuriggiri.nuriggiri.board.controller.paging.Criteria;
+import com.nuriggiri.nuriggiri.board.controller.paging.PageMaker;
 import com.nuriggiri.nuriggiri.board.domain.Board;
-import com.nuriggiri.nuriggiri.board.paging.Criteria;
 import com.nuriggiri.nuriggiri.board.domain.ModifyBoard;
-import com.nuriggiri.nuriggiri.board.paging.PageMaker;
 import com.nuriggiri.nuriggiri.board.service.BoardService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
