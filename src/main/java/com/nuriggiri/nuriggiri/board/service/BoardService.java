@@ -25,7 +25,8 @@ public class BoardService {
 
     //게시글 내용보기
     public Board more(int boardNo) {
-        return boardMapper.more(boardNo);
+        Board content = boardMapper.more(boardNo);
+        return content;
     }
 
     //게시글 수정

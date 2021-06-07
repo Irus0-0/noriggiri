@@ -17,14 +17,14 @@
               <h1>${board.boardNo}번 게시물 내용</h1>
   
               <p>
-                 # 글번호: ${board.boardNo}<br>
-                 # 작성자: ${board.writer}<br>
-                 # 제목: ${board.title}<br>
+                 # 글번호: ${article.boardNo}<br>
+                 # 작성자: ${article.writer}<br>
+                 # 제목: ${article.title}<br>
                  # 내용: <br>
-                 <textarea rows="5" cols="30" disabled>${board.content}</textarea>
+                 <textarea rows="5" cols="30" disabled>${article.content}</textarea>
               </p>
   
-              <a href="#">글
+              <a href="/board/list?page=${criteria.page}&type=${criteria.type}&keyword=${criteria.keyword}&amount=${criteria.amount}">글
                  목록보기</a>&nbsp;
   
               <!-- <c:if test="${article.writer == loginUser.account || loginUser.auth == 'ADMIN'}"> -->

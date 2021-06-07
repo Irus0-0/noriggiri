@@ -14,7 +14,17 @@
     </resultMap>
 
     <select id="boardList" resultMap="boardMap">
-        SELECT * FROM nuri_board
+        <!-- 2. 페이징 쿼리 적용   -->
+            <![CDATA[
+            SELECT
+                board_no, writer, title, content
+            FROM
+                (SELECT /*+INDEX_DESC(board pk_board)*/
+                    rownum rn, board_no, writer, title, content
+                FROM nuri_board
+                WHERE rownum <= #{page} * #{amount})
+            WHERE rn > (#{page} - 1) * #{amount}
+        ]]>
     </select>
 
     <insert id="create">
