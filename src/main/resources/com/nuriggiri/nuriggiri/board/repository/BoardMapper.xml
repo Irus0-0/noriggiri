@@ -10,6 +10,8 @@
         <result property="title" column="title"/>
         <result property="content" column="content"/>
         <result property="recommend" column="recommend"/>
+        <result property="regDate" column="reg_date"/>
+        <result property="channelNo" column="channel_no"/>
         <!--        <result property="viewCnt" column="view_cnt"/>-->
     </resultMap>
 

@@ -38,7 +38,7 @@
             <div class="card-body register-card-body">
                 <p class="login-box-msg">회원가입</p>
 
-                <form action="/sign/up" method="post">
+                <form action="/sign/up" id="signUpForm" method="post">
                     <span id="idChk"></span>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디">
@@ -234,13 +234,15 @@
                     $rowPwInput.css('background', 'pink');
                     $('#rowPwChk').html(
                         '<b style="color:red; font-size:14px;">[비밀번호를 입력해주세요]</b>');
-                } else if (!getPwCheck.test($("#rowPw").val()) || $("#rowPw").val()
-                    .length < 8) {
-                    $('#rowPw').css("background-color", "pink");
-                    $('#rowPwChk').html(
-                        '<b style="font-size:14px;color:red;">[특수문자,대소문자,숫자 포함 8자이상]</b>');
-                    currectRowPw = false;
-                } else {
+                } 
+                // else if (!getPwCheck.test($("#rowPw").val()) || $("#rowPw").val()
+                //     .length < 8) {
+                //     $('#rowPw').css("background-color", "pink");
+                //     $('#rowPwChk').html(
+                //         '<b style="font-size:14px;color:red;">[특수문자,대소문자,숫자 포함 8자이상]</b>');
+                //     currectRowPw = false;
+                // }
+                 else {
                     $('#rowPw').css("background-color", "aqua");
                     $('#rowPwChk').html(
                         '<b style="font-size:14px;color:green;">[사용가능한 비밀번호 입니다]</b>');
