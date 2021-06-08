@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nuriggiri.nuriggiri.friend.repository.FriendMapper">
+
+    <resultMap id="friendMap" type="com.nuriggiri.nuriggiri.friend.domain.Friend">
+        <result property="userNo" column="user_no"/>
+        <result property="targetNo" column="target_no"/>
+    </resultMap>
+
+    <!--    친구 요청-->
+
+    <!--    친구 목록-->
+
+    <!--    친구 삭제-->
+
+    <!--    친구 차단-->
+
+</mapper>
