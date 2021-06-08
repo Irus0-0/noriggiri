@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace에는 사용할 인터페이스 풀 경로(패키지명 포함 인터페이스)를 적는다 -->
+<mapper namespace="com.nuriggiri.nuriggiri.channel.repository.ChannelMapper">
+
+    <!-- SELECT 문 처리를 위한 자바 필드와 테이블 컬럼명 매핑 -->
+    <!-- resultMap: 자바의 이름규칙과 SQL 의 이름규칙이 다를때 매핑 처리 -->
+    <!-- id 속성에는 이 맵의 이름을 만들어주고 type 속성에는 해당 클래스 전체 경로 -->
+    <resultMap id="channelMap" type="com.nuriggiri.nuriggiri.channel.domain.Channel">
+        <!--  property속성에는 자바핑드명, column은 테이블 컬럼명    -->
+        <result property="channelNo" column="channel_no" />
+        <result property="channelName" column="channel_name" />
+        <result property="channelInfo" column="channel_info" />
+        <result property="adminUserNo" column="admin_user_no" />
+        <result property="channelPw" column="channel_pw" />
+        <result property="creationDate" column="reg_date" />
+    </resultMap>
+
+    <!-- 채널 리스트 조회 기능 -->
+    <!-- 1. 페이징 없는 버전 -->
+    <select id="viewList" resultMap="channelMap">
+        SELECT * FROM nuri_channel
+    </select>
+
+    <!-- 2. 페이징 쿼리 적용
+    <select id="viewList" resultMap="channelMap">
+        <![CDATA[
+        SELECT
+        channel_no, channel_name, channel_info, admin_user_no, channel_pw, reg_date
+        FROM (SELECT /*+INDEX_DESC(nuri_channel pk_nuri_channel)*/
+        rownum rn, channel_no, channel_name, channel_info, admin_user_no, channel_pw, reg_date
+        FROM nuri_channel
+        WHERE rownum <= #{page} * #{amount})
+        WHERE rn > (#{page} - 1) * #{amount}
+        ]]>
+    </select>
+     -->
+
+    <!-- 채널 추가 기능 -->
+    <insert id="create">
+        INSERT INTO nuri_channel
+        (channel_no, channel_name, channel_info, admin_user_no, channel_pw)
+        VALUES
+        (seq_nuri_channel.nextval, #{channelName}, #{channelInfo}, #{adminUserNo}, #{channelPw})
+    </insert>
+
+    <!-- 채널 상세보기 기능 -->
+    <select id="viewInfo" resultMap="channelMap">
+        SELECT * FROM nuri_channel
+        WHERE channel_no = #{channelNo}
+    </select>
+
+    <!-- 채널 정보 수정 기능 -->
+    <update id="update">
+        UPDATE nuri_channel
+        SET channel_name = #{channelName},
+        channel_info = #{channelInfo},
+        channel_pw = #{channelPw}
+        WHERE channel_no = #{channelNo}
+    </update>
+
+    <!-- 채널 삭제 기능 -->
+    <delete id="delete">
+        DELETE FROM nuri_channel
+        WHERE channel_no = #{channelNo}
+    </delete>
+
+
+
+</mapper>

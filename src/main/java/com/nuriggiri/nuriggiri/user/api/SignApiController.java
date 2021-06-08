@@ -7,12 +7,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.WebUtils;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -36,7 +38,7 @@ public class SignApiController {
     public String signUp(User user) {
         userService.signUp(user);
         log.info(user);
-        return "redirect:/sign/up";
+        return "redirect:/sign/in";
     }
 
     //아이디 중복 체크
@@ -65,14 +67,21 @@ public class SignApiController {
 
     //로그인
     @PostMapping("/in")
-    public String signIn(LoginUser inputUser, HttpSession httpSession, Model model) {
-        log.info("input 유저"+inputUser);
+    public String signIn(LoginUser inputUser, HttpServletRequest request, Model model, HttpServletResponse response) {
+        log.info("input 유저" + inputUser);
         //로그인
         String loginMessage = userService.login(inputUser);
-        model.addAttribute("result" ,loginMessage);
+        model.addAttribute("result", loginMessage);
         if (loginMessage.equals("success")) {
             //로그인 성공할 경우
-            httpSession.setAttribute("loginUser", userService.userInfo(inputUser.getUserId()));
+            request.getSession().setAttribute("loginUser", userService.userInfo(inputUser.getUserId()));
+            log.info(loginMessage);
+            log.info(request.getSession().getAttribute("loginUser"));
+            if (inputUser.isAutoLogin()) {
+                log.info("자동 로그인 실행중");
+                userService.keepLogin(request, response, inputUser.getUserId());
+                return "redirect:/board/board-list";
+            }
             return "redirect:/";
         }
         //로그인 실패할 경우
@@ -81,7 +90,7 @@ public class SignApiController {
 
     //로그아웃
     @GetMapping("/out")
-    public String logout(HttpSession httpSession) {
+    public String logout(HttpSession httpSession, HttpServletRequest request, HttpServletResponse response) {
         log.info("로그아웃");
 
         User loginUser = (User) httpSession.getAttribute("loginUser");
@@ -89,9 +98,51 @@ public class SignApiController {
             //로그인 한 유저들의 세션을 지운다
             httpSession.removeAttribute("loginUser");
             httpSession.invalidate();
+            Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+            if (loginCookie != null) {
+                //쿠키의 목숨을 죽여서 다시 전송 함으로써 로컬에 저장된 쿠키를 제거
+                loginCookie.setMaxAge(0);
+                response.addCookie(loginCookie);
+                userService.logout(loginUser.getUserId());
+            }
             return "redirect:/";
         }
-        return "redirect:/user/signIn";
+        return "redirect:/sign/in";
+    }
+
+    //유저 정보조회
+    @GetMapping("/detail")
+    public String userInfo(HttpServletRequest request, Model model) {
+        //로그인한 사람의 회원 정보 조회
+        if (request.getSession().getAttribute("loginUser") != null) {
+            String userId = ((User) request.getSession().getAttribute("loginUser")).getUserId();
+            User user = userService.userInfo(userId);
+            model.addAttribute("userInfo", user);
+            log.info("세션에서 받아온 ID :" + userId);
+            log.info("유저정보 확인 " + user);
+            return "/user/info";
+        } else {
+            return "redirect:/sign/in";
+        }
+    }
+
+    //회원탈퇴
+    @GetMapping("/delete")
+    public String delete(HttpServletRequest request) {
+        int userNo = ((User)request.getSession().getAttribute("loginUser")).getUserNo();
+
+        userService.deleteUser(userNo);
+
+        //삭제후 세션지우기
+        request.getSession().removeAttribute("loginUser");
+        request.getSession().invalidate();
+        return "/";
+    }
+
+    //비밀번호 찾기
+    @GetMapping("/pwSearch")
+    public String pwSearch() {
+        return "";
     }
 
 }
