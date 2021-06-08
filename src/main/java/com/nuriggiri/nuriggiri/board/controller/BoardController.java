@@ -43,16 +43,11 @@ public class BoardController {
         return "/board/write"; //jsp 경로 입력
     }
 
-    //게시글 등록 처리 요청
-    @PostMapping("board/write")
+    //게시글 작성 처리 요청
+    @PostMapping("/board/write")
     public String write(Board board) {
-        log.info("board: " + board);
-        try {
-            boardService.create(board);
-        } catch (Exception e) {
-            return "board/write"; //jsp 경로 입력
-        }
-        return "redirect:/board/list"; // 리다이렉트 경로 입력
+        boardService.create(board);
+        return "redirect:/board/list"; //jsp 경로 입력
     }
 
     //게시글 상세보기 요청
@@ -84,9 +79,9 @@ public class BoardController {
         return "redirect:/board/content?boardNo=" + modifyBoard.getBoardNo() + "&vf=false";
     }
     //게시글 삭제 요청
-    @GetMapping("/delete")
+    @GetMapping("/board/delete")
     public String delete(int boardNo) {
         boardService.remove(boardNo);
-        return "redirect:"; // 리다이렉트 경로 입력
+        return "redirect:/board/list"; // 리다이렉트 경로 입력
     }
 }

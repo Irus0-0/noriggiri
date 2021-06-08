@@ -17,11 +17,13 @@
    <div class="container">
       <div class="row">
          <div class="offset-md-1 col-md-10">
-            <h1>${board.boardNo}번 게시물 내용</h1>
+            <h1>${article.boardNo}번 게시물 내용</h1>
 
             <p>
+               # 채널번호: ${article.channelNo}<br>
                # 글번호: ${article.boardNo}<br>
                # 작성자: ${article.writer}<br>
+               # 작성일: ${article.regDate}<br>
                # 제목: ${article.title}<br>
                # 내용: <br>
                <textarea rows="5" cols="30" disabled>${article.content}</textarea>
@@ -32,6 +34,8 @@
                목록보기</a>&nbsp;
 
             <a href="/board/modify?boardNo=${article.boardNo}&vf=false">글 수정하기</a>
+
+            <a href="/board/delete?boardNo=${article.boardNo}">글 삭제하기</a>
          </div>
       </div>
 </body>

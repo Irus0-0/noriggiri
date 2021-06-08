@@ -78,6 +78,8 @@
 				<td>번호</td>
 				<td>작성자</td>
 				<td>제목</td>
+				<td>추천수</td>
+				<td>날짜</td>
 			</tr>
 
 			<%-- 컨트롤러가 가져온 게시글 데이터를 반복하여 출력하세요. --%>
@@ -91,11 +93,8 @@
 						<a
 							href="/board/content${pageMaker.makeParam(pageMaker.criteria.page)}&boardNo=${article.boardNo}&vf=true">${article.title}</a>
 					</td>
-					<td>
-						<c:if test="${article.writer == loginUser.account || loginUser.auth == 'ADMIN'}">
-							<a href="/board/delete?boardNo=${article.boardNo}">[삭제]</a>
-						</c:if>
-					</td>
+					<td>${article.recommend}</td>
+					<td>${article.regDate}</td>
 				</tr>
 			</c:forEach>
 
@@ -124,6 +123,10 @@
 
 	</c:if>
 
+	<p>
+		<a href="/board/write">게시글 작성하기</a>
+	</p>
+
 	<!-- 검색창 영역 -->
 	<div class="search">
 		<form action="/board/list" id="search-form">
@@ -144,11 +147,6 @@
 
 		</form>
 	</div>
-
-	<p>
-		<a href="/board/write">게시글 작성하기</a>
-	</p>
-
 
 	<%@ include file= "../include/footer.jsp" %>
 

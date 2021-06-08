@@ -19,7 +19,7 @@ public class BoardService {
     }
 
     //게시글 등록
-    public void create(Board board) throws Exception{
+    public void create(Board board) {
         boardMapper.create(board);
     }
 
