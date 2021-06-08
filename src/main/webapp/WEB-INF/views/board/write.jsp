@@ -21,6 +21,7 @@
 			<textarea rows="5" cols="30" name="content"></textarea>
 			<br>
 			<input type="submit" value="등록">
+			
 		</p>
 	</form>
 

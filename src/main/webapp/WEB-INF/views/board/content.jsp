@@ -35,7 +35,29 @@
 
             <a href="/board/modify?boardNo=${article.boardNo}&vf=false">글 수정하기</a>
 
-            <a href="/board/delete?boardNo=${article.boardNo}">글 삭제하기</a>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+               글 삭제하기
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+               aria-hidden="true">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">게시글 삭제</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                     </div>
+                     <div class="modal-body">
+                        정말로 삭제 하시겠습니까?
+                     </div>
+                     <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                        <button type="button" class="btn btn-primary" onclick="remove();">삭제하기</button>
+                     </div>
+                  </div>
+               </div>
+            </div>
          </div>
       </div>
 </body>
