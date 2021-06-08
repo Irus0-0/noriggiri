@@ -112,7 +112,7 @@ public class UserService {
 
     //비밀번호 찾기 비밀번호 변경
     public void changePw(String userPw) {
-
+        userMapper.pwSearchChange(userPw);
     }
 
 }
