@@ -35,6 +35,7 @@
         nick_name = #{nickName}
         WHERE user_no = #{userNo}
     </update>
+
     <!--    유저 정보 보기-->
     <select id="userInfo" resultMap="userMap">
         SELECT *
