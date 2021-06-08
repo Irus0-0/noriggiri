@@ -69,7 +69,7 @@ class ChannelMapperTest {
 
     @Test
     void bulkInsert() {
-        for (int i = 2; i <= 10 ; i++) {
+        for (int i = 1; i <= 10 ; i++) {
             Channel channel = new Channel();
             channel.setChannelName("test-ch" + i);
             channel.setChannelInfo("테스트 채널" + i);
