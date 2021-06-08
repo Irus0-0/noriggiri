@@ -24,9 +24,11 @@ public interface ChannelMapper {
     void delete(int channelNo);
 
 
-    //채널 접속
+    //채널 접속 하기
     void join(int channelNo, String channelPw, User userNo);
 
+    //채널 접속 해제
+    void exit(int channelNo, User userNo);
 
 
 }

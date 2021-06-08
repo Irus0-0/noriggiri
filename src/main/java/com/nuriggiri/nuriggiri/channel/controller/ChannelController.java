@@ -27,11 +27,11 @@ public class ChannelController {
     }
 
     //채널 목록 가져오기
-    @GetMapping("/channel")
+    @GetMapping("/chList")
     public String viewList(Model model) {
         List<Channel> channelList = channelService.viewList();
         model.addAttribute("list", channelList);
-        return "/channel";
+        return "/channel/chMain";
     }
 
     //채널 생성 화면 요청
@@ -90,8 +90,11 @@ public class ChannelController {
     }
 
 
-    //채널 접속
+    //채널 접속 하기
     //void join(int channelNo, String channelPw, User userNo);
+
+    //채널 접속 해제
+    //void exit(int channelNo, User userNo);
 
 
 
