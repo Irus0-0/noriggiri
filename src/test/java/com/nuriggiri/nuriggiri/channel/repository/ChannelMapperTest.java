@@ -1,6 +1,7 @@
 package com.nuriggiri.nuriggiri.channel.repository;
 
 import com.nuriggiri.nuriggiri.channel.domain.Channel;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,8 +32,8 @@ class ChannelMapperTest {
     @Test
     void create() {
         Channel channel = new Channel();
-        channel.setChannelName("test-ch2");
-        channel.setChannelInfo("테스트 채널 3");
+        channel.setChannelName("test-ch1");
+        channel.setChannelInfo("테스트 채널 1");
         channel.setAdminUserNo(1);
         channel.setChannelPw("1234");
 
@@ -52,10 +53,10 @@ class ChannelMapperTest {
     @Test
     void update() {
         Channel channel = new Channel();
-        channel.setChannelName("test-ch3");
+        channel.setChannelName("test-ch1");
         channel.setChannelInfo("변경변경변경 블라블라블라~~~~~");
         channel.setChannelPw("1234");
-        channel.setChannelNo(3);
+        channel.setChannelNo(1);
         mapper.update(channel);
     }
 
@@ -63,6 +64,20 @@ class ChannelMapperTest {
     @Test
     void delete() {
         mapper.delete(4);
+    }
+
+
+    @Test
+    void bulkInsert() {
+        for (int i = 2; i <= 10 ; i++) {
+            Channel channel = new Channel();
+            channel.setChannelName("test-ch" + i);
+            channel.setChannelInfo("테스트 채널" + i);
+            channel.setAdminUserNo(i);
+            channel.setChannelPw("1234");
+
+            mapper.create(channel);
+        }
     }
 
 }

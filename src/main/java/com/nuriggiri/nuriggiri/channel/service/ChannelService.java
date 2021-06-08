@@ -15,33 +15,34 @@ public class ChannelService {
     public final ChannelMapper channelMapper;
 
     //채널 목록 가져오기
-    List<Channel> viewList(){
+    public List<Channel> viewList(){
         return channelMapper.viewList();
     }
 
     //채널 생성
-    void create(Channel channel) {
+    public void create(Channel channel) throws Exception {
         channelMapper.create(channel);
     }
 
-    //채널 접속
-    void join(int channelNo, String channelPw, User userNo){
-
-    }
-
     //채널 정보 보기
-    Channel viewInfo(int channelNo){
+    public Channel viewInfo(int channelNo){
         return channelMapper.viewInfo(channelNo);
     }
 
     //채널 수정
-    void update(Channel channel){
+    public void update(Channel channel) throws Exception {
         channelMapper.update(channel);
     }
 
     //채널 삭제
-    void delete(int channelNo){
+    public void delete(int channelNo){
         channelMapper.delete(channelNo);
+    }
+
+
+    //채널 접속
+    public void join(int channelNo, String channelPw, User userNo){
+
     }
 
 }

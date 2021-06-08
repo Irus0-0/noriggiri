@@ -1,7 +1,7 @@
 package com.nuriggiri.nuriggiri.board.service;
 
 import com.nuriggiri.nuriggiri.board.domain.Board;
-import com.nuriggiri.nuriggiri.board.paging.Criteria;
+import com.nuriggiri.nuriggiri.board.controller.paging.Criteria;
 import com.nuriggiri.nuriggiri.board.repository.BoardMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
