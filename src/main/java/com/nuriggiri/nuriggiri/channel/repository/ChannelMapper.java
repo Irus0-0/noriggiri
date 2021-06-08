@@ -14,9 +14,6 @@ public interface ChannelMapper {
     //채널 생성
     void create(Channel channel);
 
-    //채널 접속
-    void join(int channelNo, String channelPw, User userNo);
-
     //채널 정보 보기
     Channel viewInfo(int channelNo);
 
@@ -26,6 +23,9 @@ public interface ChannelMapper {
     //채널 삭제
     void delete(int channelNo);
 
+
+    //채널 접속
+    void join(int channelNo, String channelPw, User userNo);
 
 
 
