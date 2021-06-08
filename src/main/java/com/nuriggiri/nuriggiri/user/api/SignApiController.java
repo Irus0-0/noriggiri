@@ -139,4 +139,10 @@ public class SignApiController {
         return "/";
     }
 
+    //비밀번호 찾기
+    @GetMapping("/pwSearch")
+    public String pwSearch() {
+        return "";
+    }
+
 }

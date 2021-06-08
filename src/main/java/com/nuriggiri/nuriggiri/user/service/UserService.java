@@ -31,8 +31,8 @@ public class UserService {
     }
 
     //회원탈퇴
-    public boolean deleteUser(int userNo) {
-        return userMapper.deleteUser(userNo) == SUCCESS;
+    public void deleteUser(int userNo) {
+        userMapper.deleteUser(userNo);
     }
 
     //내 정보 변경
