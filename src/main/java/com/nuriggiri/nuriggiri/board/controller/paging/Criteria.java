@@ -1,4 +1,4 @@
-package com.nuriggiri.nuriggiri.board.paging;
+package com.nuriggiri.nuriggiri.board.controller.paging;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -4,12 +4,15 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+   <meta charset="UTF-8">
+   <title>Document</title>
+
+   <%@ include file="../include/static-head.jsp" %>
+
 </head>
+
 <body>
     <div class="container">
         <div class="row">
@@ -23,7 +26,7 @@
                  # 내용: <br>
                  <textarea rows="5" cols="30" disabled>${article.content}</textarea>
               </p>
-  
+
               <a href="/board/list?page=${criteria.page}&type=${criteria.type}&keyword=${criteria.keyword}&amount=${criteria.amount}">글
                  목록보기</a>&nbsp;
   
