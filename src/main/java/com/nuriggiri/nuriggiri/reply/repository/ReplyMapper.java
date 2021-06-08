@@ -1,6 +1,6 @@
 package com.nuriggiri.nuriggiri.reply.repository;
 
-import com.nuriggiri.nuriggiri.board.controller.paging.Criteria;
+import com.nuriggiri.nuriggiri.board.paging.Criteria;
 import com.nuriggiri.nuriggiri.reply.domain.Reply;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

@@ -1,7 +1,7 @@
 package com.nuriggiri.nuriggiri.board.controller;
 
-import com.nuriggiri.nuriggiri.board.controller.paging.Criteria;
-import com.nuriggiri.nuriggiri.board.controller.paging.PageMaker;
+import com.nuriggiri.nuriggiri.board.paging.Criteria;
+import com.nuriggiri.nuriggiri.board.paging.PageMaker;
 import com.nuriggiri.nuriggiri.board.domain.Board;
 import com.nuriggiri.nuriggiri.board.domain.ModifyBoard;
 import com.nuriggiri.nuriggiri.board.service.BoardService;
@@ -74,19 +74,15 @@ public class BoardController {
 
     //게시글 수정 처리요청
     @PostMapping("/board/modify")
-    public String modify(ModifyBoard modArticle) {
+    public String modify(ModifyBoard modifyBoard) {
+        Board board = boardService.more(modifyBoard.getBoardNo());
+        board.setWriter(modifyBoard.getWriter());
+        board.setTitle(modifyBoard.getTitle());
+        board.setContent(modifyBoard.getContent());
+        boardService.rewrite(board);
 
-        Board board = boardService.more(modArticle.getBoardNo());
-        board.setTitle(modArticle.getTitle());
-        board.setContent(modArticle.getContent());
-        try {
-            boardService.rewrite(board);
-        } catch (Exception e) {
-            return "redirect:/modify?restaurantNum=" + modArticle.getBoardNo(); //modify 전에 경로 사입
-        }
-        return "redirect:/content?restaurantNum=" + modArticle.getBoardNo(); //content 전에 경로 사입
+        return "redirect:/board/content?boardNo=" + modifyBoard.getBoardNo() + "&vf=false";
     }
-
     //게시글 삭제 요청
     @GetMapping("/delete")
     public String delete(int boardNo) {

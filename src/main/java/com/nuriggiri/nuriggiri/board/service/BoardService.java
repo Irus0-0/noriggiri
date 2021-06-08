@@ -1,7 +1,7 @@
 package com.nuriggiri.nuriggiri.board.service;
 
 import com.nuriggiri.nuriggiri.board.domain.Board;
-import com.nuriggiri.nuriggiri.board.controller.paging.Criteria;
+import com.nuriggiri.nuriggiri.board.paging.Criteria;
 import com.nuriggiri.nuriggiri.board.repository.BoardMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,12 +25,11 @@ public class BoardService {
 
     //게시글 내용보기
     public Board more(int boardNo) {
-        Board content = boardMapper.more(boardNo);
-        return content;
+        return boardMapper.more(boardNo);
     }
 
     //게시글 수정
-    public void  rewrite(Board board) throws Exception {
+    public void rewrite(Board board) {
         boardMapper.rewrite(board);
     }
 
