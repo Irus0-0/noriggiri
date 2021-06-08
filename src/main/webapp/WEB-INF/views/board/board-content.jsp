@@ -262,8 +262,8 @@
                //서버로 전송할 데이터 (JSON)
                body: JSON.stringify({
                   boardNo: boardNo,
-                  replyText: $('#newReplyText').val(),
-                  replyWriter: $('#newReplyWriter').val()
+                  content: $('#newReplyText').val(),
+                  nickName: $('#newReplyWriter').val()
                })
             };
             fetch('/api/v1/reply', reqInfo)
@@ -320,7 +320,7 @@
                },
                body: JSON.stringify({
                   replyNo: replyId,
-                  replyText: replyText
+                  content: replyText
                })
             };
             fetch('/api/v1/reply/' + replyId, reqInfo)
@@ -338,7 +338,7 @@
          //댓글 삭제 비동기 요청 이벤트
          $("#replyData").on("click", "#replyDelBtn", e => {
             const replyId = e.target.parentNode.parentNode.parentNode.dataset.replyid;
-            //console.log("삭제 버튼 클릭! : " + replyId);
+            console.log("삭제 버튼 클릭! : " + replyId);
             if (!confirm("진짜로 삭제할거니??")) {
                return;
             }
