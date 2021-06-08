@@ -129,7 +129,7 @@ public class SignApiController {
     //회원탈퇴
     @GetMapping("/delete")
     public String delete(HttpServletRequest request) {
-        int userNo = ((User)request.getSession().getAttribute("loginUser")).getUserNo();
+        int userNo = ((User) request.getSession().getAttribute("loginUser")).getUserNo();
 
         userService.deleteUser(userNo);
 
@@ -139,10 +139,26 @@ public class SignApiController {
         return "/";
     }
 
-    //비밀번호 찾기
+    //비밀번호 찾기 페이지
     @GetMapping("/pwSearch")
     public String pwSearch() {
-        return "";
+        return "/user/pwSearch";
     }
+
+    //비밀번호 찾기 아이디 닉네임 전송
+    @PostMapping("/pwSearch")
+    public String pwSearch(LoginUser user) {
+        User userdata = userService.userInfo(user.getUserId());
+
+        boolean equals = userdata.getNickName().equals(user.getNickName());
+        log.info(equals);
+        // 이메일이나 다른걸 전송해서 비밀번호 변경페이지가 나오게 하고 변경이 가능하게 바꿔줘야함
+        //현재 구현정도는 입력된 아디이와 닉네임을 검증하는 것 까지 진행함 추후 더 좋은 보안으로 변경할 필요성이 있음
+        //아예 본인 이메일만 입력받아서 메일서버를 활용하여 변경 링크 전송도 가능
+        //메일 보내는 방법 체크 해야함
+        return "redirect:/";
+    }
+
+
 
 }
