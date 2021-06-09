@@ -20,8 +20,25 @@
 
     <!--    친구 목록-->
     <select id="friendList" resultMap="friendMap">
-        SELECT * FROM nuri_friend
-        WHERE user_no = #{userNo}
+
+<!--        SELECT * FROM nuri_user-->
+<!--        WHERE(-->
+<!--            SELECT target_no FROM nuri_friend-->
+<!--            WHERE user_no = #{userNo}-->
+<!--            AND relationship = #{relationship}-->
+<!--            )-->
+
+        SELECT b.user_no, b.user_id, b.nick_name
+        FROM
+        (
+            SELECT target_no FROM nuri_friend
+            WHERE user_no = #(userNo}
+            AND relationship = 'dude'
+        ) A
+        , nuri_user B
+        WHERE A.target_no = B.user_no
+
+
     </select>
 
     <!--    친구 삭제-->
