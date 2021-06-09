@@ -31,5 +31,7 @@ public interface UserMapper {
     //세션 아이디로 유저 검색하기
     User sessionSearchUser(String sessionId);
 
+    //비밀번호 찾기- 비밀번호 변경
+    void pwSearchChange(String userPw);
 
 }

@@ -46,7 +46,7 @@ public class ReplyApiController {
     }
 
     //댓글 수정 요청 처리
-    @PostMapping("/{rno}")
+    @PutMapping("/{rno}")
     public ResponseEntity<String> modify(
             @PathVariable("rno") int replyNo,
             @RequestBody Reply reply
@@ -56,7 +56,7 @@ public class ReplyApiController {
         log.info("/api/v1/reply" + replyNo + "put! - " + reply);
 
         return replyService.modify(reply)
-                ?new ResponseEntity<>("modSuccess", HttpStatus.OK)
+                ? new ResponseEntity<>("modSuccess", HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

@@ -14,7 +14,7 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css"> -->
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
     <!-- Bootstrap CSS -->
@@ -88,7 +88,7 @@
           <!-- /.social-auth-links -->
     
           <p class="mb-1">
-            <a href="#">비밀번호 찾기</a>
+            <a href="/sign/pwSearch">비밀번호 찾기</a>
           </p>
           <p class="mb-0">
             <a href="/sign/up" class="text-center">회원가입</a>

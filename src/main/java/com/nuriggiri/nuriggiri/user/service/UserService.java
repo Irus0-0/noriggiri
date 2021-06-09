@@ -31,8 +31,8 @@ public class UserService {
     }
 
     //회원탈퇴
-    public boolean deleteUser(int userNo) {
-        return userMapper.deleteUser(userNo) == SUCCESS;
+    public void deleteUser(int userNo) {
+        userMapper.deleteUser(userNo);
     }
 
     //내 정보 변경
@@ -108,6 +108,11 @@ public class UserService {
         logoutMap.put("lt", new Date());
         logoutMap.put("acc", account);
         userMapper.saveKeepLogin(logoutMap);
+    }
+
+    //비밀번호 찾기 비밀번호 변경
+    public void changePw(String userPw) {
+        userMapper.pwSearchChange(userPw);
     }
 
 }
