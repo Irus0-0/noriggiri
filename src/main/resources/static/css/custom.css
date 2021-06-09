@@ -63,3 +63,16 @@ table {
     background-color: #ffd43b;
     color: #000;
 }
+
+
+/* header */
+
+
+/* main-sidebar */
+.user-panel {}
+.user-panel .info-btn {
+    border: 1px solid red;
+}
+.user-panel .info-btn .btn {
+    font-size: 12px;
+}

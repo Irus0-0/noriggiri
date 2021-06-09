@@ -63,7 +63,6 @@
       </div>
 
       <!-- 댓글 영역 -->
-
       <div id="replies" class="row">
          <div class="offset-md-1 col-md-10">
             <!-- 댓글 쓰기 영역 -->
@@ -146,7 +145,6 @@
          </div>
       </div>
    </div>
-
    <!-- end replyModifyModal -->
 
 
@@ -233,15 +231,15 @@
             for (let reply of replyMap.replyList) {
                tag += "<div id='replyContent' class='card-body' data-replyId='" + reply.replyNo + "'>" +
                   "    <div class='row user-block'>" +
-                  "       <span class='col-md-3'>" +
+                  "       <span class=''>" +
                   "         <b>" + reply.nickName + "</b>" +
                   "       </span>" +
-                  "       <span class='offset-md-6 col-md-3 text-right'><b>" + formatDate(reply.regDate) +
+                  "       <span class='text-right'><b>" + formatDate(reply.regDate) +
                   "</b></span>" +
                   "    </div><br>" +
                   "    <div class='row'>" +
-                  "       <div class='col-md-6'>" + reply.content + "</div>" +
-                  "       <div class='offset-md-2 col-md-4 text-right'>" +
+                  "       <div class=''>" + reply.content + "</div>" +
+                  "       <div class='text-right'>" +
                   "         <a id='replyModBtn' class='btn btn-sm btn-outline-dark' href='#replyModifyModal' data-toggle='modal'>수정</a>&nbsp;" +
                   "         <a id='replyDelBtn' class='btn btn-sm btn-outline-dark' href='#'>삭제</a>" +
                   "       </div>" +
