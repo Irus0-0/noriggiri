@@ -30,10 +30,10 @@
         <id property="replyNo" column="reply_no"/>
         <result property="channelNo" column="channel_no"/>
         <result property="boardNo" column="board_no"/>
-<!--        <result property="content" column="content"/>-->
+        <!--        <result property="content" column="content"/>-->
         <result property="nickName" column="nick_name"/>
         <result property="replyRecommend" column="reply_recommend"/>
-<!--        <result property="recommendList" column="recommend_list"/>-->
+        <!--        <result property="recommendList" column="recommend_list"/>-->
         <result property="regDate" column="reg_date"/>
     </resultMap>
 
