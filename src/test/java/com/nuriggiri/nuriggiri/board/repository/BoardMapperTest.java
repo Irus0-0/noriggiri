@@ -23,6 +23,7 @@ class BoardMapperTest {
             board.setTitle("테스트제목" + i);
             board.setContent("테스트내용입니다. " + i);
             board.setWriter("USER" + i);
+            board.setNotice("false");
             board.setRecommend(i);
 
             boardMapper.create(board);

@@ -1,4 +1,4 @@
-package com.nuriggiri.nuriggiri.board.controller.paging;
+package com.nuriggiri.nuriggiri.board.paging;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +13,7 @@ public class Criteria {
     private String keyword; //검색어
 
     public Criteria() {
-        this(1, 10);
+        this(1,10);
     }
 
     public Criteria(int page, int amount) {

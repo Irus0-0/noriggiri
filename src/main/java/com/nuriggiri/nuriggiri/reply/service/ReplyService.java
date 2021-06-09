@@ -1,7 +1,7 @@
 package com.nuriggiri.nuriggiri.reply.service;
 
-import com.nuriggiri.nuriggiri.board.controller.paging.Criteria;
-import com.nuriggiri.nuriggiri.board.controller.paging.PageMaker;
+import com.nuriggiri.nuriggiri.board.paging.Criteria;
+import com.nuriggiri.nuriggiri.board.paging.PageMaker;
 import com.nuriggiri.nuriggiri.reply.domain.Reply;
 import com.nuriggiri.nuriggiri.reply.repository.ReplyMapper;
 import lombok.RequiredArgsConstructor;
