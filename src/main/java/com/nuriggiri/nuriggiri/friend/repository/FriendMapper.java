@@ -1,5 +1,6 @@
 package com.nuriggiri.nuriggiri.friend.repository;
 
+import com.nuriggiri.nuriggiri.friend.domain.Friend;
 import com.nuriggiri.nuriggiri.friend.domain.relation;
 import com.nuriggiri.nuriggiri.user.domain.LoginUser;
 import com.nuriggiri.nuriggiri.user.domain.UserNonSq;
@@ -11,7 +12,7 @@ import java.util.List;
 public interface FriendMapper {
 
     //친구 요청
-    void addFriend(LoginUser user, LoginUser targetUser);
+    void addFriend(Friend friend);
 
     //친구 목록
     List<UserNonSq> friendList(LoginUser user);

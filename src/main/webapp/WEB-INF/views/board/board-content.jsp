@@ -75,15 +75,15 @@
                <!-- 댓글 내용 바디 -->
                <div id="replyCollapse" class="card">
                   <div id="replyData">
-                     <!-- 
-								< JS로 댓글 정보 DIV삽입 > 
+                     <!--
+								< JS로 댓글 정보 DIV삽입 >
 							-->
                   </div>
 
                   <!-- 댓글 페이징 영역 -->
                   <ul class="pagination justify-content-center">
-                     <!-- 
-								< JS로 댓글 페이징 DIV삽입 > 
+                     <!--
+								< JS로 댓글 페이징 DIV삽입 >
 							-->
                   </ul>
                </div>
