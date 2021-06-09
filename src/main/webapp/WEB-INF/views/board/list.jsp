@@ -8,54 +8,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<style>
-		.pagination {
-			width: 60%;
-			margin-top: 10px;
-			list-style: none;
-			display: flex;
-		}
-
-		.pagination>li {
-			justify-content: flex-end;
-			margin-right: 5px;
-		}
-
-		.pagination>li>a {
-			text-decoration: none;
-			color: black;
-		}
-
-		.pagination>li>a:hover {
-			color: yellowgreen;
-		}
-
-		.pagination>li.active>a {
-			font-weight: bold;
-			color: orangered;
-			font-size: 1.1em;
-		}
-
-		.amount {
-			width: 30%;
-			display: flex;
-			justify-content: flex-end;
-			margin-bottom: 10px;
-		}
-
-		.amount a {
-			display: block;
-			color: #fff;
-			background: #f00;
-			width: 50px;
-			height: 20px;
-			border-radius: 5px;
-			margin-right: 5px;
-			text-align: center;
-			font-weight: 700;
-			text-decoration: none;
-		}
-	</style>
 	<link rel="stylesheet" href="/css/main.css">
 
 	<%@ include file= "../include/static-head.jsp" %>
@@ -71,34 +23,58 @@
 
 	<c:if test="${articles.size() > 0}">
 
-		<h1>게시글 목록</h1>
+		<div class="col-12">
+			<div class="card">
+				<div class="card-header">
+					<h3 class="card-title">게시글 목록</h3>
 
-		<table border="1">
-			<tr>
-				<td>번호</td>
-				<td>작성자</td>
-				<td>제목</td>
-				<td>추천수</td>
-				<td>날짜</td>
-			</tr>
+					<div class="card-tools">
+						<div class="input-group input-group-sm" style="width: 150px;">
+							<input type="text" name="table_search" class="form-control float-right"
+								placeholder="Search">
 
-			<%-- 컨트롤러가 가져온 게시글 데이터를 반복하여 출력하세요. --%>
-			<%-- 게시물 개수가 0개일 경우 목록대신 "게시물이 존재하지 않습니다." 출력 --%>
+							<div class="input-group-append">
+								<button type="submit" class="btn btn-default">
+									<i class="fas fa-search"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /.card-header -->
+				<div class="card-body table-responsive p-0">
+					<table class="table table-hover text-nowrap">
+						<thead>
+							<tr>
+								<td>번호</td>
+								<td>작성자</td>
+								<td>제목</td>
+								<td>추천수</td>
+								<td>날짜</td>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="article" items="${articles}">
+								<tr>
+									<td>${article.boardNo}</td>
+									<td>${article.writer}</td>
+									<td>
+										<a
+											href="/board/content${pageMaker.makeParam(pageMaker.criteria.page)}&boardNo=${article.boardNo}&vf=true">${article.title}</a>
+									</td>
+									<td>${article.recommend}</td>
+									<td>${article.regDate}</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+				<!-- /.card-body -->
+			</div>
+			<!-- /.card -->
+		</div>
 
-			<c:forEach var="article" items="${articles}">
-				<tr>
-					<td>${article.boardNo}</td>
-					<td>${article.writer}</td>
-					<td>
-						<a
-							href="/board/content${pageMaker.makeParam(pageMaker.criteria.page)}&boardNo=${article.boardNo}&vf=true">${article.title}</a>
-					</td>
-					<td>${article.recommend}</td>
-					<td>${article.regDate}</td>
-				</tr>
-			</c:forEach>
 
-		</table>
 
 		<!-- 페이지 영역 -->
 		<ul class="pagination">
