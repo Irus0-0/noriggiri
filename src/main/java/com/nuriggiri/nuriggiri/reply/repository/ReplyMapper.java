@@ -20,7 +20,7 @@ public interface ReplyMapper {
     int delete(int replyNo);
 
     //댓글 1개 조회
-    Reply read(int replyNO);
+    Reply read(int replyNo);
 
     //특정 게시물 댓글 목록 조회
     List<Reply> getList(@Param("bno") int boardNo
