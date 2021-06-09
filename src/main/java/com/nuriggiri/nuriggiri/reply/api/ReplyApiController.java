@@ -1,6 +1,6 @@
 package com.nuriggiri.nuriggiri.reply.api;
 
-import com.nuriggiri.nuriggiri.board.controller.paging.Criteria;
+import com.nuriggiri.nuriggiri.board.paging.Criteria;
 import com.nuriggiri.nuriggiri.reply.domain.Reply;
 import com.nuriggiri.nuriggiri.reply.service.ReplyService;
 import lombok.RequiredArgsConstructor;
