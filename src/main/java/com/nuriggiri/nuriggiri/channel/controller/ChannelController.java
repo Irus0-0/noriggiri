@@ -27,7 +27,7 @@ public class ChannelController {
     }
 
     //채널 목록 가져오기
-    @GetMapping("/chList")
+    @GetMapping(value = {"/chList", "/chMain"})
     public String viewList(Model model) {
         List<Channel> channelList = channelService.viewList();
         model.addAttribute("list", channelList);
@@ -56,6 +56,9 @@ public class ChannelController {
     public String viewInfo(int channelNo, Model model) {
         Channel content = channelService.viewInfo(channelNo);
         model.addAttribute("channel", content);
+        List<Channel> channelList = channelService.viewList();
+        model.addAttribute("list", channelList);
+        log.info("channel info: " + content);
         return "/channel/viewCh";
     }
 
@@ -86,7 +89,7 @@ public class ChannelController {
     @GetMapping("/delete")
     public String delete(int channelNo) {
         channelService.delete(channelNo);
-        return "redirect:/channel";
+        return "redirect:/channel/chMain";
     }
 
 
