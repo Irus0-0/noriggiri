@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
    <meta charset="UTF-8">
-   <title>Document</title>
+   <title>Insert title here</title>
 
    <%@ include file="../include/static-head.jsp" %>
 
@@ -16,25 +15,51 @@
 <body>
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+   <%@ include file="../include/header.jsp" %>
    <div class="container">
       <div class="row">
          <div class="offset-md-1 col-md-10">
-            <h1>${board.boardNo}번 게시물 내용</h1>
+            <h1>${article.boardNo}번 게시물 내용</h1>
 
             <p>
-               # 글번호: ${board.boardNo}<br>
-               # 작성자: ${board.writer}<br>
-               # 제목: ${board.title}<br>
+               # 채널번호: ${article.channelNo}<br>
+               # 글번호: ${article.boardNo}<br>
+               # 작성자: ${article.writer}<br>
+               # 작성일: ${article.regDate}<br>
+               # 제목: ${article.title}<br>
                # 내용: <br>
-               <textarea rows="5" cols="30" disabled>${board.content}</textarea>
+               <textarea rows="5" cols="30" disabled>${article.content}</textarea>
             </p>
 
-            <a href="#">글
+            <a
+               href="/board/list?page=${criteria.page}&type=${criteria.type}&keyword=${criteria.keyword}&amount=${criteria.amount}">글
                목록보기</a>&nbsp;
 
-            <!-- <c:if test="${article.writer == loginUser.account || loginUser.auth == 'ADMIN'}"> -->
-            <a href="#">글 수정하기</a>
-            <!-- </c:if> -->
+            <a href="/board/modify?boardNo=${article.boardNo}&vf=false">글 수정하기</a>
+
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+               글 삭제하기
+            </button>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog">
+                     <div class="modal-content">
+                        <div class="modal-header">
+                           <h5 class="modal-title" id="exampleModalLabel">게시글 삭제</h5>
+                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                           정말로 삭제 하시겠습니까?
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                           <button type="button" class="btn btn-primary">삭제하기</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
          </div>
       </div>
 
@@ -76,15 +101,15 @@
                <div id="replyCollapse" class="card">
                   <div id="replyData">
                      <!-- 
-								< JS로 댓글 정보 DIV삽입 > 
-							-->
+                        < JS로 댓글 정보 DIV삽입 >
+                     -->
                   </div>
 
                   <!-- 댓글 페이징 영역 -->
                   <ul class="pagination justify-content-center">
                      <!-- 
-								< JS로 댓글 페이징 DIV삽입 > 
-							-->
+                        < JS로 댓글 페이징 DIV삽입 >
+                     -->
                   </ul>
                </div>
             </div> <!-- end reply content -->
@@ -117,17 +142,22 @@
                <button id="replyModBtn" type="button" class="btn btn-dark">수정</button>
                <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
             </div>
+
+
          </div>
       </div>
    </div>
 
    <!-- end replyModifyModal -->
 
+
+   <%@ include file="../include/footer.jsp" %>
+
    <script>
       // 댓글 처리 JS
       $(function () {
          //원본글 번호
-         const boardNo = '${board.boardNo}';
+         const boardNo = '${article.boardNo}';
 
          //날짜 포맷 변환 함수
          function formatDate(datetime) {
@@ -338,7 +368,7 @@
          //댓글 삭제 비동기 요청 이벤트
          $("#replyData").on("click", "#replyDelBtn", e => {
             const replyId = e.target.parentNode.parentNode.parentNode.dataset.replyid;
-            console.log("삭제 버튼 클릭! : " + replyId);
+            //console.log("삭제 버튼 클릭! : " + replyId);
             if (!confirm("진짜로 삭제할거니??")) {
                return;
             }

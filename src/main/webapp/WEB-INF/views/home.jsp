@@ -25,12 +25,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">시작 페이지</h1>
+                            <h1 class="m-0">MAIN HOME</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">메인홈</a></li>
-                                <li class="breadcrumb-item active">breadcrumb(현재페이지)</li>
+                                <li class="breadcrumb-item active">채널 메인 (현재 페이지)</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -42,13 +42,15 @@
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
+                        <!-- lg 12 -->
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">공지나 새알림</h5>
+                                    <h5 class="card-title">로그인 후 첫 화면</h5>
 
                                     <p class="card-text">
-                                        공지나 새알림 공지나 새알림 공지나 새알림 공지나 새알림 공지나 새알림 공지나 새알림 공지나 새알림
+                                        이미 생성되어있는 전체 채널 목록 화면<br>
+                                        (다른기능 먼저 구현하고 여유되면 검색기능 추가할 예정)<br>
                                     </p>
 
                                     <a href="#" class="card-link">링크</a>
@@ -56,20 +58,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="m-0">채널 이름</h5>
-                                </div>
-                                <div class="card-body">
-                                    <h6 class="card-title">채널 부제목</h6>
 
-                                    <p class="card-text">관련 내용 블라블라 ~~~~~~~~~</p>
-                                    <a href="#" class="btn btn-primary">채널 입장</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
+                        <!-- lg 4 -->
+                        <div class="col-lg-4">
                             <div class="card card-primary card-outline">
                                 <div class="card-header">
                                     <h5 class="m-0">채널 이름</h5>
@@ -82,74 +73,115 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="card">
+                        <div class="col-lg-4">
+                            <div class="card card-primary card-outline">
                                 <div class="card-header">
-                                    <h3 class="card-title">접었다 펼수있는 박스</h3>
-                                    <div class="card-tools">
-                                        <!-- Collapse Button -->
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
-                                                class="fas fa-minus"></i></button>
-                                    </div>
-                                    <!-- /.card-tools -->
+                                    <h5 class="m-0">채널 이름</h5>
                                 </div>
-                                <!-- /.card-header -->
                                 <div class="card-body">
-                                    The body of the card
-                                </div>
-                                <!-- /.card-body -->
-                            </div>
-                            <!-- /.card -->
+                                    <h6 class="card-title">채널 부제목</h6>
 
-                            <div class="card">
-                                <div class="card-header">
-                                    <h3 class="card-title">안보이게 닫을수 있는 박스</h3>
-                                    <div class="card-tools">
-                                        <!-- Remove Button -->
-                                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i
-                                                class="fas fa-times"></i></button>
-                                    </div>
-                                    <!-- /.card-tools -->
+                                    <p class="card-text">관련 내용 블라블라 ~~~~~~~~~</p>
+                                    <a href="#" class="btn btn-primary">채널 입장</a>
                                 </div>
-                                <!-- /.card-header -->
-                                <div class="card-body">
-                                    The body of the card
-                                </div>
-                                <!-- /.card-body -->
                             </div>
-                            <!-- /.card -->
                         </div>
-                        <div class="col-lg-6">
-                            <div class="card">
+                        <div class="col-lg-4">
+                            <div class="card card-primary card-outline">
                                 <div class="card-header">
-                                    <h3 class="card-title">전체화면으로 볼수있는 박스</h3>
-                                    <div class="card-tools">
-                                        <!-- Maximize Button -->
-                                        <button type="button" class="btn btn-tool" data-card-widget="maximize"><i
-                                                class="fas fa-expand"></i></button>
-                                    </div>
-                                    <!-- /.card-tools -->
+                                    <h5 class="m-0">채널 이름</h5>
                                 </div>
-                                <!-- /.card-header -->
                                 <div class="card-body">
-                                    The body of the card
+                                    <h6 class="card-title">채널 부제목</h6>
+
+                                    <p class="card-text">관련 내용 블라블라 ~~~~~~~~~</p>
+                                    <a href="#" class="btn btn-primary">채널 입장</a>
                                 </div>
-                                <!-- /.card-body -->
                             </div>
-                            <!-- /.card -->
-                            <div class="card">
-                                <div class="card-header">
-                                    <h3 class="card-title">기본 박스</h3>
-                                </div>
-                                <!-- /.card-header -->
-                                <div class="card-body">
-                                    The body of the card
-                                </div>
-                                <!-- /.card-body -->
-                            </div>
-                            <!-- /.card -->
                         </div>
-                        <!-- /.col-md-6 -->
+
+                        <!-- lg 4 -->
+                        <div class="col-lg-4">
+                            <div class="card card-primary card-outline">
+                                <div class="card-header">
+                                    <h5 class="m-0">채널 이름</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="card-title">채널 부제목</h6>
+
+                                    <p class="card-text">관련 내용 블라블라 ~~~~~~~~~</p>
+                                    <a href="#" class="btn btn-primary">채널 입장</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card card-primary card-outline">
+                                <div class="card-header">
+                                    <h5 class="m-0">채널 이름</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="card-title">채널 부제목</h6>
+
+                                    <p class="card-text">관련 내용 블라블라 ~~~~~~~~~</p>
+                                    <a href="#" class="btn btn-primary">채널 입장</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card card-primary card-outline">
+                                <div class="card-header">
+                                    <h5 class="m-0">채널 이름</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="card-title">채널 부제목</h6>
+
+                                    <p class="card-text">관련 내용 블라블라 ~~~~~~~~~</p>
+                                    <a href="#" class="btn btn-primary">채널 입장</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- lg 4 -->
+                        <div class="col-lg-4">
+                            <div class="card card-primary card-outline">
+                                <div class="card-header">
+                                    <h5 class="m-0">채널 이름</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="card-title">채널 부제목</h6>
+
+                                    <p class="card-text">관련 내용 블라블라 ~~~~~~~~~</p>
+                                    <a href="#" class="btn btn-primary">채널 입장</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card card-primary card-outline">
+                                <div class="card-header">
+                                    <h5 class="m-0">채널 이름</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="card-title">채널 부제목</h6>
+
+                                    <p class="card-text">관련 내용 블라블라 ~~~~~~~~~</p>
+                                    <a href="#" class="btn btn-primary">채널 입장</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card card-primary card-outline">
+                                <div class="card-header">
+                                    <h5 class="m-0">채널 이름</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="card-title">채널 부제목</h6>
+
+                                    <p class="card-text">관련 내용 블라블라 ~~~~~~~~~</p>
+                                    <a href="#" class="btn btn-primary">채널 입장</a>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <!-- /.row -->
                 </div><!-- /.container-fluid -->

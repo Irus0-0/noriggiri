@@ -41,8 +41,9 @@ public class ChannelService {
 
 
     //채널 접속
-    public void join(int channelNo, String channelPw, User userNo){
+    //public void join(int channelNo, String channelPw, User userNo) {    }
 
-    }
+    //채널 접속 해제
+    //void exit(int channelNo, User userNo) {  }
 
 }

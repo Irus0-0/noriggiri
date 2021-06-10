@@ -2,7 +2,7 @@
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="http://localhost/8182" class="brand-link">
+    <a href="../index.html" class="brand-link">
         <img src="../dist/img/logo.png" alt="Logo" class="brand-image img-circle elevation-3"
             style="opacity: .8">
         <span class="brand-text font-weight-light">누리끼리</span>
@@ -16,7 +16,12 @@
                 <img src="../dist/img/ssong6735.png" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">로그인된 유저이름</a>
+                <a href="#" class="d-block">로그인된 유저이름</a>                
+            </div>
+
+            <div class="info-btn">
+                <button type="button" class="btn btn-outline-secondary btn-xs">내정보</button>
+                <button type="button" class="btn btn-secondary btn-xs">로그아웃</button>
             </div>
         </div>
 
