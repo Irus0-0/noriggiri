@@ -5,12 +5,15 @@
 
 <mapper namespace="com.nuriggiri.nuriggiri.friend.repository.FriendMapper">
 
-    <resultMap id="friendMap" type="com.nuriggiri.nuriggiri.friend.domain.Friend">
+    <resultMap id="friendMap" type="com.nuriggiri.nuriggiri.friend.domain.FriendList">
         <result property="userNo" column="user_no"/>
         <result property="targetNo" column="target_no"/>
+        <result property="userId" column="user_id"/>
+        <result property="nickName" column="nick_name"/>
+
     </resultMap>
 
-    <!--    친구 요청-->
+    <!--   요청-->
     <insert id="addFriend">
         INSERT INTO nuri_friend
         (user_no, target_no, relationship)
@@ -21,19 +24,19 @@
     <!--    친구 목록-->
     <select id="friendList" resultMap="friendMap">
 
-<!--        SELECT * FROM nuri_user-->
-<!--        WHERE(-->
-<!--            SELECT target_no FROM nuri_friend-->
-<!--            WHERE user_no = #{userNo}-->
-<!--            AND relationship = #{relationship}-->
-<!--            )-->
+        <!--        SELECT * FROM nuri_user-->
+        <!--        WHERE(-->
+        <!--            SELECT target_no FROM nuri_friend-->
+        <!--            WHERE user_no = #{userNo}-->
+        <!--            AND relationship = #{relationship}-->
+        <!--            )-->
 
         SELECT b.user_no, b.user_id, b.nick_name
         FROM
         (
-            SELECT target_no FROM nuri_friend
-            WHERE user_no = #(userNo}
-            AND relationship = 'dude'
+        SELECT target_no FROM nuri_friend
+        WHERE user_no = #{userNo}
+        AND relationship = #{relationship}
         ) A
         , nuri_user B
         WHERE A.target_no = B.user_no
@@ -47,8 +50,8 @@
         WHERE user_no = #{userNo} AND target_no = #{targetNo}
     </delete>
 
-    <!--    친구 차단-->
-    <update id="modifyUser">
+    <!--    친구 차단 update-->
+    <update id="blockFriend">
         UPDATE nuri_friend
         SET
         relationship = #{relationship}

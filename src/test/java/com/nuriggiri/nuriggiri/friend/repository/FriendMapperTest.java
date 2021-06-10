@@ -1,15 +1,14 @@
 package com.nuriggiri.nuriggiri.friend.repository;
 
 import com.nuriggiri.nuriggiri.friend.domain.Friend;
+import com.nuriggiri.nuriggiri.friend.domain.FriendList;
 import com.nuriggiri.nuriggiri.friend.domain.Relation;
 
-import com.nuriggiri.nuriggiri.user.domain.LoginUser;
 import com.nuriggiri.nuriggiri.user.domain.UserNonSq;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootTest
@@ -21,8 +20,8 @@ class FriendMapperTest {
     @Test
     void insertTest() {
         Friend friend = new Friend();
-        friend.setUserNo(1);
-        friend.setTargetNo(6);
+        friend.setUserNo(3);
+        friend.setTargetNo(1);
         friend.setRelationship(Relation.DUDE);
         System.out.println(friend);
 
@@ -32,9 +31,9 @@ class FriendMapperTest {
     @Test
     void listTest() {
         int userNo = 1;
-        List<UserNonSq> friendList = friendMapper.friendList(userNo, "DUDE");
+        List<FriendList> friendList = friendMapper.friendList(userNo, Relation.DUDE);
         System.out.println("++++++++++++++++++++++++");
-        for (UserNonSq userNonSq : friendList) {
+        for (FriendList userNonSq : friendList) {
             System.out.println("userNonSq = " + userNonSq);
         }
         System.out.println("++++++++++++++++++++++++");
