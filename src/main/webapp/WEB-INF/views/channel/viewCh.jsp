@@ -50,13 +50,14 @@
                                     <h5 class="card-title">${channel.channelName} INFO</h5>
 
                                     <ul class="ch-info">
-                                        <li>채널번호: ${channel.channelNo}</li>
-                                        <li>채널이름: ${channel.channelName}</li>
-                                        <li>채널관리자: ${channel.adminUserNo} (현재 유저번호. 추후 유저닉네임으로 변경하기)</li>
-                                        <li>채널정보: ${channel.channelInfo}</li>
-                                        <li>채널참여자: (아직 기능 구현전)</li>
+                                        <li>#채널번호: ${channel.channelNo}</li>
+                                        <li>#채널이름: ${channel.channelName}</li>
+                                        <li>#채널관리자: ${channel.adminUserNo} (현재 유저번호. 추후 유저닉네임으로 변경하기)</li>
+                                        <li>#채널정보: ${channel.channelInfo}</li>
+                                        <li>#채널참여자: (아직 기능 구현전)</li>
                                     </ul>
 
+                                    <a class="btn btn-outline-danger btn-xs" href="/channel/modCh?channelNo=${channel.channelNo}">채널 수정</a>
                                     <a class="btn btn-outline-danger btn-xs" href="/channel/delete?channelNo=${channel.channelNo}">채널 삭제</a>
 
                                 </div>

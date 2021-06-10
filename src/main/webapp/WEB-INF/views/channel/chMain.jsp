@@ -53,8 +53,7 @@
                                         기능 추가하기 UI<br>
                                     </p>
 
-                                    <a href="#" class="card-link">링크</a>
-                                    <a href="#" class="card-link">기타 링크</a>
+                                    <a href="/channel/addCh" class="card-link">채널 생성</a>
                                 </div>
                             </div>
                         </div>
