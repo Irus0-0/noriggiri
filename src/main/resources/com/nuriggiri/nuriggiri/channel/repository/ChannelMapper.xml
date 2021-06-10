@@ -21,6 +21,7 @@
     <!-- 1. 페이징 없는 버전 -->
     <select id="viewList" resultMap="channelMap">
         SELECT * FROM nuri_channel
+<!--        채널조인테이블 로그인한 유저의 아이디/ 유저번호 검색을 해서 채널 번호나 이름을 받아와서 조회되는 쿼리문-->
     </select>
 
     <!-- 2. 페이징 쿼리 적용

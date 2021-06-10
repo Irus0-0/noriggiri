@@ -63,7 +63,8 @@
                                         </li>
                                         <li>
                                             <label for="adminUserNo">#채널관리자: </label>
-                                            <input type="text" name="adminUserNo">
+                                            <input type="hidden" name="adminUserNo" value="${loginUser.userNo}">
+                                            <input type="text"  value="${loginUser.nickName}" disabled>
                                         </li>
                                         <li>
                                             <label for="channelInfo">#채널정보: </label>
