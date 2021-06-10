@@ -7,10 +7,15 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @NoArgsConstructor
-public class Friend {
+public class FriendList {
 
     private int userNo;
     private int targetNo;
     private Relation relationship;
+
+    //친구목록에 사용
+    private String userId;
+    private String nickName;
+
 
 }

@@ -13,6 +13,7 @@
 </head>
 
 <body>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
    <%@ include file="../include/header.jsp" %>
    <div class="container">
@@ -63,6 +64,7 @@
       </div>
 
       <!-- 댓글 영역 -->
+
       <div id="replies" class="row">
          <div class="offset-md-1 col-md-10">
             <!-- 댓글 쓰기 영역 -->
@@ -99,14 +101,14 @@
                <div id="replyCollapse" class="card">
                   <div id="replyData">
                      <!-- 
-                        < JS로 댓글 정보 DIV삽입 > 
+                        < JS로 댓글 정보 DIV삽입 >
                      -->
                   </div>
 
                   <!-- 댓글 페이징 영역 -->
                   <ul class="pagination justify-content-center">
                      <!-- 
-                        < JS로 댓글 페이징 DIV삽입 > 
+                        < JS로 댓글 페이징 DIV삽입 >
                      -->
                   </ul>
                </div>
@@ -145,6 +147,7 @@
          </div>
       </div>
    </div>
+
    <!-- end replyModifyModal -->
 
 
@@ -226,6 +229,7 @@
 
          //댓글 태그 생성, 배치 함수
          function makeReplyListDOM(replyMap) {
+            console.log(replyMap);
             let tag = '';
 
             for (let reply of replyMap.replyList) {
@@ -383,6 +387,7 @@
          });
       });
    </script>
+
 
 
 </body>

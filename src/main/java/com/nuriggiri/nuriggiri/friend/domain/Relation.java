@@ -1,5 +1,5 @@
 package com.nuriggiri.nuriggiri.friend.domain;
 
-public enum relation {
+public enum Relation {
     REQUEST, DUDE, BLOCK
 }

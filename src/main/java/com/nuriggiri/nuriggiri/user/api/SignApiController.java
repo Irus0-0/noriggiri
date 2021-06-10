@@ -80,7 +80,7 @@ public class SignApiController {
             if (inputUser.isAutoLogin()) {
                 log.info("자동 로그인 실행중");
                 userService.keepLogin(request, response, inputUser.getUserId());
-                return "redirect:/board/board-list";
+                return "redirect:/board/list";
             }
             return "redirect:/";
         }
