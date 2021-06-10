@@ -12,6 +12,13 @@
 
 	<%@ include file= "../include/static-head.jsp" %>
 
+	<style>
+		.col-12 {
+			width: 80%;
+			margin: 0 auto;
+		}
+	</style>
+
 </head>
 
 <body>

@@ -1,119 +1,147 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 
 <head>
    <meta charset="UTF-8">
    <title>Insert title here</title>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+
+   <!-- include libraries(jQuery, bootstrap) -->
+   <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+   <!-- include summernote css/js -->
+   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+   <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
    <%@ include file="../include/static-head.jsp" %>
+   <style>
+      .quickForm {
+         display: block;
+         width: 80%;
+         margin: 0, auto;
+      }
+   </style>
+
 
 </head>
 
 <body>
 
    <%@ include file="../include/header.jsp" %>
-   <div class="container">
-      <div class="row">
-         <div class="offset-md-1 col-md-10">
-            <h1>${article.boardNo}번 게시물 내용</h1>
 
-            <p>
-               # 채널번호: ${article.channelNo}<br>
-               # 글번호: ${article.boardNo}<br>
-               # 작성자: ${article.writer}<br>
-               # 작성일: ${article.regDate}<br>
-               # 제목: ${article.title}<br>
-               # 내용: <br>
-               <textarea rows="5" cols="30" disabled>${article.content}</textarea>
-            </p>
+   <form id="quickForm">
+      <div class="modify-board">
 
-            <a
-               href="/board/list?page=${criteria.page}&type=${criteria.type}&keyword=${criteria.keyword}&amount=${criteria.amount}">글
-               목록보기</a>&nbsp;
-
-            <a href="/board/modify?boardNo=${article.boardNo}&vf=false">글 수정하기</a>
-
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-               글 삭제하기
-            </button>
-
-                  <!-- Modal -->
-                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                  aria-hidden="true">
-                  <div class="modal-dialog">
-                     <div class="modal-content">
-                        <div class="modal-header">
-                           <h5 class="modal-title" id="exampleModalLabel">게시글 삭제</h5>
-                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                           정말로 삭제 하시겠습니까?
-                        </div>
-                        <div class="modal-footer">
-                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                           <button type="button" class="btn btn-primary">삭제하기</button>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+         <h2>${article.boardNo}번 게시물 수정</h2>
+         
+         <div class="card-body">
+            <div class="form-group">
+               <label for="exampleInputEmail1">작성자</label>
+               <input type="text" name="writer" class="form-control" id="exampleInputEmail1" value="${article.writer}">
+            </div>
+            <div class="form-group">
+               <label for="exampleInputPassword1">제목</label>
+               <input type="text" name="title" class="form-control" id="exampleInputPassword1" value="${article.title}">
+            </div>
+            <textarea id="summernote" disabled>${article.content}</textarea>
+            <div class="card-footer">
+               <button type="submit" class="btn btn-primary"
+                  href="/board/list?page=${criteria.page}&type=${criteria.type}&keyword=${criteria.keyword}&amount=${criteria.amount}">글
+                  목록보기</button>
+            </div>
+            <div class="card-footer">
+               <button type="submit" class="btn btn-primary" href="/board/modify?boardNo=${article.boardNo}&vf=false">글
+                  수정하기</button>
+            </div>
+            <div class="card-footer">
+               <button type="button" class="btn btn-primary" data-bs-target="#exampleModal">글 삭제하기</button>
+            </div>
          </div>
       </div>
+   </form>
 
-      <!-- 댓글 영역 -->
+   <!-- Modal -->
+   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">게시글 삭제</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               정말로 삭제 하시겠습니까?
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+               <button type="button" class="btn btn-primary">삭제하기</button>
+            </div>
+         </div>
+      </div>
+   </div>
+   </div>
+   </div>
 
-      <div id="replies" class="row">
-         <div class="offset-md-1 col-md-10">
-            <!-- 댓글 쓰기 영역 -->
-            <div class="card">
-               <div class="card-body">
-                  <div class="row">
-                     <div class="col-md-9">
-                        <div class="form-group">
-                           <label for="newReplyText" hidden>댓글 내용</label>
-                           <textarea rows="3" id="newReplyText" name="replyText" class="form-control"
-                              placeholder="댓글을 입력해주세요."></textarea>
-                        </div>
+   <!-- 댓글 영역 -->
+
+   <div id="replies" class="row">
+      <div class="offset-md-1 col-md-10">
+         <!-- 댓글 쓰기 영역 -->
+         <div class="card">
+            <div class="card-body">
+               <div class="row">
+                  <div class="col-md-9">
+                     <div class="form-group">
+                        <label for="newReplyText" hidden>댓글 내용</label>
+                        <textarea rows="3" id="newReplyText" name="replyText" class="form-control"
+                           placeholder="댓글을 입력해주세요."></textarea>
                      </div>
-                     <div class="col-md-3">
-                        <div class="form-group">
-                           <label for="newReplyWriter" hidden>댓글 작성자</label>
-                           <input id="newReplyWriter" name="replyWriter" type="text" class="form-control"
-                              placeholder="작성자 이름" style="margin-bottom: 6px;">
-                           <button id="replyAddBtn" type="button" class="btn btn-dark form-control">등록</button>
-                        </div>
+                  </div>
+                  <div class="col-md-3">
+                     <div class="form-group">
+                        <label for="newReplyWriter" hidden>댓글 작성자</label>
+                        <input id="newReplyWriter" name="replyWriter" type="text" class="form-control"
+                           placeholder="작성자 이름" style="margin-bottom: 6px;">
+                        <button id="replyAddBtn" type="button" class="btn btn-dark form-control">등록</button>
                      </div>
                   </div>
                </div>
-            </div> <!-- end reply write -->
+            </div>
+         </div> <!-- end reply write -->
 
-            <!--댓글 내용 영역-->
-            <div class="card">
-               <!-- 댓글 내용 헤더 -->
-               <div class="card-header text-white m-0" style="background: #343A40;">
-                  <div class="float-left">댓글 (<span id="replyCnt">0</span>)</div>
-               </div>
+         <!--댓글 내용 영역-->
+         <div class="card">
+            <!-- 댓글 내용 헤더 -->
+            <div class="card-header text-white m-0" style="background: #343A40;">
+               <div class="float-left">댓글 (<span id="replyCnt">0</span>)</div>
+            </div>
 
-               <!-- 댓글 내용 바디 -->
-               <div id="replyCollapse" class="card">
-                  <div id="replyData">
-                     <!-- 
+            <!-- 댓글 내용 바디 -->
+            <div id="replyCollapse" class="card">
+               <div id="replyData">
+                  <!-- 
                         < JS로 댓글 정보 DIV삽입 > 
                      -->
-                  </div>
+               </div>
 
-                  <!-- 댓글 페이징 영역 -->
-                  <ul class="pagination justify-content-center">
-                     <!-- 
+               <!-- 댓글 페이징 영역 -->
+               <ul class="pagination justify-content-center">
+                  <!-- 
                         < JS로 댓글 페이징 DIV삽입 > 
                      -->
-                  </ul>
-               </div>
-            </div> <!-- end reply content -->
-         </div>
-      </div> <!-- end replies row -->
+               </ul>
+            </div>
+         </div> <!-- end reply content -->
+      </div>
+   </div> <!-- end replies row -->
    </div> <!-- end content container -->
 
    <!-- 댓글 수정 모달 -->
@@ -153,6 +181,16 @@
    <%@ include file="../include/footer.jsp" %>
 
    <script>
+
+      $(function () {
+         $('#summernote').summernote({
+            height: 300,
+            minHeight: null, // set minimum height of editor
+            maxHeight: null, // set maximum height of editor
+            focus: true // set focus to editable area after initializing summe						  
+         });
+      });
+
       // 댓글 처리 JS
       $(function () {
          //원본글 번호
@@ -385,7 +423,6 @@
          });
       });
    </script>
-
 
 </body>
 
