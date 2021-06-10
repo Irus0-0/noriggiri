@@ -41,12 +41,13 @@
    <form id="quickForm">
       <div class="modify-board">
 
-         <h2>${article.boardNo}번 게시물 수정</h2>
+         <h2>${article.boardNo}번 게시물</h2>
 
          <div class="card-body">
             <div class="form-group">
                <label for="exampleInputEmail1">작성자</label>
-               <input type="text" name="writer" class="form-control" id="exampleInputEmail1" value="${article.writer}">
+               <input type="hidden" type="text" name="writer" value="${article.writer}">
+               <input type="text" class="form-control" id="exampleInputEmail1" value="${article.writer}" disabled>
             </div>
             <div class="form-group">
                <label for="exampleInputPassword1">제목</label>
@@ -108,8 +109,8 @@
                   <div class="col-md-3">
                      <div class="form-group">
                         <label for="newReplyWriter" hidden>댓글 작성자</label>
-                        <input id="newReplyWriter" name="replyWriter" type="text" class="form-control"
-                           placeholder="작성자 이름" style="margin-bottom: 6px;">
+                        <input id="newReplyWriter" type="text" class="form-control"
+                            style="margin-bottom: 6px;" name="replyWriter" value="${loginUser.nickName}" disabled>
                         <button id="replyAddBtn" type="button" class="btn btn-dark form-control">등록</button>
                      </div>
                   </div>
