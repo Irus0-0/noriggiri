@@ -15,7 +15,7 @@
 
 
         <!-- main sidebar(left menu) include -->
-        <%@include file="../include/main-sidebar.jsp" %>
+        <%@include file="../include/sub-sidebar.jsp" %>
 
 
         <!-- main content wrapper -->
@@ -25,12 +25,13 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">CHANNEL MAIN</h1>
+                            <h1 class="m-0">${channel.channelName}</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">메인홈</a></li>
-                                <li class="breadcrumb-item active">채널 메인 (현재 페이지)</li>
+                                <li class="breadcrumb-item"><a href="../home.jsp">메인홈</a></li>
+                                <li class="breadcrumb-item"><a href="/channel/chMain">채널메인</a></li>
+                                <li class="breadcrumb-item active">${channel.channelName}</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -46,14 +47,19 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">채널 선택 후 첫 화면</h5>
+                                    <h5 class="card-title">${channel.channelName} INFO</h5>
 
-                                    <p class="card-text">
-                                        현재 채널에 추가되어있는 기능들 목록<br>
-                                        기능 추가하기 UI<br>
-                                    </p>
+                                    <ul class="ch-info">
+                                        <li>#채널번호: ${channel.channelNo}</li>
+                                        <li>#채널이름: ${channel.channelName}</li>
+                                        <li>#채널관리자: ${channel.adminUserNo} (현재 유저번호. 추후 유저닉네임으로 변경하기)</li>
+                                        <li>#채널정보: ${channel.channelInfo}</li>
+                                        <li>#채널참여자: (아직 기능 구현전)</li>
+                                    </ul>
 
-                                    <a href="/channel/addCh" class="card-link">채널 생성</a>
+                                    <a class="btn btn-outline-danger btn-xs" href="/channel/modCh?channelNo=${channel.channelNo}">채널 수정</a>
+                                    <a class="btn btn-outline-danger btn-xs" href="/channel/delete?channelNo=${channel.channelNo}">채널 삭제</a>
+
                                 </div>
                             </div>
                         </div>

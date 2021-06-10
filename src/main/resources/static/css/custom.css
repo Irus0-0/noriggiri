@@ -76,3 +76,13 @@ table {
 .user-panel .info-btn .btn {
     font-size: 12px;
 }
+
+
+
+/* channel */
+
+/* channel content */
+.ch-info {
+    list-style: none;
+    clear: both;
+}
