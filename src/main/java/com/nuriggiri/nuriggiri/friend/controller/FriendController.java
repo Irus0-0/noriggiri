@@ -41,13 +41,13 @@ public class FriendController {
 
     }
 
-    //친구요청
-    @PostMapping("/1231244214421")
-    @ResponseBody
-    public ResponseEntity<String> addFriend(Friend friend) {
-        friendService.addFriend(friend);
-        return null;
-    }
+//    //친구요청
+//    @PostMapping("/1231244214421")
+//    @ResponseBody
+//    public ResponseEntity<String> addFriend(Friend friend) {
+//        friendService.addFriend(friend);
+//        return null;
+//    }
 
 
 

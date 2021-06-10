@@ -80,9 +80,9 @@ public class SignApiController {
             if (inputUser.isAutoLogin()) {
                 log.info("자동 로그인 실행중");
                 userService.keepLogin(request, response, inputUser.getUserId());
-                return "redirect:/board/list";
+                return "redirect:/channel/chList";
             }
-            return "redirect:/";
+            return "redirect:/channel/chList";
         }
         //로그인 실패할 경우
         return "/user/login-result";
@@ -105,7 +105,7 @@ public class SignApiController {
                 response.addCookie(loginCookie);
                 userService.logout(loginUser.getUserId());
             }
-            return "redirect:/";
+            return "redirect:/sign/in";
         }
         return "redirect:/sign/in";
     }
