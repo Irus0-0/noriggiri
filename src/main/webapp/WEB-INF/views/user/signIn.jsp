@@ -63,7 +63,7 @@
               <div class="col-8">
                 <div class="icheck-primary">
                   <input type="checkbox" id="auto-login" name="autoLogin">
-                  <label for="remember">
+                  <label for="auto-login">
                     로그인 유지
                   </label>
                 </div>

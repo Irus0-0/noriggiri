@@ -12,20 +12,18 @@ import java.util.List;
 public interface FriendMapper {
 
     //친구 요청
-    void addFriend(Friend friend);
+    void addFriend(int userNo, int targetNo, Relation relationship);
 
     //친구 목록
     List<FriendList> friendList(int userNo, Relation relationship);
 
-    //친구 삭제
-    void removeFriend(int user, int targetUser);
+    //친구 삭제 , 요청삭제
+    void removeFriend(int userNo, int targetNo);
 
-    //친구 차단 update
-    void blockFriend(int userNo, int targetUser);
+    //친구 update
+    void updateFriend(int userNo, int targetUser, Relation relationship);
 
-    //친구 승인
-    void approvalFriend(LoginUser user, LoginUser targetUser);
 
     // 요청 검증   관계가 어떤것이 되어있는지 확인
-    Relation checkRelation(String userNo, String targetUser);
+    Relation checkRelation(int userNo, int targetNo);
 }

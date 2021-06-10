@@ -13,7 +13,7 @@
 
     </resultMap>
 
-    <!--   요청-->
+    <!-- 친구  요청 인서트-->
     <insert id="addFriend">
         INSERT INTO nuri_friend
         (user_no, target_no, relationship)
@@ -50,8 +50,8 @@
         WHERE user_no = #{userNo} AND target_no = #{targetNo}
     </delete>
 
-    <!--    친구 차단 update-->
-    <update id="blockFriend">
+    <!--    친구 update-->
+    <update id="updateFriend">
         UPDATE nuri_friend
         SET
         relationship = #{relationship}
@@ -64,5 +64,7 @@
         FROM nuri_friend
         WHERE user_no = #{userNo} AND target_no = #{targetNo}
     </select>
+
+
 
 </mapper>

@@ -17,16 +17,16 @@ class FriendMapperTest {
     @Autowired
     FriendMapper friendMapper;
     
-    @Test
-    void insertTest() {
-        Friend friend = new Friend();
-        friend.setUserNo(3);
-        friend.setTargetNo(1);
-        friend.setRelationship(Relation.DUDE);
-        System.out.println(friend);
-
-        friendMapper.addFriend(friend);
-    }
+//    @Test
+//    void insertTest() {
+//        Friend friend = new Friend();
+//        friend.setUserNo(3);
+//        friend.setTargetNo(1);
+//        friend.setRelationship(Relation.DUDE);
+//        System.out.println(friend);
+//
+//        friendMapper.addFriend(friend);
+//    }
 
     @Test
     void listTest() {

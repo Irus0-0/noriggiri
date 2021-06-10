@@ -15,7 +15,8 @@
 
 	<form action="/board/write" method="post">
 		<p>
-			# 작성자: <input class="form-control" name="writer" type="text" value="${loginUser.nickName}" disabled><br>
+			<input type="hidden" name="writer" value="${loginUser.nickName}">
+			# 작성자: <input class="form-control" type="text" value="${loginUser.nickName}" disabled><br>
 			# 제목: <input type="text" name="title"><br>
 			# 내용: <br>
 			<textarea rows="5" cols="30" name="content"></textarea>
