@@ -41,16 +41,14 @@ public class FriendController {
 
     }
 
-//    //친구요청
-//    @PostMapping("/1231244214421")
-//    @ResponseBody
-//    public ResponseEntity<String> addFriend(Friend friend) {
-//        friendService.addFriend(friend);
-//        return null;
-//    }
-
-
-
+    //친구요청
+    @PostMapping("/friendList")
+    @ResponseBody
+    public void addFriend(HttpServletRequest request, int targetNo) {
+        int userNo = ((User) request.getSession().getAttribute("loginUser")).getUserNo();
+        log.info(userNo +":" + targetNo);
+        friendService.addFriend(userNo, targetNo);
+    }
 
 
 }

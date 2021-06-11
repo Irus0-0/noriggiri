@@ -6,11 +6,13 @@ import com.nuriggiri.nuriggiri.friend.domain.Relation;
 import com.nuriggiri.nuriggiri.friend.repository.FriendMapper;
 import com.nuriggiri.nuriggiri.user.domain.UserNonSq;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Log4j2
 @RequiredArgsConstructor
 public class FriendService {
 
@@ -18,11 +20,16 @@ public class FriendService {
 
     //친구요청
     public void addFriend(int userNo, int targetNo) {
-        if (checkRelation(targetNo, userNo).equals(Relation.REQUEST)) {
+
+        if (checkRelation(targetNo, userNo) != null && checkRelation(targetNo, userNo) == Relation.REQUEST) {
             //만약 이미 친구요청이 있다면 친구수락으로
+            System.out.println("친구 수락으로 변경");
             approveFriend(userNo, targetNo);
+        } else if (checkRelation(userNo, targetNo) == Relation.REQUEST) {
+            System.out.println("이미 요청 보내짐");
         } else {
             //아니라면 평범하게 친구요청
+            System.out.println("친구 요청 보내기");
             friendMapper.addFriend(userNo, targetNo, Relation.REQUEST);
         }
     }
