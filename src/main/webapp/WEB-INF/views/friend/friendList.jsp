@@ -30,24 +30,41 @@
 <body>
 
     <c:forEach var="article" items="${friendList}">
-        
+
             <td>유저번호: ${article.userNo}</td>
             <td>닉네임: ${article.nickName}</td>
-
+        <br>
     </c:forEach>
 
     <form action="/friendList" id="friendForm" method="POST">
-        <input type="hidden" name="targetNo" value="5">
+        <input type="hidden" id="targetNo" name="targetNo" value="4">
 
-        <input type="button" id="addFriend-btn" class="btn btn-primary btn-block" value="친구요청">
+        <button id="addFriend-btn" class="btn btn-primary">친구요청</button>
     </form>
 
     <script>
         $(function () {
+
             $('#addFriend-btn').on('click', e => {
 
+                const reqInfo = {
+                    method: 'POST', //요청 방식
+                    headers: { //요청 헤더 내용
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        targetNo: $('#targetNo').value()
+                    })
+                };
 
-                $('#friendForm').submit();
+                fetch('/friendList' ,reqInfo)
+                    .then(res => res.text())
+                    .then(msg => {
+                        if(msg !== 'friendAddSuccess') {
+                            alert('친구추가에 실패하셨습니다')
+                        }
+                    });
+
             })
 
         })

@@ -18,19 +18,24 @@ public class FriendService {
 
     private final FriendMapper friendMapper;
 
-    //친구요청
-    public void addFriend(int userNo, int targetNo) {
-
+    //    친구요청
+    public boolean addFriend(int userNo, int targetNo) {
+        log.info("친구 여부 체크 로그" + checkRelation(userNo, targetNo));
+        log.info("친구 여부 체크 로그 반대로" + checkRelation(targetNo, userNo));
         if (checkRelation(targetNo, userNo) != null && checkRelation(targetNo, userNo) == Relation.REQUEST) {
             //만약 이미 친구요청이 있다면 친구수락으로
-            System.out.println("친구 수락으로 변경");
+            log.info("친구 수락으로 변경");
             approveFriend(userNo, targetNo);
-        } else if (checkRelation(userNo, targetNo) == Relation.REQUEST) {
-            System.out.println("이미 요청 보내짐");
+            return true;
+        } else if (checkRelation(userNo, targetNo) != null
+                && (checkRelation(userNo, targetNo) == Relation.REQUEST || checkRelation(userNo, targetNo) == Relation.DUDE)) {
+            log.info("이미 친구거나 친구요청 있음 체크 요망");
+            return false;
         } else {
             //아니라면 평범하게 친구요청
-            System.out.println("친구 요청 보내기");
+            log.info("친구 요청 보내기");
             friendMapper.addFriend(userNo, targetNo, Relation.REQUEST);
+            return true;
         }
     }
 
@@ -79,7 +84,8 @@ public class FriendService {
     //검증
     public Relation checkRelation(int userNo, int targetNo) {
         // 관계를 알아냄
-        return friendMapper.checkRelation(userNo, targetNo);
+        FriendList friendList = friendMapper.checkRelation(userNo, targetNo);
+        return friendList != null ? friendList.getRelationship() : null;
     }
 
 }
