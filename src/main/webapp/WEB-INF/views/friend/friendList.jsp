@@ -60,7 +60,10 @@
                 fetch('/friendList' ,reqInfo)
                     .then(res => res.text())
                     .then(msg => {
-                        if(msg !== 'friendAddSuccess') {
+                        if(msg === 'friendAddSuccess') {
+                            alert('친구요청에 성공하셨습니다');
+                        }
+                        else{
                             alert('친구추가에 실패하셨습니다')
                         }
                     });

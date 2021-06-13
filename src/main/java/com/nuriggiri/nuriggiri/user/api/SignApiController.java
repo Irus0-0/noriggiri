@@ -1,7 +1,10 @@
 package com.nuriggiri.nuriggiri.user.api;
 
+import com.nuriggiri.nuriggiri.friend.domain.FriendList;
+import com.nuriggiri.nuriggiri.friend.service.FriendService;
 import com.nuriggiri.nuriggiri.user.domain.LoginUser;
 import com.nuriggiri.nuriggiri.user.domain.User;
+import com.nuriggiri.nuriggiri.user.domain.UserNonSq;
 import com.nuriggiri.nuriggiri.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -16,6 +19,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/sign")
@@ -25,6 +30,8 @@ import javax.servlet.http.HttpSession;
 public class SignApiController {
 
     private final UserService userService;
+
+    private final FriendService friendService;
 
 
     //회원가입 페이지
@@ -75,6 +82,11 @@ public class SignApiController {
         if (loginMessage.equals("success")) {
             //로그인 성공할 경우
             request.getSession().setAttribute("loginUser", userService.userInfo(inputUser.getUserId()));
+
+            int userNo = ((User) request.getSession().getAttribute("loginUser")).getUserNo();
+            Map<String, List<FriendList>> stringListMap = friendService.friendAllMap(userNo);
+            request.getSession().setAttribute("friendListMap", stringListMap);
+
             log.info(loginMessage);
             log.info(request.getSession().getAttribute("loginUser"));
             if (inputUser.isAutoLogin()) {
@@ -115,7 +127,7 @@ public class SignApiController {
     public String userInfo(HttpServletRequest request, Model model) {
         //로그인한 사람의 회원 정보 조회
         if (request.getSession().getAttribute("loginUser") != null) {
-            String userId = ((User) request.getSession().getAttribute("loginUser")).getUserId();
+            String userId = ((UserNonSq) request.getSession().getAttribute("loginUser")).getUserId();
             User user = userService.userInfo(userId);
             model.addAttribute("userInfo", user);
             log.info("세션에서 받아온 ID :" + userId);
@@ -136,7 +148,7 @@ public class SignApiController {
         //삭제후 세션지우기
         request.getSession().removeAttribute("loginUser");
         request.getSession().invalidate();
-        return "/";
+        return "redirect:/sign/in";
     }
 
     //비밀번호 찾기 페이지

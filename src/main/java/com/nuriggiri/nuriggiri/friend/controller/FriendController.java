@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @Log4j2
@@ -42,6 +43,19 @@ public class FriendController {
 
     }
 
+    //테스트
+    @GetMapping("/friendListMap")
+    @ResponseBody
+    public ResponseEntity<Map<String, List<FriendList>>> getList(HttpServletRequest request) {
+        int userNo = ((User) request.getSession().getAttribute("loginUser")).getUserNo();
+
+        Map<String, List<FriendList>> stringListMap = friendService.friendAllMap(userNo);
+        request.getSession().setAttribute("friendListMap", stringListMap);
+        log.info("stringListMap" + stringListMap);
+        return new ResponseEntity<>(stringListMap, HttpStatus.OK);
+    }
+
+
     //친구요청
     @PostMapping("/friendList")
     @ResponseBody
@@ -53,8 +67,6 @@ public class FriendController {
                 ? new ResponseEntity<>("friendAddSuccess", HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
-
 
 
 }

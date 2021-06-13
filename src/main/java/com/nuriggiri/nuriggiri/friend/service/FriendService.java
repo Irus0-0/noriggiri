@@ -4,12 +4,17 @@ import com.nuriggiri.nuriggiri.friend.domain.Friend;
 import com.nuriggiri.nuriggiri.friend.domain.FriendList;
 import com.nuriggiri.nuriggiri.friend.domain.Relation;
 import com.nuriggiri.nuriggiri.friend.repository.FriendMapper;
+import com.nuriggiri.nuriggiri.user.domain.User;
 import com.nuriggiri.nuriggiri.user.domain.UserNonSq;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
 
 @Service
 @Log4j2
@@ -54,6 +59,17 @@ public class FriendService {
     public List<FriendList> friendList(int userNo, Relation relation) {
         //관계를 지정해줌으로써 내가 요청하고있는 리스트나 차단한 리스트 친구인 리스트 등을 불러 올 수 있다.
         return friendMapper.friendList(userNo, relation);
+    }
+
+    //친구목록 (차단 , 요청 , 친구)
+    public Map<String, List<FriendList>> friendAllMap(int userNo) {
+        Map<String, List<FriendList>> stringListMap = new HashMap<>();
+        stringListMap.put("DUDE", friendList(userNo, Relation.DUDE));
+        stringListMap.put("BLOCK", friendList(userNo, Relation.BLOCK));
+        stringListMap.put("REQUEST", friendList(userNo, Relation.REQUEST));
+
+        log.info("친구 맵 가져오기"+stringListMap);
+        return stringListMap;
     }
 
     //친구삭제
