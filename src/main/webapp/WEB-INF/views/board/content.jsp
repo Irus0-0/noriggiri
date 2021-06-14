@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
@@ -78,28 +78,32 @@
 
    <!-- 댓글 영역 -->
 
-   <div id="replies" class="row">
-      <div class="offset-md-1">
-         <!-- 댓글 쓰기 영역 -->
-         <div class="card">
+<div id="replies" class="row">
+    <div class="offset-md-1 col-md-10">
+        <!-- 댓글 쓰기 영역 -->
+        <div class="card">
             <div class="card-body">
-               <div class="row">
-                  <div class="col-md-9">
-                     <div class="form-group">
-                        <label for="newReplyText" hidden>댓글 내용</label>
-                        <textarea rows="3" id="newReplyText" name="replyText" class="form-control"
-                           placeholder="댓글을 입력해주세요."></textarea>
-                     </div>
-                  </div>
-                  <div class="col-md-3">
-                     <div class="form-group">
-                        <label for="newReplyWriter" hidden>댓글 작성자</label>
-                        <input id="newReplyWriter" type="text" class="form-control" style="margin-bottom: 6px;"
-                           name="replyWriter" value="${loginUser.nickName}" disabled>
-                        <button id="replyAddBtn" type="button" class="btn btn-dark form-control">등록</button>
-                     </div>
-                  </div>
-               </div>
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            <label for="newReplyText" hidden>댓글 내용</label>
+                            <textarea rows="3" id="newReplyText" name="replyText" class="form-control"
+                                      placeholder="댓글을 입력해주세요."></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="newReplyWriter" hidden>댓글 작성자</label>
+                            <input id="newReplyWriter" type="text" class="form-control"
+                                   style="margin-bottom: 6px;" name="replyWriter" value="${loginUser.nickName}"
+                                   disabled>
+                            <input type="checkbox" id="anonymous" name="anonymous">
+                            <label for="anonymous">익명</label>
+<%--                            <input type="hidden" id="anonymous" name="anonymous">--%>
+                            <button id="replyAddBtn" type="button" class="btn btn-dark form-control">등록</button>
+                        </div>
+                    </div>
+                </div>
             </div>
          </div> <!-- end reply write -->
 
@@ -112,18 +116,18 @@
 
             <!-- 댓글 내용 바디 -->
             <div id="replyCollapse" class="card">
-               <div id="replyData">
-                  <!--
-                          < JS로 댓글 정보 DIV삽입 > 
+                <div id="replyData">
+                    <!--
+                          < JS로 댓글 정보 DIV삽입 >
                        -->
-               </div>
+                </div>
 
-               <!-- 댓글 페이징 영역 -->
-               <ul class="pagination justify-content-center">
-                  <!--
-                          < JS로 댓글 페이징 DIV삽입 > 
+                <!-- 댓글 페이징 영역 -->
+                <ul class="pagination justify-content-center">
+                    <!--
+                          < JS로 댓글 페이징 DIV삽입 >
                        -->
-               </ul>
+                </ul>
             </div>
          </div> <!-- end reply content -->
       </div>
@@ -155,28 +159,32 @@
                <button id="replyModBtn" type="button" class="btn btn-dark">수정</button>
                <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
             </div>
-         </div>
-      </div>
-   </div>
+
+
+        </div>
+    </div>
+</div>
 
    <!-- end replyModifyModal -->
 
-   <script>
-      $(function () {
-         $('#summernote').summernote({
+
+<%@ include file="../include/footer.jsp" %>
+
+<script>
+
+    $(function () {
+        $('#summernote').summernote({
             height: 300,
             minHeight: null, // set minimum height of editor
             maxHeight: null, // set maximum height of editor
             focus: true // set focus to editable area after initializing summe
-         });
-      });
-   </script>
+        });
+    });
 
-   <script>
-      // 댓글 처리 JS
-      $(function () {
-         //원본글 번호
-         const boardNo = '${article.boardNo}';
+    // 댓글 처리 JS
+    $(function () {
+        //원본글 번호
+        const boardNo = '${article.boardNo}';
 
          //날짜 포맷 변환 함수
          function formatDate(datetime) {
@@ -405,6 +413,7 @@
          });
       });
    </script>
+
 
 </body>
 

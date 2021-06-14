@@ -244,6 +244,7 @@
                   "    <div class='row'>" +
                   "       <div class='col-md-6'>" + reply.content + "</div>" +
                   "       <div class='offset-md-2 col-md-4 text-right'>" +
+                  "         <a id='replyRecBtn' class='btn btn-sm btn-outline-dark' href='#'>추천</a>" +
                   "         <a id='replyModBtn' class='btn btn-sm btn-outline-dark' href='#replyModifyModal' data-toggle='modal'>수정</a>&nbsp;" +
                   "         <a id='replyDelBtn' class='btn btn-sm btn-outline-dark' href='#'>삭제</a>" +
                   "       </div>" +
