@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 
 <head>
+   <meta charset="UTF-8">
+   <title>Insert title here</title>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,46 +22,37 @@
    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
+   <%@ include file="../include/static-head.jsp" %>
    <style>
-      .modify-board {
+      .quickForm {
          display: block;
          width: 80%;
-         margin: 0 auto;
+         margin: 0, auto;
       }
-      .offset-md-1 {
-         width: 80%;
-         margin: 0 auto;
-         margin-bottom: 10px;
-      }
-      .card-footer {
-         display: block;
-         float: left;
-         margin-right: 5px;
-      }
-      .clearfix::after {
-         content: '';
-         display: block;
-         clear: both;
-      }
+      
    </style>
+
 
 </head>
 
 <body>
+
+   <%@ include file="../include/header.jsp" %>
+
    <form id="quickForm">
       <div class="modify-board">
 
          <h2>${article.boardNo}번 게시물</h2>
 
-         <div class="card-body clearfix">
+         <div class="card-body">
             <div class="form-group">
                <label for="exampleInputEmail1">작성자</label>
-               <input type="hidden" type="text" name="writer" value="${article.writer}">
+               <input type="hidden" type="text" name="writer" value="${article.writer}" disabled>
                <input type="text" class="form-control" id="exampleInputEmail1" value="${article.writer}" disabled>
             </div>
             <div class="form-group">
                <label for="exampleInputPassword1">제목</label>
-               <input type="text" name="title" class="form-control" id="exampleInputPassword1" value="${article.title}"disabled>
+               <input type="text" name="title" class="form-control" id="exampleInputPassword1" value="${article.title}">
             </div>
             <textarea id="summernote" disabled>${article.content}</textarea>
             <div class="card-footer">
@@ -76,34 +69,51 @@
       </div>
    </form>
 
+   <!-- Modal -->
+   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">게시글 삭제</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               정말로 삭제 하시겠습니까?
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+               <button type="button" class="btn btn-primary">삭제하기</button>
+            </div>
+         </div>
+      </div>
+   </div>
+   </div>
+   </div>
+
    <!-- 댓글 영역 -->
 
-<div id="replies" class="row">
-    <div class="offset-md-1 col-md-10">
-        <!-- 댓글 쓰기 영역 -->
-        <div class="card">
+   <div id="replies" class="row">
+      <div class="offset-md-1 col-md-10">
+         <!-- 댓글 쓰기 영역 -->
+         <div class="card">
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-9">
-                        <div class="form-group">
-                            <label for="newReplyText" hidden>댓글 내용</label>
-                            <textarea rows="3" id="newReplyText" name="replyText" class="form-control"
-                                      placeholder="댓글을 입력해주세요."></textarea>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="newReplyWriter" hidden>댓글 작성자</label>
-                            <input id="newReplyWriter" type="text" class="form-control"
-                                   style="margin-bottom: 6px;" name="replyWriter" value="${loginUser.nickName}"
-                                   disabled>
-                            <input type="checkbox" id="anonymous" name="anonymous">
-                            <label for="anonymous">익명</label>
-<%--                            <input type="hidden" id="anonymous" name="anonymous">--%>
-                            <button id="replyAddBtn" type="button" class="btn btn-dark form-control">등록</button>
-                        </div>
-                    </div>
-                </div>
+               <div class="row">
+                  <div class="col-md-9">
+                     <div class="form-group">
+                        <label for="newReplyText" hidden>댓글 내용</label>
+                        <textarea rows="3" id="newReplyText" name="replyText" class="form-control"
+                           placeholder="댓글을 입력해주세요."></textarea>
+                     </div>
+                  </div>
+                  <div class="col-md-3">
+                     <div class="form-group">
+                        <label for="newReplyWriter" hidden>댓글 작성자</label>
+                        <input id="newReplyWriter" type="text" class="form-control" style="margin-bottom: 6px;"
+                           name="replyWriter" value="${loginUser.nickName}" disabled>
+                        <button id="replyAddBtn" type="button" class="btn btn-dark form-control">등록</button>
+                     </div>
+                  </div>
+               </div>
             </div>
          </div> <!-- end reply write -->
 
@@ -116,18 +126,18 @@
 
             <!-- 댓글 내용 바디 -->
             <div id="replyCollapse" class="card">
-                <div id="replyData">
-                    <!--
-                          < JS로 댓글 정보 DIV삽입 >
-                       -->
-                </div>
+               <div id="replyData">
+                  <!--
+                        < JS로 댓글 정보 DIV삽입 > 
+                     -->
+               </div>
 
-                <!-- 댓글 페이징 영역 -->
-                <ul class="pagination justify-content-center">
-                    <!--
-                          < JS로 댓글 페이징 DIV삽입 >
-                       -->
-                </ul>
+               <!-- 댓글 페이징 영역 -->
+               <ul class="pagination justify-content-center">
+                  <!--
+                        < JS로 댓글 페이징 DIV삽입 > 
+                     -->
+               </ul>
             </div>
          </div> <!-- end reply content -->
       </div>
@@ -161,30 +171,21 @@
             </div>
 
 
-        </div>
-    </div>
-</div>
+         </div>
+      </div>
+   </div>
 
    <!-- end replyModifyModal -->
 
 
-<%@ include file="../include/footer.jsp" %>
+   <%@ include file="../include/footer.jsp" %>
 
-<script>
+   <script>
 
-    $(function () {
-        $('#summernote').summernote({
-            height: 300,
-            minHeight: null, // set minimum height of editor
-            maxHeight: null, // set maximum height of editor
-            focus: true // set focus to editable area after initializing summe
-        });
-    });
-
-    // 댓글 처리 JS
-    $(function () {
-        //원본글 번호
-        const boardNo = '${article.boardNo}';
+      // 댓글 처리 JS
+      $(function () {
+         //원본글 번호
+         const boardNo = '${article.boardNo}';
 
          //날짜 포맷 변환 함수
          function formatDate(datetime) {
@@ -410,6 +411,17 @@
                      alert("댓글 삭제에 실패했습니다.");
                   }
                })
+         });
+      });
+   </script>
+
+   <script>
+       $(function () {
+         $('#summernote').summernote({
+            height: 300,
+            minHeight: null, // set minimum height of editor
+            maxHeight: null, // set maximum height of editor
+            focus: true // set focus to editable area after initializing summe
          });
       });
    </script>
