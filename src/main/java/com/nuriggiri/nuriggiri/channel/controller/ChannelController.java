@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -28,9 +29,11 @@ public class ChannelController {
 
     //채널 목록 가져오기
     @GetMapping(value = {"/chList", "/chMain"})
-    public String viewList(Model model) {
+    public String viewList(Model model, HttpSession session) {
         List<Channel> channelList = channelService.viewList();
         model.addAttribute("list", channelList);
+
+        session.setAttribute("chList", channelList);
         return "/channel/chMain";
     }
 
@@ -44,11 +47,12 @@ public class ChannelController {
     @PostMapping("/addCh")
     public String create(Channel channel) {
         try {
+            log.info("channel: " + channel);
             channelService.create(channel);
         } catch (Exception e) {
             return "/channel/addCh";
         }
-        return "redirect:channel";
+        return "redirect:/channel/chList";
     }
 
     //채널 정보 상세보기 요청
@@ -58,7 +62,7 @@ public class ChannelController {
         model.addAttribute("channel", content);
         List<Channel> channelList = channelService.viewList();
         model.addAttribute("list", channelList);
-        log.info("channel info: " + content);
+//        log.info("channel info: " + content);
         return "/channel/viewCh";
     }
 
@@ -77,6 +81,8 @@ public class ChannelController {
         channel.setChannelName(modifyChannel.getChannelName());
         channel.setChannelInfo(modifyChannel.getChannelInfo());
         channel.setChannelPw(modifyChannel.getChannelPw());
+
+        log.info(channel);
         try {
             channelService.update(channel);
         } catch (Exception e) {

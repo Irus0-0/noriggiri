@@ -32,8 +32,8 @@ class ChannelMapperTest {
     @Test
     void create() {
         Channel channel = new Channel();
-        channel.setChannelName("test-ch1");
-        channel.setChannelInfo("테스트 채널 1");
+        channel.setChannelName("test-ch7");
+        channel.setChannelInfo("테스트 채널 7");
         channel.setAdminUserNo(1);
         channel.setChannelPw("1234");
 
