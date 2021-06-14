@@ -160,15 +160,29 @@
    </div>
 
    <!-- end replyModifyModal -->
-
    <script>
       $(function () {
-         $('#summernote').summernote({
+         $('#summernote').summernote('disable',{
             height: 300,
             minHeight: null, // set minimum height of editor
             maxHeight: null, // set maximum height of editor
             focus: true // set focus to editable area after initializing summe
          });
+
+         //목록버튼
+			$('#list-btn').on('click', e => {
+				location.href='/board/list?page=${criteria.page}&type=${criteria.type}&keyword=${criteria.keyword}&amount=${criteria.amount}';
+			});
+
+         //수정버튼
+			$('#modify-btn').on('click', e => {
+				location.href='/board/modify?boardNo=${article.boardNo}&vf=false';
+			});
+
+         //삭제버튼
+			$('#delete-btn').on('click', e => {
+				location.href='/board/delete?boardNo=${article.boardNo}';
+			});
       });
    </script>
 

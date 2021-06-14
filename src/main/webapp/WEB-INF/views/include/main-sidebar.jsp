@@ -20,11 +20,10 @@
             </div>
 
             <div class="info-btn">
-                <%--                <button type="button" onclick="location.href='/sign/detail'" class="btn btn-outline-secondary btn-xs">--%>
-                <%--                    내정보--%>
-                <%--                </button>--%>
-                <button type="button" class="btn btn-outline-secondary btn-xs" data-toggle="modal"
-                    data-target="#userInfo-modal">
+<%--                <button type="button" onclick="location.href='/sign/detail'" class="btn btn-outline-secondary btn-xs">--%>
+<%--                    내정보--%>
+<%--                </button>--%>
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#userInfo-modal">
                     내정보
                 </button>
                 <button type="button" id="signOut-btn" class="btn btn-secondary btn-xs">로그아웃</button>
@@ -87,7 +86,15 @@
         <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
-
+    <script>
+        //로그아웃 버튼 클릭이벤트
+        $('#signOut-btn').on('click', e => {
+            let checkLogout = confirm("로그아웃 하시겠습니까?");
+            if (checkLogout) {
+                location.href = '/sign/out'
+            }
+        });
+    </script>
 </aside>
 
 <%--        내정보 모달--%>

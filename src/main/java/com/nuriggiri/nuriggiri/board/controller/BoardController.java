@@ -46,6 +46,7 @@ public class BoardController {
     //게시글 작성 처리 요청
     @PostMapping("/board/write")
     public String write(Board board) {
+        log.info("글작성 데이터 : " + board);
         boardService.create(board);
         return "redirect:/board/list"; //jsp 경로 입력
     }
