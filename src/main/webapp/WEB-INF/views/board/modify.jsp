@@ -53,10 +53,8 @@
 				</div>
 				<textarea id="summernote" name="content">${article.content}</textarea>
 				<div class="card-footer">
-					<button type="submit" class="btn btn-primary">수정</button>
-				</div>
-				<div class="card-footer">
-					<button type="submit" class="btn btn-primary" href="/board/list">글 목록보기</button>
+					<button type="submit" class="btn btn-warning">수정</button>
+					<button type="button" class="btn btn-warning" id="list-btn">글 목록보기</button>
 				</div>
 			</div>
 		</div>
@@ -70,6 +68,11 @@
 				minHeight: null, // set minimum height of editor
 				maxHeight: null, // set maximum height of editor
 				focus: true // set focus to editable area after initializing summe						  
+			});
+
+			//목록버튼
+			$('#list-btn').on('click', e => {
+				location.href='/board/list';
 			});
 		});
 	</script>
