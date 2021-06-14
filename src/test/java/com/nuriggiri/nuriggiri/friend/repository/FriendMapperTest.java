@@ -1,10 +1,9 @@
 package com.nuriggiri.nuriggiri.friend.repository;
 
-import com.nuriggiri.nuriggiri.friend.domain.Friend;
 import com.nuriggiri.nuriggiri.friend.domain.FriendList;
 import com.nuriggiri.nuriggiri.friend.domain.Relation;
 
-import com.nuriggiri.nuriggiri.user.domain.UserNonSq;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -38,6 +37,19 @@ class FriendMapperTest {
         }
         System.out.println("++++++++++++++++++++++++");
 
+    }
+
+    @Test
+    void checkTest() {
+        FriendList s = null;
+        try {
+            s = friendMapper.checkRelation(1, 3);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("s = " + s);
+        Relation relationship = s.getRelationship();
+        System.out.println("relationship = " + relationship);
 
 
     }

@@ -12,7 +12,7 @@ import java.util.List;
 public interface FriendMapper {
 
     //친구 요청
-    void addFriend(int userNo, int targetNo, Relation relationship);
+    int addFriend(int userNo, int targetNo, Relation relationship);
 
     //친구 목록
     List<FriendList> friendList(int userNo, Relation relationship);
@@ -21,9 +21,9 @@ public interface FriendMapper {
     void removeFriend(int userNo, int targetNo);
 
     //친구 update
-    void updateFriend(int userNo, int targetUser, Relation relationship);
+    void updateFriend(int userNo, int targetNo, Relation relationship);
 
 
     // 요청 검증   관계가 어떤것이 되어있는지 확인
-    Relation checkRelation(int userNo, int targetNo);
+    FriendList checkRelation(int userNo, int targetNo);
 }
