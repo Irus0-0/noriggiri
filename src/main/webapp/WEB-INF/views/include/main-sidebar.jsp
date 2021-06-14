@@ -20,39 +20,16 @@
             </div>
 
             <div class="info-btn">
-<%--                <button type="button" onclick="location.href='/sign/detail'" class="btn btn-outline-secondary btn-xs">--%>
-<%--                    내정보--%>
-<%--                </button>--%>
-                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#userInfo-modal">
+                <%--                <button type="button" onclick="location.href='/sign/detail'" class="btn btn-outline-secondary btn-xs">--%>
+                <%--                    내정보--%>
+                <%--                </button>--%>
+                <button type="button" class="btn btn-outline-secondary btn-xs" data-toggle="modal"
+                    data-target="#userInfo-modal">
                     내정보
                 </button>
                 <button type="button" id="signOut-btn" class="btn btn-secondary btn-xs">로그아웃</button>
             </div>
         </div>
-        <%--        내정보 모달--%>
-        <div class="modal fade" id="userInfo-modal" tabindex="-1">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">${loginUser.nickName}님의 정보</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>
-                            # 유저ID: ${loginUser.userId}<br>
-                            # 닉네임: ${loginUser.nickName}<br>
-                            # 가입일: <fmt:formatDate pattern="YYYY년 MM월 dd일 HH시" value="${loginUser.regDate}" /><br>
-                        </p>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div> <!-- /.modal-content -->
-            </div> <!-- /.modal-dialog -->
-        </div> <!-- /.modal -->
 
         <!-- SidebarSearch Form -->
         <div class="form-inline">
@@ -110,13 +87,31 @@
         <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
-    <script>
-        //로그아웃 버튼 클릭이벤트
-        $('#signOut-btn').on('click', e => {
-            let checkLogout = confirm("로그아웃 하시겠습니까?");
-            if (checkLogout) {
-                location.href = '/sign/out'
-            }
-        });
-    </script>
+
 </aside>
+
+<%--        내정보 모달--%>
+<div class="modal fade" id="userInfo-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">${loginUser.nickName}님의 정보</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    # 유저ID: ${loginUser.userId}<br>
+                    # 닉네임: ${loginUser.nickName}<br>
+                    # 가입일:
+                    <fmt:formatDate pattern="YYYY년 MM월 dd일 HH시" value="${loginUser.regDate}" /><br>
+                </p>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div> <!-- /.modal-content -->
+    </div> <!-- /.modal-dialog -->
+</div> <!-- /.modal -->

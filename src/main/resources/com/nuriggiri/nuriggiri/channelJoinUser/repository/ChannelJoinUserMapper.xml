@@ -1,0 +1,30 @@
+<!--
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nuriggiri.nuriggiri.channelJoinUser.repository.ChannelJoinUserMapper">
+
+    <resultMap id="joinUserMap" type="com.nuriggiri.nuriggiri.channelJoinUser.domain.channelJoinUser">
+        <result property="joinSeqNo" column="join_seq_no"/>
+        <result property="channelNo" column="channel_no"/>
+        <result property="userNo" column="user_no"/>
+    </resultMap>
+
+
+    &lt;!&ndash; // 채널 접속 &ndash;&gt;
+    <insert id="joinCh">
+        INSERT INTO nuri_channel_join_user
+        (joinSeqNo, channel_no, user_no)
+        VALUES
+        (seq_nuri_channel_join_user.nextval, , #{channelNo}, #{userNo})
+    </insert>
+
+    &lt;!&ndash; // 채널 나가기 &ndash;&gt;
+    <delete id="exitCh">
+        DELETE FROM nuri_channel_join_user
+        WHERE join_seq_no = #{joinSeqNo}
+    </delete>
+
+</mapper>-->

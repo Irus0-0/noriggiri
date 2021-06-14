@@ -47,7 +47,7 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">${channel.channelName} INFO</h5>
+                                    <h4 class="card-title">${channel.channelName} INFO</h4>
 
                                     <form action="/channel/modCh" method="POST">
                                         <input type="hidden" name="channelNo" value="${channel.channelNo}">
@@ -55,7 +55,7 @@
                                     <ul class="ch-info">
                                         <li>
                                             <label for="channelNo">#채널번호: </label>
-                                            <input type="text" name="channelNo" value="${channel.channelNo}">
+                                            <input type="text" name="channelNo" value="${channel.channelNo}" disabled>
                                         </li>
                                         <li>
                                             <label for="channelName">#채널이름: </label>
@@ -63,21 +63,25 @@
                                         </li>
                                         <li>
                                             <label for="adminUserNo">#채널관리자: </label>
-                                            <input type="text" name="adminUserNo" value="${channel.adminUserNo}  (현재 유저번호. 추후 유저닉네임으로 변경하기)">
+                                            <input type="text" name="adminUserNo" value="${channel.adminUserNo}  (현재 유저번호. 추후 유저닉네임으로 변경하기)" disabled>
                                         </li>
                                         <li>
                                             <label for="channelInfo">#채널정보: </label>
                                             <input type="text" name="channelInfo" value="${channel.channelInfo}">
                                         </li>
                                         <li>
+                                            <label for="channelPw">#채널패스워드: </label>
+                                            <input type="password" name="channelPw" value="${channel.channelPw}">
+                                        </li>
+                                        <li>
                                             <label for="joinUser">#채널참여자: </label>
-                                            <input type="text" name="joinUser" value="(아직 기능 구현전)">
+                                            <input type="text" name="joinUser" value="(아직 기능 구현전)" disabled>
                                         </li>
                                     </ul>
 
-                                    <div class="list-btn">
-                                        <button type="submit" class="btn">완료</button>
-                                        <a class="btn" href="/channel/viewCh?channelNo">취소</a>
+                                    <div class="list-btn justify-content-end">
+                                        <button type="submit" class="btn btn-primary">완료</button>
+                                        <a class="btn btn-primary" href="/channel/viewCh?channelNo">취소</a>
                                     </div>
                                 </form>
 

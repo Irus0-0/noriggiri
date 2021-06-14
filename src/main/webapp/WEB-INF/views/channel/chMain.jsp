@@ -53,7 +53,9 @@
                                         기능 추가하기 UI<br>
                                     </p>
 
-                                    <a href="/channel/addCh" class="card-link">채널 생성</a>
+                                    <!-- <button type="button" class="btn btn-outline-secondary btn-xs" data-toggle="modal"
+                                    data-target="#createCh-modal">채널 생성</button> -->
+                                    <a href="/channel/addCh" class="btn btn-outline-secondary btn-xs">채널 생성</a>
                                 </div>
                             </div>
                         </div>
@@ -98,7 +100,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                     <!-- /.row -->
                 </div><!-- /.container-fluid -->

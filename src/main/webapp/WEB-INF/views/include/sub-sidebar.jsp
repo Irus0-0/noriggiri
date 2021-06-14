@@ -64,7 +64,7 @@
                         </li>
                         <li class="nav-header">내가 참여한 채널</li>
 
-                        <c:forEach var="channel" items="${list}">
+                        <c:forEach var="channel" items="${chList}">
                             <li class="nav-item" data-num="${channel.channelNo}">
                                 <a href="/channel/viewCh?channelNo=${channel.channelNo}" class="nav-link">
                                 <!-- <a href="/channel/viewCh" class="nav-link"> -->
