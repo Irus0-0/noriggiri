@@ -43,7 +43,7 @@ public class FriendController {
 
     }
 
-    //테스트
+    //    테스트
     @GetMapping("/friendListMap")
     @ResponseBody
     public ResponseEntity<Map<String, List<FriendList>>> getList(HttpServletRequest request) {
