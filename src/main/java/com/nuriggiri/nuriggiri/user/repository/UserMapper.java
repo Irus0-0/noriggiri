@@ -1,6 +1,7 @@
 package com.nuriggiri.nuriggiri.user.repository;
 
 import com.nuriggiri.nuriggiri.user.domain.User;
+import com.nuriggiri.nuriggiri.user.domain.UserNonSq;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Map;

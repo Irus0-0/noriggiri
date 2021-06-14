@@ -1,7 +1,10 @@
 package com.nuriggiri.nuriggiri.user.service;
 
+import com.nuriggiri.nuriggiri.friend.domain.FriendList;
+import com.nuriggiri.nuriggiri.friend.service.FriendService;
 import com.nuriggiri.nuriggiri.user.domain.LoginUser;
 import com.nuriggiri.nuriggiri.user.domain.User;
+import com.nuriggiri.nuriggiri.user.domain.UserNonSq;
 import com.nuriggiri.nuriggiri.user.repository.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -22,6 +26,7 @@ public class UserService {
 
 
     private final UserMapper userMapper;
+    private final FriendService friendService;
 
     //회원가입
     public void signUp(User user) {
