@@ -35,6 +35,7 @@
          display: block;
          float: left;
          margin-right: 5px;
+         margin-bottom: 15px;;
       }
       .clearfix::after {
          content: '';
@@ -61,17 +62,12 @@
                <label for="exampleInputPassword1">제목</label>
                <input type="text" name="title" class="form-control" id="exampleInputPassword1" value="${article.title}"disabled>
             </div>
-            <textarea id="summernote" disabled>${article.content}</textarea>
+            <textarea id="summernote">${article.content}</textarea>
             <div class="card-footer">
-               <a href="/board/list?page=${criteria.page}&type=${criteria.type}&keyword=${criteria.keyword}&amount=${criteria.amount}">글
-                  목록보기</a>
-            </div>
-            <div class="card-footer">
-               <a href="/board/modify?boardNo=${article.boardNo}&vf=false">글 수정하기</a>
-            </div>
-            <div class="card-footer">
-               <button type="button" class="btn btn-primary" data-bs-target="#exampleModal">글 삭제하기</button>
-            </div>
+               <button type="button" class="btn btn-warning" id="list-btn">글 목록보기</button>
+               <button type="button" class="btn btn-warning" id="modify-btn">글 수정하기</button>
+               <button type="button" class="btn btn-warning" id="delete-btn">글 삭제하기</button>
+            </div>               
          </div>
       </div>
    </form>
@@ -160,15 +156,29 @@
    </div>
 
    <!-- end replyModifyModal -->
-
    <script>
       $(function () {
-         $('#summernote').summernote({
+         $('#summernote').summernote('disable',{
             height: 300,
             minHeight: null, // set minimum height of editor
             maxHeight: null, // set maximum height of editor
             focus: true // set focus to editable area after initializing summe
          });
+
+         //목록버튼
+			$('#list-btn').on('click', e => {
+				location.href='/board/list?page=${criteria.page}&type=${criteria.type}&keyword=${criteria.keyword}&amount=${criteria.amount}';
+			});
+
+         //수정버튼
+			$('#modify-btn').on('click', e => {
+				location.href='/board/modify?boardNo=${article.boardNo}&vf=false';
+			});
+
+         //삭제버튼
+			$('#delete-btn').on('click', e => {
+				location.href='/board/delete?boardNo=${article.boardNo}';
+			});
       });
    </script>
 

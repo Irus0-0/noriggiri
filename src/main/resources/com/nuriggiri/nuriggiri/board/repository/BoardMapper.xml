@@ -21,7 +21,7 @@
             SELECT
                 board_no, writer, title, content, recommend, reg_date
             FROM
-                (SELECT /*+INDEX_DESC(board pk_board)*/
+                (SELECT /*+INDEX_DESC(nuri_board pk_nuri_board)*/
                     rownum rn, board_no, writer, title, content, recommend, reg_date
                 FROM nuri_board
                 WHERE
