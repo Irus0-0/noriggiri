@@ -15,7 +15,7 @@
 
 
         <!-- main sidebar(left menu) include -->
-        <%@include file="../include/sub-sidebar.jsp" %>
+        <%@include file="../include/main-sidebar.jsp" %>
 
 
         <!-- main content wrapper -->
@@ -29,8 +29,8 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="../home.jsp">메인홈</a></li>
-                                <li class="breadcrumb-item"><a href="/channel/chMain">채널메인</a></li>
+                                <!-- <li class="breadcrumb-item"><a href="../home.jsp">메인홈</a></li> -->
+                                <li class="breadcrumb-item"><i class="fas fa-home"></i> <a href="/channel/chMain">채널메인</a></li>
                                 <li class="breadcrumb-item active">${channel.channelName}</li>
                             </ol>
                         </div><!-- /.col -->
@@ -47,7 +47,7 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">${channel.channelName} INFO</h5>
+                                    <h5 class="card-title">채널생성</h5>
 
                                     <form id="createCh" action="/channel/addCh" method="POST">
                                         <ul class="ch-info">
@@ -70,8 +70,8 @@
                                             </li>
                                         </ul>
                                         <div class="list-btn">
-                                            <button type="submit" class="btn btn-primary">완료</button>
-                                            <a class="btn btn-primary" href="/channel/viewCh?channelNo">취소</a>
+                                            <button type="submit" class="btn btn-warning">완료</button>
+                                            <a class="btn btn-warning" href="/channel/chMain">취소</a>
                                         </div>
                                     </form>
 

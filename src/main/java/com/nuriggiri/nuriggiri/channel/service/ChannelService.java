@@ -1,5 +1,6 @@
 package com.nuriggiri.nuriggiri.channel.service;
 
+import com.nuriggiri.nuriggiri.board.paging.Criteria;
 import com.nuriggiri.nuriggiri.channel.domain.Channel;
 import com.nuriggiri.nuriggiri.channel.repository.ChannelMapper;
 import com.nuriggiri.nuriggiri.user.domain.User;
@@ -18,6 +19,17 @@ public class ChannelService {
     public List<Channel> viewList(){
         return channelMapper.viewList();
     }
+
+    // 검색 쿼리 추가 목록
+    public List<Channel> viewList(Criteria criteria){
+        return channelMapper.getSearchArticles(criteria);
+    }
+
+    // 총 채널 수 조회
+    public int getTotal(Criteria criteria) {
+        return channelMapper.getTotalCount(criteria);
+    }
+
 
     //채널 생성
     public void create(Channel channel) throws Exception {
@@ -38,12 +50,5 @@ public class ChannelService {
     public void delete(int channelNo){
         channelMapper.delete(channelNo);
     }
-
-
-    //채널 접속
-    //public void join(int channelNo, String channelPw, User userNo) {    }
-
-    //채널 접속 해제
-    //void exit(int channelNo, User userNo) {  }
 
 }

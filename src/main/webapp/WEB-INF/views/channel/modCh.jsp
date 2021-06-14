@@ -15,7 +15,7 @@
 
 
         <!-- main sidebar(left menu) include -->
-        <%@include file="../include/sub-sidebar.jsp" %>
+        <%@include file="../include/main-sidebar.jsp" %>
 
 
         <!-- main content wrapper -->
@@ -29,7 +29,7 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="../home.jsp">메인홈</a></li>
+                                <!-- <li class="breadcrumb-item"><a href="../home.jsp">메인홈</a></li> -->
                                 <li class="breadcrumb-item"><a href="/channel/chMain">채널메인</a></li>
                                 <li class="breadcrumb-item active">${channel.channelName}</li>
                             </ol>
@@ -80,8 +80,8 @@
                                     </ul>
 
                                     <div class="list-btn justify-content-end">
-                                        <button type="submit" class="btn btn-primary">완료</button>
-                                        <a class="btn btn-primary" href="/channel/viewCh?channelNo">취소</a>
+                                        <button type="submit" class="btn btn-warning">완료</button>
+                                        <a class="btn btn-warning" href="/channel/viewCh?channelNo=${channel.channelNo}">취소</a>
                                     </div>
                                 </form>
 
