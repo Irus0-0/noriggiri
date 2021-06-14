@@ -108,12 +108,19 @@
                             <input id="newReplyWriter" type="text" class="form-control"
                                    style="margin-bottom: 6px;" name="replyWriter" value="${loginUser.nickName}"
                                    disabled>
+                            <input type="checkbox" id="anonymous" name="anonymous">
+                            <label for="anonymous">익명</label>
+<%--                            <input type="hidden" id="anonymous" name="anonymous">--%>
                             <button id="replyAddBtn" type="button" class="btn btn-dark form-control">등록</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div> <!-- end reply write -->
+
+<%--        체크박스 이벤트--%>
+
+
 
         <!--댓글 내용 영역-->
         <div class="card">
@@ -270,8 +277,13 @@
             for (let reply of replyMap.replyList) {
                 tag += "<div id='replyContent' class='card-body' data-replyId='" + reply.replyNo + "'>" +
                     "    <div class='row user-block'>" +
-                    "       <span class='col-md-3'>" +
-                    "         <b>" + reply.nickName + "</b>" +
+                    "       <span class='col-md-3'>";
+                    if (reply.anonymous == 'true') {
+                        tag += "<b>익명</b>";
+                    } else {
+                        tag += "<b>" + reply.nickName + "</b>";
+                    }
+                tag +=
                     "       </span>" +
                     "       <span class='offset-md-6 col-md-3 text-right'><b>" + formatDate(reply.regDate) +
                     "</b></span>" +
@@ -329,7 +341,8 @@
                 body: JSON.stringify({
                     boardNo: boardNo,
                     content: $('#newReplyText').val(),
-                    nickName: $('#newReplyWriter').val()
+                    nickName: $('#newReplyWriter').val(),
+                    anonymous: $('input:checkbox[id="anonymous"]').is(":checked") == true
                 })
             };
             fetch('/api/v1/reply', reqInfo)
@@ -423,7 +436,6 @@
         });
     });
 </script>
-
 
 </body>
 

@@ -24,6 +24,7 @@ public class Reply {
     private int replyRecommend; //추천
     private List<User> recommendList; //추천한 사람들 중복추천방지
     private Date regDate; // 댓글 작성일자
+    private String anonymous; //익명
 
 //    public Reply() {
 //        this.replyNo = ++sequence;
