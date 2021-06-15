@@ -116,11 +116,15 @@ a {
     width: 100%;
 }
 
-.ch-info li span {
+.ch-info li span:first-child {
     width: 100px;
     display: inline-block;
     background-color: #eee;
     margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.ch-info li span.joinNick {
     margin-right: 10px;
 }
 

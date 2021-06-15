@@ -33,12 +33,22 @@
 
     <!-- 내가 참여중인 채널 리스트 -->
     <select id="partiList" resultMap="channelMap">
-        SELECT b.* FROM
+        SELECT B.* FROM
         (SELECT channel_no FROM nuri_channel_join_user WHERE user_no = #{userNo}) A,
         nuri_channel B
-        WHERE a.channel_no = b.channel_no
-        ORDER BY a.channel_no
+        WHERE A.channel_no = B.channel_no
+        ORDER BY A.channel_no
     </select>
+
+    <!-- 채널에 참여중인 유저 정보 리스트 -->
+    <select id="joinUser" resultMap="channelMap">
+        SELECT B.* FROM
+        (SELECT user_no FROM nuri_channel_join_user WHERE channel_no = #{channelNo}) A,
+        nuri_user B
+        WHERE A.user_no = B.user_no
+        ORDER BY b.user_no
+    </select>
+
 
     <!-- 3. 검색 쿼리 + 페이징 쿼리 적용 -->
     <select id="getSearchArticles" resultMap="channelMap">

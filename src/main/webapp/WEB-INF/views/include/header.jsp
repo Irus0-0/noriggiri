@@ -32,7 +32,9 @@
                 <i class="fas fa-search"></i>
             </a>
             <div class="navbar-search-block">
-                <form class="form-inline" action="/channel/chMain" id="search-form">
+                <form class="form-inline" action="/channel/searchCh" id="search-form">
+                    <input type="hidden" name="amount" value="${pageMaker.criteria.amount}">
+                    <input type="hidden" name="page" value="${pageMaker.criteria.page}">
                     <div class="input-group input-group-sm">
                         <input class="form-control form-control-navbar" type="search" placeholder="검색어를 입력하세요."
                             aria-label="Search" name="keyword" value="${pageMaker.criteria.keyword}">
@@ -40,9 +42,9 @@
                             <button class="btn btn-navbar" type="submit">
                                 <i class="fas fa-search"></i>
                             </button>
-                            <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                <i class="fas fa-times"></i>t
-                            </button>
+                            <!-- <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                <i class="fas fa-times"></i>
+                            </button> -->
                         </div>
                     </div>
                 </form>

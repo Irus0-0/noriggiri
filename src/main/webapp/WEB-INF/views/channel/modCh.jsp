@@ -25,13 +25,13 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">${channel.channelName}</h1>
+                            <h1 class="m-0">CH.${channel.channelNo} [${channel.channelName}] 채널 수정</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <!-- <li class="breadcrumb-item"><a href="../home.jsp">메인홈</a></li> -->
                                 <li class="breadcrumb-item"><a href="/channel/chMain">채널메인</a></li>
-                                <li class="breadcrumb-item active">${channel.channelName}</li>
+                                <li class="breadcrumb-item active">CH.${channel.channelNo} [${channel.channelName}] 채널 수정</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -47,7 +47,7 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">${channel.channelName} INFO</h4>
+                                    <h4 class="card-title">CH.${channel.channelNo} [${channel.channelName}] 채널 정보</h4>
 
                                     <form action="/channel/modCh" method="POST">
                                         <input type="hidden" name="channelNo" value="${channel.channelNo}">
@@ -63,7 +63,7 @@
                                         </li>
                                         <li>
                                             <label for="adminUserNo">#채널관리자: </label>
-                                            <input type="text" name="adminUserNo" value="${channel.adminUserNo}  (현재 유저번호. 추후 유저닉네임으로 변경하기)" disabled>
+                                            <input type="text" name="adminUserNo" value="${userInfo.nickName}" disabled>
                                         </li>
                                         <li>
                                             <label for="channelInfo">#채널정보: </label>
@@ -73,15 +73,15 @@
                                             <label for="channelPw">#채널패스워드: </label>
                                             <input type="password" name="channelPw" value="${channel.channelPw}">
                                         </li>
-                                        <li>
+                                        <!-- <li>
                                             <label for="joinUser">#채널참여자: </label>
                                             <input type="text" name="joinUser" value="(아직 기능 구현전)" disabled>
-                                        </li>
+                                        </li> -->
                                     </ul>
 
                                     <div class="list-btn justify-content-end">
                                         <button type="submit" class="btn btn-warning">완료</button>
-                                        <a class="btn btn-warning" href="/channel/viewCh?channelNo=${channel.channelNo}">취소</a>
+                                        <a class="btn btn-warning" href="/channel/viewCh/${channel.channelNo}">취소</a>
                                     </div>
                                 </form>
 

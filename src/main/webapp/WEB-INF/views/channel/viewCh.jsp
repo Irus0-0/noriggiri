@@ -25,14 +25,13 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">${channel.channelName}</h1>
+                            <h1 class="m-0">CH.${channel.channelNo} [${channel.channelName}]</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <!-- <li class="breadcrumb-item"><a href="../home.jsp">메인홈</a></li> -->
-                                <li class="breadcrumb-item"><i class="fas fa-home"></i> <a
-                                        href="/channel/chMain">채널메인</a></li>
-                                <li class="breadcrumb-item active">${channel.channelName}</li>
+                                <li class="breadcrumb-item"><i class="fas fa-home"></i> <a href="/channel/chMain">채널 메인</a></li>
+                                <li class="breadcrumb-item active">CH.${channel.channelNo} [${channel.channelName}]</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -48,14 +47,20 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">${channel.channelName} INFO</h5>
+                                    <h5 class="card-title">CH.${channel.channelNo} [${channel.channelName}] 채널 정보</h5>
 
                                     <ul class="ch-info">
                                         <li><span>#채널번호: </span>${channel.channelNo}</li>
                                         <li><span>#채널이름: </span>${channel.channelName}</li>
-                                        <li><span>#채널관리자: </span>${userInfo.nickName}의 닉네임찾아넣기</li>
+                                        <li><span>#채널관리자: </span>${userInfo.nickName}</li>
                                         <li><span>#채널정보: </span>${channel.channelInfo}</li>
-                                        <li><span>#채널참여자: </span>(아직 기능 구현전)</li>
+                                        <li><span>#채널참여자: </span>
+
+                                            <!-- <c:forEach var="joinUser" items="${joinUserList}">
+                                                <span class="joinNick">${joinUser.nickName}</span>
+                                            </c:forEach> -->
+
+                                        </li>
                                     </ul>
 
                                     <c:if test="${channel.adminUserNo == loginUser.userNo}">

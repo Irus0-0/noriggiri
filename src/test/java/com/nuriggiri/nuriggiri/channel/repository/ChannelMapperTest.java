@@ -2,6 +2,7 @@ package com.nuriggiri.nuriggiri.channel.repository;
 
 import com.nuriggiri.nuriggiri.board.paging.Criteria;
 import com.nuriggiri.nuriggiri.channel.domain.Channel;
+import com.nuriggiri.nuriggiri.user.domain.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,5 +96,16 @@ class ChannelMapperTest {
         }
         System.out.println("==============================================================");
     }
+
+    /*@Test
+    void  joinUserTest() {
+        List<User> joinUserList = mapper.joinUser(2);
+        System.out.println(joinUserList);
+        System.out.println("================================================================");
+        for (User user : joinUserList) {
+            System.out.println(user);
+            System.out.println("================================================================");
+        }
+    }*/
 
 }
