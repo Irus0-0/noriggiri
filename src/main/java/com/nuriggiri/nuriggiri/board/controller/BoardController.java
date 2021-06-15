@@ -56,7 +56,6 @@ public class BoardController {
     public String content(int boardNo, Criteria criteria, Model model) {
         Board content = boardService.more(boardNo);
         model.addAttribute("article", content);
-
         return "/board/content"; //jsp 경로 입력
     }
 

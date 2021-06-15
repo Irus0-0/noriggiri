@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -39,6 +40,9 @@
 		p {
 			width: 25%;
 			margin-left: 82%;
+		}
+		.btn-warning {
+			color: #fff;
 		}
 	</style>
 
@@ -109,7 +113,7 @@
 															href="/board/content${pageMaker.makeParam(pageMaker.criteria.page)}&boardNo=${article.boardNo}&vf=true">${article.title}</a>
 													</td>
 													<td>${article.recommend}</td>
-													<td>${article.regDate}</td>
+													<td><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${article.regDate}" /></td>
 												</tr>
 											</c:forEach>
 										</tbody>
@@ -134,8 +138,8 @@
 
 							<!-- li*5>a{[$]} -->
 							<c:forEach var="i" begin="${pageMaker.beginPage}" end="${pageMaker.endPage}" step="1">
-								<li data-page="${i}"><button type="button" class="btn btn-block btn-warning btn-sm"
-										id="page-btn">${i}</button></li>
+								<li data-page="${i}"><a class="btn btn-block btn-warning btn-sm"
+										id="page-btn" href="/board/list${pageMaker.makeParam(i)}">${i}</a></li>
 							</c:forEach>
 
 							<c:if test="${pageMaker.next}">
@@ -221,9 +225,6 @@
 		});
 		$('#next-btn').on('click', e => {
 			location.href = '/board/list${pageMaker.makeParam(pageMaker.endPage+1)}';
-		});
-		$('#page-btn').on('click', e => {
-			location.href = '/board/list${pageMaker.makeParam(i)}';
 		});
 	</script>
 
