@@ -1,5 +1,6 @@
 package com.nuriggiri.nuriggiri.user.api;
 
+import com.nuriggiri.nuriggiri.channel.service.ChannelService;
 import com.nuriggiri.nuriggiri.friend.domain.FriendList;
 import com.nuriggiri.nuriggiri.friend.service.FriendService;
 import com.nuriggiri.nuriggiri.user.domain.LoginUser;
@@ -33,6 +34,7 @@ public class SignApiController {
 
     private final FriendService friendService;
 
+    private final ChannelService channelService;
 
     //회원가입 페이지
     @GetMapping("/up")
@@ -83,9 +85,13 @@ public class SignApiController {
             //로그인 성공할 경우
             request.getSession().setAttribute("loginUser", userService.userInfo(inputUser.getUserId()));
 
+            //친구
             int userNo = ((User) request.getSession().getAttribute("loginUser")).getUserNo();
             Map<String, List<FriendList>> stringListMap = friendService.friendAllMap(userNo);
             request.getSession().setAttribute("friendListMap", stringListMap);
+
+            //채널목록
+            channelService.chSecList(request.getSession());
 
             log.info(loginMessage);
             log.info(request.getSession().getAttribute("loginUser"));

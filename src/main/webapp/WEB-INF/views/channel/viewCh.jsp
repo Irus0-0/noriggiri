@@ -30,7 +30,8 @@
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <!-- <li class="breadcrumb-item"><a href="../home.jsp">메인홈</a></li> -->
-                                <li class="breadcrumb-item"><i class="fas fa-home"></i> <a href="/channel/chMain">채널메인</a></li>
+                                <li class="breadcrumb-item"><i class="fas fa-home"></i> <a
+                                        href="/channel/chMain">채널메인</a></li>
                                 <li class="breadcrumb-item active">${channel.channelName}</li>
                             </ol>
                         </div><!-- /.col -->
@@ -57,8 +58,15 @@
                                         <li><span>#채널참여자: </span>(아직 기능 구현전)</li>
                                     </ul>
 
-                                    <a class="btn btn-outline-warning btn-xs" href="/channel/modCh?channelNo=${channel.channelNo}">채널 수정</a>
-                                    <a class="btn btn-outline-warning btn-xs" href="/channel/delete?channelNo=${channel.channelNo}">채널 삭제</a>
+                                    <c:if test="${channel.adminUserNo} == ${loginUser.userNo}">
+                                        <a class="btn btn-outline-warning btn-xs"
+                                            href="/channel/modCh?channelNo=${channel.channelNo}">채널 수정</a>
+                                        <a class="btn btn-outline-warning btn-xs"
+                                            href="/channel/delete?channelNo=${channel.channelNo}">채널 삭제</a>
+                                    </c:if>
+
+                                    <a class="btn btn-outline-warning btn-xs"
+                                        href="/channelJoinUser/exitCh?channelNo=${channel.channelNo}&joinSeqNo=${channelJoinUser.joinSeqNo}">채널 나가기</a>
 
                                 </div>
                             </div>
@@ -74,7 +82,7 @@
                                     <h6 class="card-title">ex)게시판 (게시판이름)</h6>
 
                                     <p class="card-text">기능관련 설명</p>
-                                    <a href="#" class="btn btn-primary">기능 들어가기</a>
+                                    <a href="/board/list" class="btn btn-primary">기능 들어가기</a>
                                 </div>
                             </div>
                         </div>
@@ -104,7 +112,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                     <!-- /.row -->
                 </div><!-- /.container-fluid -->

@@ -48,8 +48,8 @@
                     <ul class="nav nav-treeview">
                         <!-- <li class="nav-header">내가 생성한 채널</li> 
                             채널 관리자 (adminUserNo)가 현재 로그인되어있는 유저일때만 보이게하기
-                        -->
-                        <c:forEach var="channel" items="${list}">
+                        -->                        
+                        <c:forEach var="channel" items="${adminList}">
                             <li class="nav-item" data-num="${channel.channelNo}">
                                 <a href="/channel/viewCh?channelNo=${channel.channelNo}" class="nav-link">
                                     <!-- <a href="/channel/viewCh" class="nav-link"> -->
@@ -90,7 +90,7 @@
                             채널 참여자 (joinUser)에 현재 로그인되어있는 유저가 있는 채널만 보이게하기
                         -->
 
-                        <c:forEach var="channel" items="${list}">
+                        <c:forEach var="channel" items="${partiList}">
                             <li class="nav-item" data-num="${channel.channelNo}">
                                 <a href="/channel/viewCh?channelNo=${channel.channelNo}" class="nav-link">
                                     <!-- <a href="/channel/viewCh" class="nav-link"> -->
