@@ -49,7 +49,9 @@
         </button>
         <ul id="block-ul" class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
             <c:forEach var="BLOCK" items="${friendListMap.get('BLOCK')}">
-                    <div> <a href="#">${BLOCK.nickName}</a> <a href="#">차단 취소</a></div>
+                    <div> <a href="#">${BLOCK.nickName}</a>
+                        <button id="removeBlockFriend-btn" type="button" value="${BLOCK.userNo}">친구 삭제</button>
+                        </div>
                 </c:forEach>
         </ul>
     </div>
@@ -127,6 +129,18 @@
             fetch('/removeFriend'+$('#removeFriend-btn').val(), reqInfo)
         });
 
+         //친구 차단 해제 - 관계 삭제
+         $('#removeBlockFriend-btn').on('click', e => {
+            e.preventDefault();
+            const reqInfo = {
+                method: 'delete', //요청 방식
+                headers: { //요청 헤더 내용
+                    'content-type': 'application/json'
+                }
+            };
+            fetch('/removeBlockFriend'+$('#removeBlockFriend-btn').val(), reqInfo)
+        });
+
 
 
         //DOM
@@ -150,7 +164,7 @@
             tag = '';
             for (let BLOCK of stringListMap.BLOCK) {
                 tag += "<div> <a href='#'>" + BLOCK.nickName +
-                    "</a> <a href='#'>차단 취소</a></div>";
+                    " <button id='removeBlockFriend-btn' type='button' value='"+BLOCK.userNo+"'>친구 삭제</button>";
             }
             $('#block-ul').html(tag);
 

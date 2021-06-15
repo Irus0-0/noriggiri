@@ -93,6 +93,13 @@ public class FriendService {
         friendMapper.removeFriend(targetNo, user);
         return true;
     }
+    //친구 차단해제
+    public boolean removeBlockFriend(int user, int targetNo) {
+        //양쪽모두 친구 삭제
+        log.info("친구삭제 가동!");
+        friendMapper.removeFriend(user, targetNo);
+        return true;
+    }
 
     //친구 승인
     public boolean approveFriend(int userNo, int targetNo) {
