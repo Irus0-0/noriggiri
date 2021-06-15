@@ -23,7 +23,7 @@ class ChannelJoinUserMapperTest {
 
     @Test
     void exitCh() {
-        mapper.exitCh(1);
+        mapper.exitCh(9, 10);
     }
 
 }

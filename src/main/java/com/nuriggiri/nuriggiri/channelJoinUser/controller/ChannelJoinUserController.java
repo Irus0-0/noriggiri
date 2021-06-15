@@ -17,14 +17,35 @@ public class ChannelJoinUserController {
 
     private final ChannelJoinUserService channelJoinUserService;
 
+    // 채널 접속
     @GetMapping("/joinCh/{channelNo}")
     public String joinCh(HttpSession session, @PathVariable int channelNo) {
         log.info("chNo" + channelNo);
+        int userNo = ((User) session.getAttribute("loginUser")).getUserNo();
+        boolean bl = channelJoinUserService.joinList(session, channelNo);
+        if (!bl) {
+            channelJoinUserService.joinCh(userNo, channelNo);
+        } else {
+            return "redirect:/channel/viewCh/" + channelNo;
+        }
+
+        return "redirect:/channel/viewCh/" + channelNo;
+    }
+
+
+    // 채널 나가기
+    @GetMapping("/exitCh/{channelNo}")
+    public String exitCh(HttpSession session, @PathVariable int channelNo) {
+        log.info(channelNo + "채널 exit 요청!");
 
         int userNo = ((User) session.getAttribute("loginUser")).getUserNo();
-        channelJoinUserService.joinCh(userNo, channelNo);
-
-        return "redirect:/channel/viewCh/"+channelNo;
+        boolean bl = channelJoinUserService.joinList(session, channelNo);
+        if (bl) {
+            channelJoinUserService.exitCh(userNo, channelNo);
+        } else {
+            return "redirect:/channel/chMain";
+        }
+        return "redirect:/channel/chMain";
     }
 
 }

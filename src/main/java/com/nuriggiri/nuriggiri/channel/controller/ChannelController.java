@@ -6,6 +6,9 @@ import com.nuriggiri.nuriggiri.channel.domain.Channel;
 import com.nuriggiri.nuriggiri.channel.domain.ModifyChannel;
 import com.nuriggiri.nuriggiri.channel.service.ChannelService;
 import com.nuriggiri.nuriggiri.channelJoinUser.service.ChannelJoinUserService;
+import com.nuriggiri.nuriggiri.user.domain.User;
+import com.nuriggiri.nuriggiri.user.service.UserService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +22,7 @@ import java.util.List;
 @Log4j2
 //@CrossOrigin
 @RequestMapping("/channel")
+@RequiredArgsConstructor
 public class ChannelController {
 
     //서비스 파일과 연결
@@ -26,11 +30,9 @@ public class ChannelController {
 
     public final ChannelJoinUserService channelJoinUserService;
 
-    @Autowired
-    public ChannelController(ChannelService channelService, ChannelJoinUserService channelJoinUserService) {
-        this.channelService = channelService;
-        this.channelJoinUserService = channelJoinUserService;
-    }
+    public final UserService userService;
+
+
 
     //채널 목록 가져오기
     @GetMapping(value = {"/chList", "/chMain"})
@@ -78,8 +80,11 @@ public class ChannelController {
         Channel content = channelService.viewInfo(channelNo);
         model.addAttribute("channel", content);
 
+        User user = userService.userInfoNo(content.getAdminUserNo());
+
         List<Channel> channelList = channelService.viewList();
         model.addAttribute("list", channelList);
+        model.addAttribute("userInfo",user);
 //        log.info("channel info: " + content);
         return "/channel/viewCh";
     }
