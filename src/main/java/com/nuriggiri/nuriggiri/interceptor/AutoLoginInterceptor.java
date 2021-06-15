@@ -14,6 +14,7 @@ import org.springframework.web.util.WebUtils;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -31,32 +32,43 @@ public class AutoLoginInterceptor implements HandlerInterceptor {
     private ChannelService channelService;
 
 
+    //자동로그인
+    private boolean loginFlag = false;
 
     //사이트 방분하는 동시에 자동로그인 쿠키를 검사하기 위함
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+        HttpSession session = request.getSession();
+
 
         //자동로그인 쿠키가 있는경우
-        if (loginCookie != null) {
-            String value = loginCookie.getValue();
-            User user = userMapper.sessionSearchUser(value);
 
-            if (user != null) {
-                //DB에 쿠키에 있는 세션 ID 로 검색해서 검색결과가 있는 경우
-                //세션에 유저정보 저장
-                request.getSession().setAttribute("loginUser", user);
+        if (!loginFlag) {
+            if (loginCookie != null) {
+                String value = loginCookie.getValue();
+                User user = userMapper.sessionSearchUser(value);
 
-                // 친구
-                int userNo = ((User) request.getSession().getAttribute("loginUser")).getUserNo();
-                Map<String, List<FriendList>> stringListMap = friendService.friendAllMap(userNo);
-                request.getSession().setAttribute("friendListMap", stringListMap);
+                if (user != null) {
+                    //DB에 쿠키에 있는 세션 ID 로 검색해서 검색결과가 있는 경우
+                    //세션에 유저정보 저장
+                    session.setAttribute("loginUser", user);
 
-                // 채널목록
-                channelService.chSecList(request.getSession());
+                    //친구목록
+                    Map<String, List<FriendList>> stringListMap = friendService.friendMapSes(request);
+                    session.setAttribute("friendListMap", stringListMap);
+
+                    // 채널목록
+                    channelService.chSecList(request.getSession());
+
+                    loginFlag = true;
+                }
 
             }
+
         }
         return true;
     }
 }
+
+
