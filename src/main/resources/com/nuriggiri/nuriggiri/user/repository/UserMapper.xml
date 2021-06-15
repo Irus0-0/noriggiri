@@ -43,6 +43,13 @@
         WHERE user_Id=#{userId}
     </select>
 
+    <!--    유저 정보 보기-->
+    <select id="userInfoNick" resultMap="userMap">
+        SELECT *
+        FROM nuri_user
+        WHERE nick_name = #{nickName}
+    </select>
+
     <!--    중복 아이디 검색-->
     <select id="searchUserId" resultType="int">
         SELECT count(user_id)

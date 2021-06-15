@@ -17,6 +17,8 @@ public interface FriendMapper {
     //친구 목록
     List<FriendList> friendList(int userNo, Relation relationship);
 
+    //나에게 요청한 유저 정보
+    List<FriendList> targetFriendList(int userNo, Relation relationship);
     //친구 삭제 , 요청삭제
     void removeFriend(int userNo, int targetNo);
 

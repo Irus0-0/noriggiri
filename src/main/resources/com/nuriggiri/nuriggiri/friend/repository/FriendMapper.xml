@@ -40,9 +40,20 @@
         ) A
         , nuri_user B
         WHERE A.target_no = B.user_no
-
-
     </select>
+
+    <select id="targetFriendList" resultMap="friendMap">
+        SELECT b.user_no, b.user_id, b.nick_name
+        FROM
+        (
+        SELECT user_no FROM nuri_friend
+        WHERE target_no = #{userNo}
+        AND relationship = #{relationship}
+        ) A
+        , nuri_user B
+        WHERE A.user_no = B.user_no
+    </select>
+
 
     <!--    친구 삭제-->
     <delete id="removeFriend">
