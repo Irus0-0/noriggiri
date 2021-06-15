@@ -1,6 +1,5 @@
 //package com.nuriggiri.nuriggiri.channelJoinUser.repository;
 //
-//import com.nuriggiri.nuriggiri.channel.domain.Channel;
 //import com.nuriggiri.nuriggiri.channelJoinUser.domain.ChannelJoinUser;
 //import org.apache.ibatis.annotations.Mapper;
 //

@@ -29,8 +29,8 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">메인홈</a></li>
-                                <li class="breadcrumb-item active">채널 메인 (현재 페이지)</li>
+                                <!-- <li class="breadcrumb-item"><a href="#">메인홈</a></li> -->
+                                <li class="breadcrumb-item active"><i class="fas fa-home"></i> 채널 메인</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -46,63 +46,73 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">채널 선택 후 첫 화면</h5>
+                                    <h5 class="card-title">로그인 후 첫 화면</h5>
 
                                     <p class="card-text">
-                                        현재 채널에 추가되어있는 기능들 목록<br>
-                                        기능 추가하기 UI<br>
+                                        전체 채널 리스트 보기 화면<br>
+                                        만들어진 모든 채널들 보이게 하기<br>
                                     </p>
 
-                                    <!-- <button type="button" class="btn btn-outline-secondary btn-xs" data-toggle="modal"
-                                    data-target="#createCh-modal">채널 생성</button> -->
-                                    <a href="/channel/addCh" class="btn btn-outline-secondary btn-xs">채널 생성</a>
+                                    <a href="/channel/addCh" class="btn btn-outline-warning btn-xs">채널 생성</a>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- lg 4 -->
-                        <div class="col-lg-4">
-                            <div class="card card-primary card-outline">
-                                <div class="card-header">
-                                    <h5 class="m-0">기능이름</h5>
-                                </div>
-                                <div class="card-body">
-                                    <h6 class="card-title">ex)게시판 (게시판이름)</h6>
-
-                                    <p class="card-text">기능관련 설명</p>
-                                    <a href="#" class="btn btn-primary">기능 들어가기</a>
+                        <!-- 채널 카드 -->
+                        <%-- 생성된 채널 개수가 0개일 경우 목록대신 "채널이 존재하지 않습니다." 출력 --%>
+                        <c:if test="${list.size() <= 0}">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <span class="no-channel">채널이 존재하지 않습니다.</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="card card-primary card-outline">
-                                <div class="card-header">
-                                    <h5 class="m-0">기능이름</h5>
-                                </div>
-                                <div class="card-body">
-                                    <h6 class="card-title">ex)게시판 (게시판이름)</h6>
+                        </c:if>
 
-                                    <p class="card-text">기능관련 설명</p>
-                                    <a href="#" class="btn btn-primary">기능 들어가기</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="card card-primary card-outline">
-                                <div class="card-header">
-                                    <h5 class="m-0">기능이름</h5>
-                                </div>
-                                <div class="card-body">
-                                    <h6 class="card-title">ex)게시판 (게시판이름)</h6>
 
-                                    <p class="card-text">기능관련 설명</p>
-                                    <a href="#" class="btn btn-primary">기능 들어가기</a>
+                        <c:if test="${list.size() > 0}">
+                            <%-- 컨트롤러가 가져온 채널 데이터를 반복하여 출력. --%>
+                            <c:forEach var="channel" items="${list}">
+                                <div class="col-lg-4">
+                                    <div class="card card-primary card-outline">
+                                        <div class="card-header">
+                                            <h5 class="m-0">CH.${channel.channelNo} [${channel.channelName}]</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <h6 class="card-title"><span>#채널관리자: </span>${channel.adminUserNo}의 닉네임찾아넣기
+                                            </h6>
+
+                                            <p class="card-text">${channel.channelInfo}</p>
+                                            <a href="/channel/viewCh?channelNo=${channel.channelNo}"
+                                                class="btn btn-warning">채널참여</a>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+                            </c:forEach>
+                        </c:if>
 
                     </div>
                     <!-- /.row -->
+
+                    <!-- 페이지 영역 -- >
+                    <div class="row">                        
+                        <ul class="pagination pagination-sm m-0 float-right">
+                            <c:if test="${pageMaker.prev}">
+                                <li class="page-item"><a class="page-link"
+                                        href="/board/list${pageMaker.makeParam(pageMaker.beginPage-1)}">«</a></li>
+                            </c:if>
+                            <c:forEach var="i" begin="${pageMaker.beginPage}" end="${pageMaker.endPage}" step="1">
+                                <li class="page-item" data-page="${i}"><a
+                                        href="/board/list${pageMaker.makeParam(i)}">${i}</a></li>
+                            </c:forEach>
+                            <c:if test="${pageMaker.next}">
+                                <li class="page-item"><a class="page-link"
+                                        href="/board/list${pageMaker.makeParam(pageMaker.endPage+1)}">»</a></li>
+                            </c:if>
+                        </ul>
+                    </div>-->
+
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content -->
