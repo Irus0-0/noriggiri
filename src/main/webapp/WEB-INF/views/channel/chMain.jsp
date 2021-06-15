@@ -18,9 +18,9 @@
         <%@include file="../include/main-sidebar.jsp" %>
 
 
-        <!-- main content wrapper -->
+        <!-- 컨텐츠 화면 -->
         <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
+            <!-- 상단 페이지 타이틀 -->
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
@@ -38,9 +38,10 @@
             </div>
             <!-- /.content-header -->
 
-            <!-- Main content -->
+            <!-- 메인 화면 -->
             <div class="content">
                 <div class="container-fluid">
+
                     <div class="row">
                         <!-- lg 12 -->
                         <div class="col-lg-12">
@@ -115,7 +116,7 @@
 
                 </div><!-- /.container-fluid -->
             </div>
-            <!-- /.content -->
+            <!-- 메인 화면 end -->
         </div>
         <!-- // .content-wrapper end -->
 

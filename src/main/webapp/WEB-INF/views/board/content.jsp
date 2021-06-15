@@ -26,23 +26,31 @@
          width: 80%;
          margin: 0 auto;
       }
+
       .offset-md-1 {
          width: 80%;
          margin: 0 auto;
          margin-bottom: 10px;
       }
+
       .card-footer {
          display: block;
          float: left;
          margin-right: 5px;
       }
+
       .clearfix::after {
          content: '';
          display: block;
          clear: both;
       }
+
       .card-footer {
          margin-bottom: 20px;
+      }
+
+      .text-white {
+         color: #fff !important;
       }
    </style>
 
@@ -62,7 +70,8 @@
             </div>
             <div class="form-group">
                <label for="exampleInputPassword1">제목</label>
-               <input type="text" name="title" class="form-control" id="exampleInputPassword1" value="${article.title}"disabled>
+               <input type="text" name="title" class="form-control" id="exampleInputPassword1" value="${article.title}"
+                  disabled>
             </div>
             <textarea id="summernote" disabled>${article.content}</textarea>
             <div class="card-footer">
@@ -94,6 +103,8 @@
                         <label for="newReplyWriter" hidden>댓글 작성자</label>
                         <input id="newReplyWriter" type="text" class="form-control" style="margin-bottom: 6px;"
                            name="replyWriter" value="${loginUser.nickName}" disabled>
+                        <input type="checkbox" id="anonymous" name="anonymous">
+                        <label for="anonymous">익명</label>
                         <button id="replyAddBtn" type="button" class="btn btn-dark form-control">등록</button>
                      </div>
                   </div>
@@ -104,7 +115,7 @@
          <!--댓글 내용 영역-->
          <div class="card">
             <!-- 댓글 내용 헤더 -->
-            <div class="card-header text-white m-0" style="background: #343A40;">
+            <div class="card-header m-0 text-white" style="background: #343A40; ">
                <div class="float-left">댓글 (<span id="replyCnt">0</span>)</div>
             </div>
 
@@ -160,7 +171,7 @@
    <!-- end replyModifyModal -->
    <script>
       $(function () {
-         $('#summernote').summernote('disable',{
+         $('#summernote').summernote('disable', {
             height: 300,
             minHeight: null, // set minimum height of editor
             maxHeight: null, // set maximum height of editor
@@ -168,19 +179,20 @@
          });
 
          //목록버튼
-			$('#list-btn').on('click', e => {
-				location.href='/board/list?page=${criteria.page}&type=${criteria.type}&keyword=${criteria.keyword}&amount=${criteria.amount}';
-			});
+         $('#list-btn').on('click', e => {
+            location.href =
+               '/board/list?page=${criteria.page}&type=${criteria.type}&keyword=${criteria.keyword}&amount=${criteria.amount}';
+         });
 
          //수정버튼
-			$('#modify-btn').on('click', e => {
-				location.href='/board/modify?boardNo=${article.boardNo}&vf=false';
-			});
+         $('#modify-btn').on('click', e => {
+            location.href = '/board/modify?boardNo=${article.boardNo}&vf=false';
+         });
 
          //삭제버튼
-			$('#delete-btn').on('click', e => {
-				location.href='/board/delete?boardNo=${article.boardNo}';
-			});
+         $('#delete-btn').on('click', e => {
+            location.href = '/board/delete?boardNo=${article.boardNo}';
+         });
       });
    </script>
 
@@ -265,8 +277,13 @@
             for (let reply of replyMap.replyList) {
                tag += "<div id='replyContent' class='card-body' data-replyId='" + reply.replyNo + "'>" +
                   "    <div class='row user-block'>" +
-                  "       <span class='col-md-3'>" +
-                  "         <b>" + reply.nickName + "</b>" +
+                  "       <span class='col-md-3'>";
+               if (reply.anonymous == 'true') {
+                  tag += "<b>익명</b>";
+               } else {
+                  tag += "<b>" + reply.nickName + "</b>";
+               }
+               tag +=
                   "       </span>" +
                   "       <span class='offset-md-6 col-md-3 text-right'><b>" + formatDate(reply.regDate) +
                   "</b></span>" +
@@ -274,7 +291,8 @@
                   "    <div class='row'>" +
                   "       <div class='col-md-6'>" + reply.content + "</div>" +
                   "       <div class='offset-md-2 col-md-4 text-right'>" +
-                  "         <a id='replyModBtn' class='btn btn-sm btn-outline-dark' href='#replyModifyModal' data-toggle='modal'>수정</a>&nbsp;" +
+                  "         <a id='replyRecBtn' class='btn btn-sm btn-outline-dark' href='#'>추천</a>" +
+                  "         <a id='replyModBtn' class='btn btn-sm btn-outline-dark' href='#' data-toggle='modal'>수정</a>&nbsp;" +
                   "         <a id='replyDelBtn' class='btn btn-sm btn-outline-dark' href='#'>삭제</a>" +
                   "       </div>" +
                   "    </div>" +
@@ -323,7 +341,8 @@
                body: JSON.stringify({
                   boardNo: boardNo,
                   content: $('#newReplyText').val(),
-                  nickName: $('#newReplyWriter').val()
+                  nickName: $('#newReplyWriter').val(),
+                  anonymous: $('input:checkbox[id="anonymous"]').is(":checked") == true
                })
             };
             fetch('/api/v1/reply', reqInfo)
