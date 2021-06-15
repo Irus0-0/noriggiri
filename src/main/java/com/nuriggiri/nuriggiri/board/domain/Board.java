@@ -26,6 +26,8 @@ public class Board {
     private Date regDate; //글 작성일
     private String notice; //공지 구분 - default false
 
+    private boolean newBoard; //신규게시물 여부
+
     public Board() {
         this.boardNo = ++sequence;
     }
