@@ -45,7 +45,7 @@ public class FriendService {
     }
 
     //친구 거절, 친구요청 취소
-    public void refuseFriend(int userNo, int targetNo) {
+    public boolean refuseFriend(int userNo, int targetNo) {
         if (checkRelation(userNo, targetNo) == Relation.REQUEST) {
             //내가 친구요청인 경우
             friendMapper.removeFriend(userNo, targetNo);
@@ -53,6 +53,7 @@ public class FriendService {
             //내가 친구요청이 아닌 상대방이 친구요청인 경우
             friendMapper.removeFriend(targetNo, userNo);
         }
+        return true;
     }
 
     //친구목록
@@ -73,22 +74,32 @@ public class FriendService {
         stringListMap.put("REQUEST", friendList(userNo, Relation.REQUEST));
         stringListMap.put("TARGET", targetFriendList(userNo, Relation.REQUEST));
 
-        log.info("친구 맵 가져오기"+stringListMap);
+        log.info("친구 맵 가져오기12312313"+stringListMap);
         return stringListMap;
     }
 
+    public Map<String, List<FriendList>> friendMapSes(HttpServletRequest request) {
+        int userNo = ((User) request.getSession().getAttribute("loginUser")).getUserNo();
+        Map<String, List<FriendList>> stringListMap = friendAllMap(userNo);
+        return stringListMap;
+    }
+
+
     //친구삭제
-    public void removeFriend(int user, int targetNo) {
+    public boolean removeFriend(int user, int targetNo) {
         //양쪽모두 친구 삭제
+        log.info("친구삭제 가동!");
         friendMapper.removeFriend(user, targetNo);
         friendMapper.removeFriend(targetNo, user);
+        return true;
     }
 
     //친구 승인
-    public void approveFriend(int userNo, int targetNo) {
+    public boolean approveFriend(int userNo, int targetNo) {
         //친구 요청한 쪽과 요청받은쪽 둘다 친구로 바꿔줌
         friendMapper.addFriend(userNo, targetNo, Relation.DUDE);
         friendMapper.updateFriend(targetNo, userNo, Relation.DUDE);
+        return true;
     }
 
     //친구 차단
