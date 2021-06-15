@@ -99,6 +99,16 @@ public class FriendController {
                 ? new ResponseEntity<>("removeFriendSuccess", HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    //친구 차단 해제 - 관계 삭제됨
+    @DeleteMapping("/removeBlockFriend{targetNo}")
+    @ResponseBody
+    public ResponseEntity<String> removeBlockFriend(HttpServletRequest request, @PathVariable int targetNo) {
+        log.info("친구차단 해제");
+        int userNo = ((User) request.getSession().getAttribute("loginUser")).getUserNo();
+        return friendService.removeBlockFriend(userNo, targetNo)
+                ? new ResponseEntity<>("removeBlockFriendSuccess", HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
     //친구요청
     @PostMapping("/addFriend{targetNo}")
@@ -106,9 +116,11 @@ public class FriendController {
     public ResponseEntity<String> addFriend(HttpServletRequest request, @PathVariable int targetNo) {
         int userNo = ((User) request.getSession().getAttribute("loginUser")).getUserNo();
         return friendService.addFriend(userNo, targetNo)
-                ? new ResponseEntity<>("removeFriendSuccess", HttpStatus.OK)
+                ? new ResponseEntity<>("addFriendSuccess", HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+
 
 
 }
