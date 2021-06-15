@@ -1,5 +1,7 @@
 package com.nuriggiri.nuriggiri.channel.controller;
 
+import com.nuriggiri.nuriggiri.board.paging.Criteria;
+import com.nuriggiri.nuriggiri.board.paging.PageMaker;
 import com.nuriggiri.nuriggiri.board.service.BoardService;
 import com.nuriggiri.nuriggiri.channel.domain.Channel;
 import com.nuriggiri.nuriggiri.channel.domain.ModifyChannel;
@@ -16,7 +18,7 @@ import java.util.List;
 
 @Controller
 @Log4j2
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping("/channel")
 public class ChannelController {
 
@@ -29,9 +31,13 @@ public class ChannelController {
 
     //채널 목록 가져오기
     @GetMapping(value = {"/chList", "/chMain"})
-    public String viewList(Model model, HttpSession session) {
+    public String viewList(Criteria criteria, Model model, HttpSession session) {
         List<Channel> channelList = channelService.viewList();
         model.addAttribute("list", channelList);
+
+//        model.addAttribute("articles", channelService.viewList(criteria));
+        // 페이지 정보를 만들어서 jsp 에게 보내기
+        model.addAttribute("pageMaker", new PageMaker(criteria, channelService.getTotal(criteria)));
 
         session.setAttribute("chList", channelList);
         return "/channel/chMain";
@@ -39,7 +45,10 @@ public class ChannelController {
 
     //채널 생성 화면 요청
     @GetMapping("/addCh")
-    public String create() {
+    public String create(Model model) {
+        List<Channel> channelList = channelService.viewList();
+        model.addAttribute("list", channelList);
+
         return "/channel/addCh";
     }
 
@@ -47,7 +56,7 @@ public class ChannelController {
     @PostMapping("/addCh")
     public String create(Channel channel) {
         try {
-            log.info("channel: " + channel);
+//            log.info("channel: " + channel);
             channelService.create(channel);
         } catch (Exception e) {
             return "/channel/addCh";
@@ -70,6 +79,9 @@ public class ChannelController {
     @GetMapping("/modCh")
     public String update(int channelNo, Model model) {
         model.addAttribute("channel", channelService.viewInfo(channelNo));
+
+        List<Channel> channelList = channelService.viewList();
+        model.addAttribute("list", channelList);
         return "/channel/modCh";
     }
 

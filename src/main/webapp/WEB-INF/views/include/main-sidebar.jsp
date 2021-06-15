@@ -17,29 +17,20 @@
             </div>
             <div class="info">
                 <a href="#" class="d-block">${loginUser.nickName}</a>
-            </div>
 
-            <div class="info-btn">
-<%--                <button type="button" onclick="location.href='/sign/detail'" class="btn btn-outline-secondary btn-xs">--%>
-<%--                    내정보--%>
-<%--                </button>--%>
-                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#userInfo-modal">
-                    내정보
-                </button>
-                <button type="button" id="signOut-btn" class="btn btn-secondary btn-xs">로그아웃</button>
-            </div>
-        </div>
-
-        <!-- SidebarSearch Form -->
-        <div class="form-inline">
-            <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar" type="search" placeholder="채널 검색" aria-label="Search">
-                <div class="input-group-append">
-                    <button class="btn btn-sidebar">
-                        <i class="fas fa-search fa-fw"></i>
+                <div class="info-btn">
+                    <%--                <button type="button" onclick="location.href='/sign/detail'" class="btn btn-outline-secondary btn-xs">--%>
+                    <%--                    내정보--%>
+                    <%--                </button>--%>
+                    <button type="button" class="btn btn-outline-warning btn-xs" data-toggle="modal"
+                        data-target="#userInfo-modal">
+                        내정보
                     </button>
+                    <button type="button" id="signOut-btn" class="btn btn-warning btn-xs">로그아웃</button>
                 </div>
             </div>
+
+            
         </div>
 
         <!-- Sidebar Menu -->
@@ -48,14 +39,28 @@
                 <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                 <li class="nav-item menu-open">
                     <a href="#" class="nav-link active">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="fas fa-chess-king"></i>
                         <p>
-                            채널 목록
+                            내가 생성한 채널
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-header">내가 생성한 채널</li>
+                        <!-- <li class="nav-header">내가 생성한 채널</li> 
+                            채널 관리자 (adminUserNo)가 현재 로그인되어있는 유저일때만 보이게하기
+                        -->
+                        <c:forEach var="channel" items="${list}">
+                            <li class="nav-item" data-num="${channel.channelNo}">
+                                <a href="/channel/viewCh?channelNo=${channel.channelNo}" class="nav-link">
+                                    <!-- <a href="/channel/viewCh" class="nav-link"> -->
+                                    <i class="far fa-heart"></i>
+                                    <p>${channel.channelName}</p>
+                                </a>
+                            </li>
+                        </c:forEach>
+
+                        <!--
+                        현재 위치의 채널(컨텐츠 화면에 보이는 채널)의 채널이름에 active 클래스 넣어주기
                         <li class="nav-item">
                             <a href="#" class="nav-link active">
                                 <i class="far fa-circle nav-icon"></i>
@@ -68,13 +73,28 @@
                                 <p>비활성 채널</p>
                             </a>
                         </li>
-                        <li class="nav-header">내가 참여한 채널</li>
+                        -->
+                    </ul>
+                </li>
+
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link active">
+                        <i class="fas fa-chess-pawn"></i>
+                        <p>
+                            내가 참여한 채널
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <!-- <li class="nav-header">내가 참여한 채널</li>
+                            채널 참여자 (joinUser)에 현재 로그인되어있는 유저가 있는 채널만 보이게하기
+                        -->
 
                         <c:forEach var="channel" items="${list}">
                             <li class="nav-item" data-num="${channel.channelNo}">
                                 <a href="/channel/viewCh?channelNo=${channel.channelNo}" class="nav-link">
                                     <!-- <a href="/channel/viewCh" class="nav-link"> -->
-                                    <i class="far fa-grin"></i>
+                                    <i class="far fa-heart"></i>
                                     <p>${channel.channelName}</p>
                                 </a>
                             </li>
@@ -85,17 +105,10 @@
         </nav>
         <!-- /.sidebar-menu -->
     </div>
-    <!-- /.sidebar -->
-    <script>
-        //로그아웃 버튼 클릭이벤트
-        $('#signOut-btn').on('click', e => {
-            let checkLogout = confirm("로그아웃 하시겠습니까?");
-            if (checkLogout) {
-                location.href = '/sign/out'
-            }
-        });
-    </script>
+    <!-- /.sidebar -->    
 </aside>
+
+
 
 <%--        내정보 모달--%>
 <div class="modal fade" id="userInfo-modal" tabindex="-1">
