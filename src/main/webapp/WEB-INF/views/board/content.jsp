@@ -41,6 +41,9 @@
          display: block;
          clear: both;
       }
+      .card-footer {
+         margin-bottom: 20px;
+      }
    </style>
 
 </head>
@@ -63,14 +66,9 @@
             </div>
             <textarea id="summernote" disabled>${article.content}</textarea>
             <div class="card-footer">
-               <a href="/board/list?page=${criteria.page}&type=${criteria.type}&keyword=${criteria.keyword}&amount=${criteria.amount}">글
-                  목록보기</a>
-            </div>
-            <div class="card-footer">
-               <a href="/board/modify?boardNo=${article.boardNo}&vf=false">글 수정하기</a>
-            </div>
-            <div class="card-footer">
-               <button type="button" class="btn btn-primary" data-bs-target="#exampleModal">글 삭제하기</button>
+               <button type="button" class="btn btn-warning" id="list-btn">글 목록보기</button>
+               <button type="button" class="btn btn-warning" id="modify-btn">글 수정하기</button>
+               <button type="button" class="btn btn-warning" id="delete-btn">글 삭제하기</button>
             </div>
          </div>
       </div>
