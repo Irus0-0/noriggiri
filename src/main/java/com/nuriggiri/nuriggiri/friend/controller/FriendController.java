@@ -68,7 +68,14 @@ public class FriendController {
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    
+    //친구수락
+    @GetMapping("/friendAccept")
+    @ResponseBody
+    public ResponseEntity<String> friendAccept(HttpServletRequest request, int targetNo) {
+        int userNo = ((User) request.getSession().getAttribute("loginUser")).getUserNo();
+        friendService.approveFriend(userNo, targetNo);
+        return null;
+    }
 
 
 }
