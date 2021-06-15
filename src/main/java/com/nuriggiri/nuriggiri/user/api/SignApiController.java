@@ -171,6 +171,14 @@ public class SignApiController {
         return "redirect:/";
     }
 
+    //유저 정보찾기 닉네임
+    @GetMapping
+    @ResponseBody
+    public ResponseEntity<String> userSearch(String nickName) {
+        userService.userInfoNick(nickName);
+        return null;
+    }
+
 
 
 }

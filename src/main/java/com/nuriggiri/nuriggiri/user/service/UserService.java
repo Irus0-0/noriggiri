@@ -49,6 +49,10 @@ public class UserService {
     public User userInfo(String userId) {
         return userMapper.userInfo(userId);
     }
+    //유저 정보 보기
+    public User userInfoNick(String nickName) {
+        return userMapper.userInfoNick(nickName);
+    }
 
     //중복 아이디 검색
     public boolean searchUserId(String userId) {
