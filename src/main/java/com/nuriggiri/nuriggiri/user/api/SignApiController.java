@@ -86,14 +86,9 @@ public class SignApiController {
         if (loginMessage.equals("success")) {
             //로그인 성공할 경우
             request.getSession().setAttribute("loginUser", userInfo);
+            //친구
             Map<String, List<FriendList>> stringListMap = friendService.friendMapSes(request);
             request.getSession().setAttribute("loginUser", userService.userInfo(inputUser.getUserId()));
-
-            //친구
-            int userNo = ((User) request.getSession().getAttribute("loginUser")).getUserNo();
-            Map<String, List<FriendList>> stringListMap = friendService.friendAllMap(userNo);
-            request.getSession().setAttribute("friendListMap", stringListMap);
-
             //채널목록
             channelService.chSecList(request.getSession());
 

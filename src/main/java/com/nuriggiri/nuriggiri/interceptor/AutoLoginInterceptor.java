@@ -53,26 +53,22 @@ public class AutoLoginInterceptor implements HandlerInterceptor {
                     //DB에 쿠키에 있는 세션 ID 로 검색해서 검색결과가 있는 경우
                     //세션에 유저정보 저장
                     session.setAttribute("loginUser", user);
+
+                    //친구목록
                     Map<String, List<FriendList>> stringListMap = friendService.friendMapSes(request);
                     session.setAttribute("friendListMap", stringListMap);
+
+                    // 채널목록
+                    channelService.chSecList(request.getSession());
+
                     loginFlag = true;
                 }
-            if (user != null) {
-                //DB에 쿠키에 있는 세션 ID 로 검색해서 검색결과가 있는 경우
-                //세션에 유저정보 저장
-                request.getSession().setAttribute("loginUser", user);
-
-                // 친구
-                int userNo = ((User) request.getSession().getAttribute("loginUser")).getUserNo();
-                Map<String, List<FriendList>> stringListMap = friendService.friendAllMap(userNo);
-                request.getSession().setAttribute("friendListMap", stringListMap);
-
-                // 채널목록
-                channelService.chSecList(request.getSession());
 
             }
-        }
 
+        }
         return true;
     }
 }
+
+
