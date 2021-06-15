@@ -10,11 +10,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -56,25 +55,59 @@ public class FriendController {
     }
 
 
-    //친구요청
-    @PostMapping("/friendList")
-    @ResponseBody
-    public ResponseEntity<String> addFriend(HttpServletRequest request, int targetNo) {
-        int userNo = ((User) request.getSession().getAttribute("loginUser")).getUserNo();
-        log.info("컨트롤러 친구 번호 : 타겟 번호" + userNo + ":" + targetNo);
+//    //친구요청
+//    @PostMapping("/friendList")
+//    @ResponseBody
+//    public ResponseEntity<String> requestFriend(HttpServletRequest request, int targetNo) {
+//        int userNo = ((User) request.getSession().getAttribute("loginUser")).getUserNo();
+//        log.info("컨트롤러 친구 번호 : 타겟 번호" + userNo + ":" + targetNo);
+//
+//        return friendService.addFriend(userNo, targetNo)
+//                ? new ResponseEntity<>("friendAddSuccess", HttpStatus.OK)
+//                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
 
-        return friendService.addFriend(userNo, targetNo)
-                ? new ResponseEntity<>("friendAddSuccess", HttpStatus.OK)
+    //친구수락
+    @PostMapping("/friendAccept{targetNo}")
+    @ResponseBody
+    public ResponseEntity<String> friendAccept(HttpServletRequest request, @PathVariable int targetNo) {
+        int userNo = ((User) request.getSession().getAttribute("loginUser")).getUserNo();
+        log.info("친구수락 성공");
+        return friendService.approveFriend(userNo, targetNo)
+                ? new ResponseEntity<>("acceptSuccess", HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+
+    }
+    //친구 요청취소 / 친구거절
+    @DeleteMapping("/refuseFriend{targetNo}")
+    @ResponseBody
+    public ResponseEntity<String> refuseFriend(HttpServletRequest request, @PathVariable int targetNo) {
+        log.info("친구요청 취소");
+        int userNo = ((User) request.getSession().getAttribute("loginUser")).getUserNo();
+        return friendService.refuseFriend(userNo, targetNo)
+                ? new ResponseEntity<>("refuseSuccess", HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    //친구수락
-    @GetMapping("/friendAccept")
+    //친구 삭제
+    @DeleteMapping("/removeFriend{targetNo}")
     @ResponseBody
-    public ResponseEntity<String> friendAccept(HttpServletRequest request, int targetNo) {
+    public ResponseEntity<String> removeFriend(HttpServletRequest request, @PathVariable int targetNo) {
+        log.info("친구삭제");
         int userNo = ((User) request.getSession().getAttribute("loginUser")).getUserNo();
-        friendService.approveFriend(userNo, targetNo);
-        return null;
+        return friendService.removeFriend(userNo, targetNo)
+                ? new ResponseEntity<>("removeFriendSuccess", HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    //친구요청
+    @PostMapping("/addFriend{targetNo}")
+    @ResponseBody
+    public ResponseEntity<String> addFriend(HttpServletRequest request, @PathVariable int targetNo) {
+        int userNo = ((User) request.getSession().getAttribute("loginUser")).getUserNo();
+        return friendService.addFriend(userNo, targetNo)
+                ? new ResponseEntity<>("removeFriendSuccess", HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 

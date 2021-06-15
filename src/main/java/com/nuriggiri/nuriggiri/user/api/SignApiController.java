@@ -1,5 +1,6 @@
 package com.nuriggiri.nuriggiri.user.api;
 
+import com.nuriggiri.nuriggiri.channel.service.ChannelService;
 import com.nuriggiri.nuriggiri.friend.domain.FriendList;
 import com.nuriggiri.nuriggiri.friend.service.FriendService;
 import com.nuriggiri.nuriggiri.user.domain.LoginUser;
@@ -33,6 +34,7 @@ public class SignApiController {
 
     private final FriendService friendService;
 
+    private final ChannelService channelService;
 
     //회원가입 페이지
     @GetMapping("/up")
@@ -79,13 +81,16 @@ public class SignApiController {
         //로그인
         String loginMessage = userService.login(inputUser);
         model.addAttribute("result", loginMessage);
+        User userInfo = userService.userInfo(inputUser.getUserId());
+
         if (loginMessage.equals("success")) {
             //로그인 성공할 경우
+            request.getSession().setAttribute("loginUser", userInfo);
+            //친구
+            Map<String, List<FriendList>> stringListMap = friendService.friendMapSes(request);
             request.getSession().setAttribute("loginUser", userService.userInfo(inputUser.getUserId()));
-
-            int userNo = ((User) request.getSession().getAttribute("loginUser")).getUserNo();
-            Map<String, List<FriendList>> stringListMap = friendService.friendAllMap(userNo);
-            request.getSession().setAttribute("friendListMap", stringListMap);
+            //채널목록
+            channelService.chSecList(request.getSession());
 
             log.info(loginMessage);
             log.info(request.getSession().getAttribute("loginUser"));
@@ -109,6 +114,7 @@ public class SignApiController {
         if (loginUser != null) {
             //로그인 한 유저들의 세션을 지운다
             httpSession.removeAttribute("loginUser");
+            httpSession.removeAttribute("friendListMap");
             httpSession.invalidate();
             Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
             if (loginCookie != null) {
@@ -147,6 +153,7 @@ public class SignApiController {
 
         //삭제후 세션지우기
         request.getSession().removeAttribute("loginUser");
+        request.getSession().removeAttribute("friendListMap");
         request.getSession().invalidate();
         return "redirect:/sign/in";
     }
@@ -178,7 +185,6 @@ public class SignApiController {
         userService.userInfoNick(nickName);
         return null;
     }
-
 
 
 }
