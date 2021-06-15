@@ -4,8 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.nuriggiri.nuriggiri.channelJoinUser.repository.ChannelJoinUserMapper">
-
-    <resultMap id="joinUserMap" type="com.nuriggiri.nuriggiri.channelJoinUser.domain.channelJoinUser">
+    <resultMap id="joinUserMap" type="com.nuriggiri.nuriggiri.channelJoinUser.domain.ChannelJoinUser">
         <result property="joinSeqNo" column="join_seq_no"/>
         <result property="channelNo" column="channel_no"/>
         <result property="userNo" column="user_no"/>

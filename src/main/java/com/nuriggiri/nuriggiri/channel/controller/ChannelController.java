@@ -2,11 +2,10 @@ package com.nuriggiri.nuriggiri.channel.controller;
 
 import com.nuriggiri.nuriggiri.board.paging.Criteria;
 import com.nuriggiri.nuriggiri.board.paging.PageMaker;
-import com.nuriggiri.nuriggiri.board.service.BoardService;
 import com.nuriggiri.nuriggiri.channel.domain.Channel;
 import com.nuriggiri.nuriggiri.channel.domain.ModifyChannel;
 import com.nuriggiri.nuriggiri.channel.service.ChannelService;
-import com.nuriggiri.nuriggiri.user.domain.User;
+import com.nuriggiri.nuriggiri.channelJoinUser.service.ChannelJoinUserService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,9 +23,13 @@ public class ChannelController {
 
     //서비스 파일과 연결
     public final ChannelService channelService;
+
+    public final ChannelJoinUserService channelJoinUserService;
+
     @Autowired
-    public ChannelController(ChannelService channelService) {
+    public ChannelController(ChannelService channelService, ChannelJoinUserService channelJoinUserService) {
         this.channelService = channelService;
+        this.channelJoinUserService = channelJoinUserService;
     }
 
     //채널 목록 가져오기
@@ -42,6 +45,8 @@ public class ChannelController {
         session.setAttribute("chList", channelList);
         return "/channel/chMain";
     }
+
+
 
     //채널 생성 화면 요청
     @GetMapping("/addCh")
@@ -65,10 +70,14 @@ public class ChannelController {
     }
 
     //채널 정보 상세보기 요청
-    @GetMapping("/viewCh")
-    public String viewInfo(int channelNo, Model model) {
+    @GetMapping("/viewCh/{channelNo}")
+    public String viewInfo(@PathVariable int channelNo, Model model) {
+
+//        channelJoinUserService.joinCh(userNo, channelNo);
+
         Channel content = channelService.viewInfo(channelNo);
         model.addAttribute("channel", content);
+
         List<Channel> channelList = channelService.viewList();
         model.addAttribute("list", channelList);
 //        log.info("channel info: " + content);
