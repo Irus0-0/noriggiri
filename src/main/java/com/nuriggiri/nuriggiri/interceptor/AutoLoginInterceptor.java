@@ -1,5 +1,6 @@
 package com.nuriggiri.nuriggiri.interceptor;
 
+import com.nuriggiri.nuriggiri.channel.service.ChannelService;
 import com.nuriggiri.nuriggiri.friend.domain.FriendList;
 import com.nuriggiri.nuriggiri.friend.service.FriendService;
 import com.nuriggiri.nuriggiri.user.domain.User;
@@ -27,6 +28,10 @@ public class AutoLoginInterceptor implements HandlerInterceptor {
     @Autowired
     private FriendService friendService;
 
+    @Autowired
+    private ChannelService channelService;
+
+
     //자동로그인
     private boolean loginFlag = false;
 
@@ -52,6 +57,19 @@ public class AutoLoginInterceptor implements HandlerInterceptor {
                     session.setAttribute("friendListMap", stringListMap);
                     loginFlag = true;
                 }
+            if (user != null) {
+                //DB에 쿠키에 있는 세션 ID 로 검색해서 검색결과가 있는 경우
+                //세션에 유저정보 저장
+                request.getSession().setAttribute("loginUser", user);
+
+                // 친구
+                int userNo = ((User) request.getSession().getAttribute("loginUser")).getUserNo();
+                Map<String, List<FriendList>> stringListMap = friendService.friendAllMap(userNo);
+                request.getSession().setAttribute("friendListMap", stringListMap);
+
+                // 채널목록
+                channelService.chSecList(request.getSession());
+
             }
         }
 

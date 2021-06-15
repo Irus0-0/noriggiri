@@ -7,6 +7,7 @@ import com.nuriggiri.nuriggiri.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Service
@@ -16,12 +17,32 @@ public class ChannelService {
     public final ChannelMapper channelMapper;
 
     //채널 목록 가져오기
-    public List<Channel> viewList(){
+    public List<Channel> viewList() {
         return channelMapper.viewList();
     }
 
+    // 채널 리스트 세션 등록
+    public void chSecList(HttpSession session) {
+
+        session.setAttribute("adminList", adminList(session));
+        session.setAttribute("partiList", partiList(session));
+
+    }
+
+    //내가 관리자인 채널 리스트
+    public List<Channel> adminList(HttpSession session) {
+        int userNo = ((User) session.getAttribute("loginUser")).getUserNo();
+        return channelMapper.adminList(userNo);
+    }
+
+    //내가 참여중인 채널 리스트
+    public List<Channel> partiList(HttpSession session) {
+        int userNo = ((User) session.getAttribute("loginUser")).getUserNo();
+        return channelMapper.partiList(userNo);
+    }
+
     // 검색 쿼리 추가 목록
-    public List<Channel> viewList(Criteria criteria){
+    public List<Channel> viewList(Criteria criteria) {
         return channelMapper.getSearchArticles(criteria);
     }
 
@@ -37,7 +58,7 @@ public class ChannelService {
     }
 
     //채널 정보 보기
-    public Channel viewInfo(int channelNo){
+    public Channel viewInfo(int channelNo) {
         return channelMapper.viewInfo(channelNo);
     }
 
@@ -47,7 +68,7 @@ public class ChannelService {
     }
 
     //채널 삭제
-    public void delete(int channelNo){
+    public void delete(int channelNo) {
         channelMapper.delete(channelNo);
     }
 

@@ -85,7 +85,9 @@
                                             </h6>
 
                                             <p class="card-text">${channel.channelInfo}</p>
-                                            <a href="/channel/viewCh?channelNo=${channel.channelNo}"
+                                            <!-- <a href="/channel/viewCh?channelNo=${channel.channelNo}"
+                                                class="btn btn-warning">채널참여</a> -->
+                                                <a href="/channelJoinUser/joinCh/${channel.channelNo}"
                                                 class="btn btn-warning">채널참여</a>
                                         </div>
                                     </div>

@@ -12,6 +12,13 @@ public interface ChannelMapper {
     //채널 목록 가져오기
     List<Channel> viewList();
 
+    //내가 관리자인 채널 리스트
+    List<Channel> adminList(int userNo);
+
+    //내가 참여중인 채널 리스트
+    List<Channel> partiList(int userNo);
+
+
     //검색 쿼리 추가 목록
     List<Channel> getSearchArticles(Criteria criteria);
 
