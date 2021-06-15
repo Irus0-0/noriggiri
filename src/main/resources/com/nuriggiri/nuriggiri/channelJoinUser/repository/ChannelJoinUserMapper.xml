@@ -10,6 +10,12 @@
         <result property="userNo" column="user_no"/>
     </resultMap>
 
+    <!-- // 정보 보기 (한명의 유저) -->
+    <select id="joinList" resultType="int">
+        SELECT count(*) FROM nuri_channel_join_user
+        WHERE user_no = #{userNo} AND channel_no = #{channelNo}
+    </select>
+
 
     <!-- // 채널 접속 -->
     <insert id="joinCh">
@@ -22,7 +28,10 @@
     <!-- // 채널 나가기 -->
     <delete id="exitCh">
         DELETE FROM nuri_channel_join_user
-        WHERE join_seq_no = #{joinSeqNo}
+        WHERE join_seq_no = (
+        SELECT join_seq_no FROM nuri_channel_join_user
+        WHERE user_no = #{userNo} AND channel_no = #{channelNo}
+        )
     </delete>
 
 </mapper>

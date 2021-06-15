@@ -53,12 +53,12 @@
                                     <ul class="ch-info">
                                         <li><span>#채널번호: </span>${channel.channelNo}</li>
                                         <li><span>#채널이름: </span>${channel.channelName}</li>
-                                        <li><span>#채널관리자: </span>${channel.adminUserNo}의 닉네임찾아넣기</li>
+                                        <li><span>#채널관리자: </span>${userInfo.nickName}의 닉네임찾아넣기</li>
                                         <li><span>#채널정보: </span>${channel.channelInfo}</li>
                                         <li><span>#채널참여자: </span>(아직 기능 구현전)</li>
                                     </ul>
 
-                                    <c:if test="${channel.adminUserNo} == ${loginUser.userNo}">
+                                    <c:if test="${channel.adminUserNo == loginUser.userNo}">
                                         <a class="btn btn-outline-warning btn-xs"
                                             href="/channel/modCh?channelNo=${channel.channelNo}">채널 수정</a>
                                         <a class="btn btn-outline-warning btn-xs"
@@ -66,7 +66,7 @@
                                     </c:if>
 
                                     <a class="btn btn-outline-warning btn-xs"
-                                        href="/channelJoinUser/exitCh?channelNo=${channel.channelNo}&joinSeqNo=${channelJoinUser.joinSeqNo}">채널 나가기</a>
+                                        href="/channelJoinUser/exitCh/${channel.channelNo}">채널 나가기</a>
 
                                 </div>
                             </div>

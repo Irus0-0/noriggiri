@@ -23,6 +23,9 @@ public interface UserMapper {
     //유저 정보 보기 닉네임
     User userInfoNick(String nickName);
 
+    //유저 정보 보기 유저번호
+    User userInfoNo(int userNo);
+
     //중복 아이디 검색
     int searchUserId(String userId);
 

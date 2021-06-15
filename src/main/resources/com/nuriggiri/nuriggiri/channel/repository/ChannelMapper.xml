@@ -20,7 +20,7 @@
     <!-- 채널 리스트 조회 기능 -->
     <!-- 1. 페이징 없는 버전 -->
     <select id="viewList" resultMap="channelMap">
-        SELECT * FROM nuri_channel
+        SELECT * FROM nuri_channel ORDER BY channel_no
         <!--        채널조인테이블 로그인한 유저의 아이디/ 유저번호 검색을 해서 채널 번호나 이름을 받아와서 조회되는 쿼리문-->
     </select>
 
@@ -28,6 +28,7 @@
     <select id="adminList" resultMap="channelMap">
         SELECT * FROM nuri_channel
         WHERE admin_user_no = #{userNo}
+        ORDER BY channel_no
     </select>
 
     <!-- 내가 참여중인 채널 리스트 -->
@@ -36,6 +37,7 @@
         (SELECT channel_no FROM nuri_channel_join_user WHERE user_no = #{userNo}) A,
         nuri_channel B
         WHERE a.channel_no = b.channel_no
+        ORDER BY a.channel_no
     </select>
 
     <!-- 3. 검색 쿼리 + 페이징 쿼리 적용 -->
