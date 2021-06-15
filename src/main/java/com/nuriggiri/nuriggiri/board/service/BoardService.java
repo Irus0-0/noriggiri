@@ -15,7 +15,19 @@ public class BoardService {
     public final BoardMapper boardMapper;
 
     public List<Board> boardList(Criteria criteria) {
-        return boardMapper.boardList(criteria);
+        List<Board> boardList = boardMapper.boardList(criteria);
+
+        for (Board article : boardList){
+            long regTime = article.getRegDate().getTime();
+            long now = System.currentTimeMillis();
+
+            if (now - regTime < 60 * 3 * 1000) {
+                article.setNewBoard(true);
+            }
+        }
+
+//        return boardMapper.boardList(criteria);
+        return boardList;
     }
 
     //게시글 등록

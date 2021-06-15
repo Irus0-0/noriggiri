@@ -49,8 +49,17 @@
          margin-bottom: 20px;
       }
 
+      .card-board {
+         background-color: red;
+      }
+
       .text-white {
          color: #fff !important;
+      }
+
+      .replybtn {
+         margin-left: 500px;
+         width: 50px;
       }
    </style>
 
@@ -73,7 +82,7 @@
                <input type="text" name="title" class="form-control" id="exampleInputPassword1" value="${article.title}"
                   disabled>
             </div>
-            <textarea id="summernote" disabled>${article.content}</textarea>
+            <textarea id="summernote" rows="20" disabled>${article.content}</textarea>
             <div class="card-footer">
                <button type="button" class="btn btn-warning" id="list-btn">글 목록보기</button>
                <button type="button" class="btn btn-warning" id="modify-btn">글 수정하기</button>
@@ -171,12 +180,14 @@
    <!-- end replyModifyModal -->
    <script>
       $(function () {
-         $('#summernote').summernote('disable', {
+         $('#summernote').summernote({
             height: 300,
-            minHeight: null, // set minimum height of editor
-            maxHeight: null, // set maximum height of editor
-            focus: true // set focus to editable area after initializing summe
+            toolbar: 'disable',
+            contenteditable: 'false'
          });
+         $('#summernote').next().find(".note-editable").attr("contenteditable", false);
+         // $('#summernote').summernote('disable');
+         // $('.note-editable').css('height', '300px');
 
          //목록버튼
          $('#list-btn').on('click', e => {
@@ -290,10 +301,10 @@
                   "    </div><br>" +
                   "    <div class='row'>" +
                   "       <div class='col-md-6'>" + reply.content + "</div>" +
-                  "       <div class='offset-md-2 col-md-4 text-right'>" +
-                  "         <a id='replyRecBtn' class='btn btn-sm btn-outline-dark' href='#'>추천</a>" +
-                  "         <a id='replyModBtn' class='btn btn-sm btn-outline-dark' href='#' data-toggle='modal'>수정</a>&nbsp;" +
-                  "         <a id='replyDelBtn' class='btn btn-sm btn-outline-dark' href='#'>삭제</a>" +
+                  "       <div class='offset-md-2 col-md-2 text-right dom'>" +
+                  "         <button type='button' class='btn btn-block btn-warning btn-xs replybtn' id='replyRecBtn'>추천</button>" +
+                  "         <button type='button' class='btn btn-block btn-warning btn-xs replybtn' id='replyModBtn' data-toggle='modal'>수정</button>" +
+                  "         <button type='button' class='btn btn-block btn-danger btn-xs replybtn' id='replyDelBtn'>삭제</button>" +
                   "       </div>" +
                   "    </div>" +
                   " </div>";
