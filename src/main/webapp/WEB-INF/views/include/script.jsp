@@ -7,3 +7,13 @@
 <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../dist/js/adminlte.min.js"></script>
+
+<script>
+    //로그아웃 버튼 클릭이벤트
+    $('#signOut-btn').on('click', e => {
+        let checkLogout = confirm("로그아웃 하시겠습니까?");
+        if (checkLogout) {
+            location.href = '/sign/out'
+        }
+    });
+</script>

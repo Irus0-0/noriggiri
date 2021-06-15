@@ -14,6 +14,7 @@ table {
     font-style: normal;
 }
 
+
 /* 색상 수정시 참고
 :root {
     --blue: #007bff;
@@ -64,6 +65,14 @@ table {
     color: #000;
 }
 
+/* common */
+*:focus {
+    outline: none;
+}
+
+a {
+    text-decoration: none;
+}
 
 /* header */
 
@@ -71,7 +80,8 @@ table {
 /* main-sidebar */
 .user-panel {}
 .user-panel .info-btn {
-    border: 1px solid red;
+    /* border: 1px solid red; */
+    margin-top: 20px;
 }
 .user-panel .info-btn .btn {
     font-size: 12px;
@@ -82,7 +92,75 @@ table {
 /* channel */
 
 /* channel content */
+.modal {
+    margin-top: 10%;
+}
+
+.no-channel {
+    width: 100%;
+    margin: 30px auto;
+}
+
+.card-body {
+    padding: 30px;
+}
+
+
 .ch-info {
     list-style: none;
     clear: both;
+    margin-top: 50px;
+}
+
+.ch-info li {
+    width: 100%;
+}
+
+.ch-info li span {
+    width: 100px;
+    display: inline-block;
+    background-color: #eee;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.ch-info li label {
+    width: 150px;
+    display: inline-block;
+    background-color: #eee;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.ch-info li input {
+    display: inline-block;
+    width: 80%;
+    border: 1px solid #ccc;
+    text-indent: 10px;
+}
+
+
+
+
+/* btn */
+
+.btn-basic {
+    background-color: #444;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn-basic:hover {
+    background-color: #004986;
+    color: #fff;
+}
+
+.list-btn {
+    margin-top: 20px;
+    margin-left: 20px;
+    text-align: center;
+}
+
+.list-btn a {
+    /* color: #fff; */
 }

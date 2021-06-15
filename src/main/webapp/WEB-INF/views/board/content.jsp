@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
@@ -41,6 +41,9 @@
          display: block;
          clear: both;
       }
+      .card-footer {
+         margin-bottom: 20px;
+      }
    </style>
 
 </head>
@@ -63,14 +66,9 @@
             </div>
             <textarea id="summernote" disabled>${article.content}</textarea>
             <div class="card-footer">
-               <a href="/board/list?page=${criteria.page}&type=${criteria.type}&keyword=${criteria.keyword}&amount=${criteria.amount}">글
-                  목록보기</a>
-            </div>
-            <div class="card-footer">
-               <a href="/board/modify?boardNo=${article.boardNo}&vf=false">글 수정하기</a>
-            </div>
-            <div class="card-footer">
-               <button type="button" class="btn btn-primary" data-bs-target="#exampleModal">글 삭제하기</button>
+               <button type="button" class="btn btn-warning" id="list-btn">글 목록보기</button>
+               <button type="button" class="btn btn-warning" id="modify-btn">글 수정하기</button>
+               <button type="button" class="btn btn-warning" id="delete-btn">글 삭제하기</button>
             </div>
          </div>
       </div>
@@ -78,32 +76,28 @@
 
    <!-- 댓글 영역 -->
 
-<div id="replies" class="row">
-    <div class="offset-md-1 col-md-10">
-        <!-- 댓글 쓰기 영역 -->
-        <div class="card">
+   <div id="replies" class="row">
+      <div class="offset-md-1">
+         <!-- 댓글 쓰기 영역 -->
+         <div class="card">
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-9">
-                        <div class="form-group">
-                            <label for="newReplyText" hidden>댓글 내용</label>
-                            <textarea rows="3" id="newReplyText" name="replyText" class="form-control"
-                                      placeholder="댓글을 입력해주세요."></textarea>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="newReplyWriter" hidden>댓글 작성자</label>
-                            <input id="newReplyWriter" type="text" class="form-control"
-                                   style="margin-bottom: 6px;" name="replyWriter" value="${loginUser.nickName}"
-                                   disabled>
-                            <input type="checkbox" id="anonymous" name="anonymous">
-                            <label for="anonymous">익명</label>
-<%--                            <input type="hidden" id="anonymous" name="anonymous">--%>
-                            <button id="replyAddBtn" type="button" class="btn btn-dark form-control">등록</button>
-                        </div>
-                    </div>
-                </div>
+               <div class="row">
+                  <div class="col-md-9">
+                     <div class="form-group">
+                        <label for="newReplyText" hidden>댓글 내용</label>
+                        <textarea rows="3" id="newReplyText" name="replyText" class="form-control"
+                           placeholder="댓글을 입력해주세요."></textarea>
+                     </div>
+                  </div>
+                  <div class="col-md-3">
+                     <div class="form-group">
+                        <label for="newReplyWriter" hidden>댓글 작성자</label>
+                        <input id="newReplyWriter" type="text" class="form-control" style="margin-bottom: 6px;"
+                           name="replyWriter" value="${loginUser.nickName}" disabled>
+                        <button id="replyAddBtn" type="button" class="btn btn-dark form-control">등록</button>
+                     </div>
+                  </div>
+               </div>
             </div>
          </div> <!-- end reply write -->
 
@@ -116,18 +110,18 @@
 
             <!-- 댓글 내용 바디 -->
             <div id="replyCollapse" class="card">
-                <div id="replyData">
-                    <!--
-                          < JS로 댓글 정보 DIV삽입 >
+               <div id="replyData">
+                  <!--
+                          < JS로 댓글 정보 DIV삽입 > 
                        -->
-                </div>
+               </div>
 
-                <!-- 댓글 페이징 영역 -->
-                <ul class="pagination justify-content-center">
-                    <!--
-                          < JS로 댓글 페이징 DIV삽입 >
+               <!-- 댓글 페이징 영역 -->
+               <ul class="pagination justify-content-center">
+                  <!--
+                          < JS로 댓글 페이징 DIV삽입 > 
                        -->
-                </ul>
+               </ul>
             </div>
          </div> <!-- end reply content -->
       </div>
@@ -159,32 +153,42 @@
                <button id="replyModBtn" type="button" class="btn btn-dark">수정</button>
                <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
             </div>
-
-
-        </div>
-    </div>
-</div>
+         </div>
+      </div>
+   </div>
 
    <!-- end replyModifyModal -->
-
-
-<%@ include file="../include/footer.jsp" %>
-
-<script>
-
-    $(function () {
-        $('#summernote').summernote({
+   <script>
+      $(function () {
+         $('#summernote').summernote('disable',{
             height: 300,
             minHeight: null, // set minimum height of editor
             maxHeight: null, // set maximum height of editor
             focus: true // set focus to editable area after initializing summe
-        });
-    });
+         });
 
-    // 댓글 처리 JS
-    $(function () {
-        //원본글 번호
-        const boardNo = '${article.boardNo}';
+         //목록버튼
+			$('#list-btn').on('click', e => {
+				location.href='/board/list?page=${criteria.page}&type=${criteria.type}&keyword=${criteria.keyword}&amount=${criteria.amount}';
+			});
+
+         //수정버튼
+			$('#modify-btn').on('click', e => {
+				location.href='/board/modify?boardNo=${article.boardNo}&vf=false';
+			});
+
+         //삭제버튼
+			$('#delete-btn').on('click', e => {
+				location.href='/board/delete?boardNo=${article.boardNo}';
+			});
+      });
+   </script>
+
+   <script>
+      // 댓글 처리 JS
+      $(function () {
+         //원본글 번호
+         const boardNo = '${article.boardNo}';
 
          //날짜 포맷 변환 함수
          function formatDate(datetime) {
@@ -413,7 +417,6 @@
          });
       });
    </script>
-
 
 </body>
 

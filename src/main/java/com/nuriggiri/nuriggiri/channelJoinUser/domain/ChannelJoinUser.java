@@ -2,15 +2,26 @@ package com.nuriggiri.nuriggiri.channelJoinUser.domain;
 
 import lombok.*;
 
-@Setter @Getter
+@Setter
+@Getter
 @ToString
-@NoArgsConstructor
 @AllArgsConstructor
 public class ChannelJoinUser {
+    private static int sequence;
 
-    private int channelNo; //채널번호 PK FK
-    private int userNo; //유저번호 Fk
+    private int joinSeqNo; // 조인유저 PK
+    private int channelNo; // 채널번호 FK
+    private int userNo; // 유저번호 Fk
 
+    public ChannelJoinUser() {
+        this.channelNo = ++sequence;
+    }
+
+    public ChannelJoinUser(int channelNo, int userNo) {
+        this();
+        this.channelNo = channelNo;
+        this.userNo = userNo;
+    }
 }
 
 
