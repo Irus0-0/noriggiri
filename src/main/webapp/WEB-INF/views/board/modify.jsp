@@ -1,68 +1,115 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+<!-- head(meta, link) include -->
+<%@include file="../include/static-head(board).jsp" %>
 
-	<!-- include libraries(jQuery, bootstrap) -->
-	<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<body class="hold-transition sidebar-mini layout-footer-fixed">
+    <div class="wrapper">
 
-	<!-- include summernote css/js -->
-	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+        <!-- header (top navbar) include -->
+        <%@include file="../include/header.jsp" %>
 
-	<style>
-		.modify-board {
-			width: 80%;
-			margin: 0 auto;
-			display: block;
-		}
 
-		.card-footer {
-			float: left;
-			margin-right: 5px;
-		}
-	</style>
-</head>
+        <!-- main sidebar(left menu) include -->
+        <%@include file="../include/main-sidebar.jsp" %>
 
-<body>
-	<form id="quickForm" action="/board/modify" method="post">
-		<input type="hidden" name="boardNo" value="${article.boardNo}">
-		<input type="hidden" name="vf" value="false">
-		<div class="modify-board">
-			<h2>${article.boardNo}번 게시물 수정</h2>
-			<div class="card-body">
-				<div class="form-group">
-					<label for="exampleInputEmail1">작성자</label>
-					<input type="text" name="writer" class="form-control" id="exampleInputEmail1"
-						value="${article.writer}">
-				</div>
-				<div class="form-group">
-					<label for="exampleInputPassword1">제목</label>
-					<input type="text" name="title" class="form-control" id="exampleInputPassword1"
-						value="${article.title}">
-				</div>
-				<textarea id="summernote" name="content">${article.content}</textarea>
-				<div class="card-footer">
-					<button type="submit" class="btn btn-warning">수정</button>
-					<button type="button" class="btn btn-warning" id="list-btn">글 목록보기</button>
-				</div>
-			</div>
-		</div>
-	</form>
 
-	<script>
+        <!-- main content wrapper -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">CH.${channel.channelNo} [${channel.channelName}] - No.${article.boardNo} 게시판
+                            </h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <!-- <li class="breadcrumb-item"><a href="../home.jsp">메인홈</a></li> -->
+                                <li class="breadcrumb-item"><i class="fas fa-home"></i> <a href="/channel/chMain">채널
+                                        메인</a></li>
+                                <li class="breadcrumb-item">CH.${channel.channelNo} [${channel.channelName}]</li>
+                                <li class="breadcrumb-item active">No.${article.boardNo} 게시판</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+
+            <!-- Main content -->
+            <div class="content board-content">
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">${article.boardNo}번 게시물 수정</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+                                <form id="quickForm" action="/board/modify" method="post">
+                                    <input type="hidden" name="boardNo" value="${article.boardNo}">
+                                    <input type="hidden" name="vf" value="false">
+
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="boardWriter">작성자</label>
+                                            <input type="hidden" name="writer" value="${article.writer}">
+                                            <input type="text" class="form-control" id="boardWriter"
+                                                value="${article.writer}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="boardTitle">제목</label>
+                                            <input type="text" name="title" class="form-control" id="boardTitle" value="${article.title}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>내용</label>
+                                            <textarea class="form-control" rows="10" name="content" id="summernote">${article.content}</textarea>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+                                    <div class="card-footer d-flex justify-content-center">
+                                        <button type="submit" class="btn btn-warning">수정</button>
+                                        <button type="button" class="btn btn-warning" id="list-btn">글 목록보기</button>
+                                    </div>
+                                </form>
+
+                            </div><!-- /.card -->
+                        </div><!-- /.col -->
+
+                    </div>
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div><!-- /.content -->
+        </div>
+        <!-- // .content-wrapper end -->
+
+
+        <!-- right sidebar include -->
+        <%@include file="../include/right-sidebar.jsp" %>
+
+
+        <!-- footer include -->
+        <%@include file="../include/footer.jsp" %>
+
+    </div>
+    <!-- // .wrapper end -->
+
+
+    <!-- script include -->
+    <%@include file="../include/script(board).jsp" %>
+
+
+    <script> //board/modify
 		$(function () {
-
 			$('#summernote').summernote({
 				height: 300,
 				minHeight: null, // set minimum height of editor
@@ -76,7 +123,6 @@
 			});
 		});
 	</script>
-
 </body>
 
 </html>

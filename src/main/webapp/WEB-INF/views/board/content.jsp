@@ -1,183 +1,202 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="ko">
 
-<head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Document</title>
+<!-- head(meta, link) include -->
+<%@include file="../include/static-head(board).jsp" %>
 
-   <!-- include libraries(jQuery, bootstrap) -->
-   <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-   <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<body class="hold-transition sidebar-mini layout-footer-fixed">
+   <div class="wrapper">
 
-   <!-- include summernote css/js -->
-   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-   <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+      <!-- header (top navbar) include -->
+      <%@include file="../include/header.jsp" %>
 
-   <style>
-      .modify-board {
-         display: block;
-         width: 80%;
-         margin: 0 auto;
-      }
 
-      .offset-md-1 {
-         width: 80%;
-         margin: 0 auto;
-         margin-bottom: 10px;
-      }
+      <!-- main sidebar(left menu) include -->
+      <%@include file="../include/main-sidebar.jsp" %>
 
-      .card-footer {
-         display: block;
-         float: left;
-         margin-right: 5px;
-      }
 
-      .clearfix::after {
-         content: '';
-         display: block;
-         clear: both;
-      }
-
-      .card-footer {
-         margin-bottom: 20px;
-      }
-
-      .card-board {
-         background-color: red;
-      }
-
-      .text-white {
-         color: #fff !important;
-      }
-
-      .replybtn {
-         margin-left: 500px;
-         width: 50px;
-      }
-   </style>
-
-</head>
-
-<body>
-   <form id="quickForm">
-      <div class="modify-board">
-
-         <h2>${article.boardNo}번 게시물</h2>
-
-         <div class="card-body clearfix">
-            <div class="form-group">
-               <label for="exampleInputEmail1">작성자</label>
-               <input type="hidden" type="text" name="writer" value="${article.writer}">
-               <input type="text" class="form-control" id="exampleInputEmail1" value="${article.writer}" disabled>
-            </div>
-            <div class="form-group">
-               <label for="exampleInputPassword1">제목</label>
-               <input type="text" name="title" class="form-control" id="exampleInputPassword1" value="${article.title}"
-                  disabled>
-            </div>
-            <textarea id="summernote" rows="20" disabled>${article.content}</textarea>
-            <div class="card-footer">
-               <button type="button" class="btn btn-warning" id="list-btn">글 목록보기</button>
-               <button type="button" class="btn btn-warning" id="modify-btn">글 수정하기</button>
-               <button type="button" class="btn btn-warning" id="delete-btn">글 삭제하기</button>
-            </div>
+      <!-- main content wrapper -->
+      <div class="content-wrapper">
+         <!-- Content Header (Page header) -->
+         <div class="content-header">
+            <div class="container-fluid">
+               <div class="row mb-2">
+                  <div class="col-sm-6">
+                     <h1 class="m-0">CH.${channel.channelNo} [${channel.channelName}] - No.${article.boardNo} 게시판
+                     </h1>
+                  </div><!-- /.col -->
+                  <div class="col-sm-6">
+                     <ol class="breadcrumb float-sm-right">
+                        <!-- <li class="breadcrumb-item"><a href="../home.jsp">메인홈</a></li> -->
+                        <li class="breadcrumb-item"><i class="fas fa-home"></i> <a href="/channel/chMain">채널
+                              메인</a></li>
+                        <li class="breadcrumb-item">CH.${channel.channelNo} [${channel.channelName}]</li>
+                        <li class="breadcrumb-item active">No.${article.boardNo} 게시판</li>
+                     </ol>
+                  </div><!-- /.col -->
+               </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
          </div>
-      </div>
-   </form>
+         <!-- /.content-header -->
 
-   <!-- 댓글 영역 -->
-
-   <div id="replies" class="row">
-      <div class="offset-md-1">
-         <!-- 댓글 쓰기 영역 -->
-         <div class="card">
-            <div class="card-body">
+         <!-- Main content -->
+         <div class="content board-content">
+            <div class="container-fluid">
                <div class="row">
-                  <div class="col-md-9">
-                     <div class="form-group">
-                        <label for="newReplyText" hidden>댓글 내용</label>
-                        <textarea rows="3" id="newReplyText" name="replyText" class="form-control"
-                           placeholder="댓글을 입력해주세요."></textarea>
+
+                  <div class="col-lg-12">
+                     <div class="card">
+                        <div class="card-header">
+                           <h3 class="card-title">${article.boardNo}번 게시물</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <form id="quickForm">
+                           <input type="hidden" name="boardNo" value="${article.boardNo}">
+                           <input type="hidden" name="vf" value="false">
+
+                           <div class="card-body">
+                              <div class="form-group">
+                                 <label for="boardWriter">작성자</label>
+                                 <input type="hidden" name="writer" value="${article.writer}">
+                                 <input type="text" class="form-control" id="boardWriter" value="${article.writer}"
+                                    disabled>
+                              </div>
+                              <div class="form-group">
+                                 <label for="boardTitle">제목</label>
+                                 <input type="text" name="title" class="form-control" id="boardTitle"
+                                    value="${article.title}" disabled>
+                              </div>
+                              <div class="form-group">
+                                 <label>내용</label>
+                                 <textarea class="form-control" rows="10" name="content" id="summernote"
+                                    disabled>${article.content}</textarea>
+                              </div>
+                           </div>
+                           <!-- /.card-body -->
+                           <div class="card-footer d-flex justify-content-center">
+                              <button type="button" class="btn btn-warning" id="list-btn">글 목록보기</button>
+                              <button type="button" class="btn btn-warning" id="modify-btn">글 수정하기</button>
+                              <button type="button" class="btn btn-warning" id="delete-btn">글 삭제하기</button>
+                           </div>
+                        </form>
+                     </div><!-- /.card -->
+                  </div><!-- /.col -->
+               </div>
+               <!-- /.row -->
+
+               <!-- 댓글 영역 -->
+               <div id="replies" class="row">
+                  <div class="col-lg-12">
+                     <!-- 댓글 쓰기 영역 -->
+                     <div class="card">
+                        <div class="card-body">
+                           <div class="row">
+                              <div class="col-md-9">
+                                 <div class="form-group">
+                                    <label for="newReplyText" hidden>댓글 내용</label>
+                                    <textarea rows="3" id="newReplyText" name="replyText" class="form-control"
+                                       placeholder="댓글을 입력해주세요."></textarea>
+                                 </div>
+                              </div>
+                              <div class="col-md-3">
+                                 <div class="form-group">
+                                    <label for="newReplyWriter" hidden>댓글 작성자</label>
+                                    <input id="newReplyWriter" type="text" class="form-control"
+                                       style="margin-bottom: 6px;" name="replyWriter" value="${loginUser.nickName}"
+                                       disabled>
+                                    <input type="checkbox" id="anonymous" name="anonymous">
+                                    <label for="anonymous">익명</label>
+                                    <button id="replyAddBtn" type="button" class="btn btn-dark form-control">등록</button>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div> <!-- end reply write -->
+
+                     <!--댓글 내용 영역-->
+                     <div class="card">
+                        <!-- 댓글 내용 헤더 -->
+                        <div class="card-header m-0 text-white" style="background: #343A40; ">
+                           <div class="float-left">댓글 (<span id="replyCnt">0</span>)</div>
+                        </div>
+
+                        <!-- 댓글 내용 바디 -->
+                        <div id="replyCollapse" class="card">
+                           <div id="replyData">
+                              <!--
+             < JS로 댓글 정보 DIV삽입 > 
+          -->
+                           </div>
+
+                           <!-- 댓글 페이징 영역 -->
+                           <ul class="pagination justify-content-center">
+                              <!--
+             < JS로 댓글 페이징 DIV삽입 > 
+          -->
+                           </ul>
+                        </div>
+                     </div> <!-- end reply content -->
+                  </div>
+               </div> <!-- end replies row -->
+
+               <!-- 댓글 수정 모달 -->
+               <div class="modal fade bd-example-modal-lg" id="replyModifyModal">
+                  <div class="modal-dialog modal-lg">
+                     <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header" style="background: #343A40; color: white;">
+                           <h4 class="modal-title">댓글 수정하기</h4>
+                           <button type="button" class="close text-white" data-dismiss="modal">X</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                           <div class="form-group">
+                              <input id="modReplyId" type="hidden">
+                              <label for="modReplyText" hidden>댓글내용</label>
+                              <textarea id="modReplyText" class="form-control" placeholder="수정할 댓글 내용을 입력하세요."
+                                 rows="3"></textarea>
+                           </div>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                           <button id="replyModBtn" type="button" class="btn btn-dark">수정</button>
+                           <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+                        </div>
                      </div>
                   </div>
-                  <div class="col-md-3">
-                     <div class="form-group">
-                        <label for="newReplyWriter" hidden>댓글 작성자</label>
-                        <input id="newReplyWriter" type="text" class="form-control" style="margin-bottom: 6px;"
-                           name="replyWriter" value="${loginUser.nickName}" disabled>
-                        <input type="checkbox" id="anonymous" name="anonymous">
-                        <label for="anonymous">익명</label>
-                        <button id="replyAddBtn" type="button" class="btn btn-dark form-control">등록</button>
-                     </div>
-                  </div>
                </div>
-            </div>
-         </div> <!-- end reply write -->
+               <!-- end replyModifyModal -->
 
-         <!--댓글 내용 영역-->
-         <div class="card">
-            <!-- 댓글 내용 헤더 -->
-            <div class="card-header m-0 text-white" style="background: #343A40; ">
-               <div class="float-left">댓글 (<span id="replyCnt">0</span>)</div>
-            </div>
 
-            <!-- 댓글 내용 바디 -->
-            <div id="replyCollapse" class="card">
-               <div id="replyData">
-                  <!--
-                          < JS로 댓글 정보 DIV삽입 > 
-                       -->
-               </div>
-
-               <!-- 댓글 페이징 영역 -->
-               <ul class="pagination justify-content-center">
-                  <!--
-                          < JS로 댓글 페이징 DIV삽입 > 
-                       -->
-               </ul>
-            </div>
-         </div> <!-- end reply content -->
+            </div><!-- /.container-fluid -->
+         </div><!-- /.content -->
       </div>
-   </div> <!-- end replies row -->
-   </div> <!-- end content container -->
+      <!-- // .content-wrapper end -->
 
-   <!-- 댓글 수정 모달 -->
-   <div class="modal fade bd-example-modal-lg" id="replyModifyModal">
-      <div class="modal-dialog modal-lg">
-         <div class="modal-content">
 
-            <!-- Modal Header -->
-            <div class="modal-header" style="background: #343A40; color: white;">
-               <h4 class="modal-title">댓글 수정하기</h4>
-               <button type="button" class="close text-white" data-dismiss="modal">X</button>
-            </div>
+      <!-- right sidebar include -->
+      <%@include file="../include/right-sidebar.jsp" %>
 
-            <!-- Modal body -->
-            <div class="modal-body">
-               <div class="form-group">
-                  <input id="modReplyId" type="hidden">
-                  <label for="modReplyText" hidden>댓글내용</label>
-                  <textarea id="modReplyText" class="form-control" placeholder="수정할 댓글 내용을 입력하세요." rows="3"></textarea>
-               </div>
-            </div>
 
-            <!-- Modal footer -->
-            <div class="modal-footer">
-               <button id="replyModBtn" type="button" class="btn btn-dark">수정</button>
-               <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
-            </div>
-         </div>
-      </div>
+      <!-- footer include -->
+      <%@include file="../include/footer.jsp" %>
+
    </div>
+   <!-- // .wrapper end -->
 
-   <!-- end replyModifyModal -->
+
+   <!-- script include -->
+   <%@include file="../include/script(board).jsp" %>
+
+
    <script>
       $(function () {
          $('#summernote').summernote({
@@ -267,7 +286,8 @@
             //페이지 번호 리스트 만들기
             for (let i = begin; i <= end; i++) {
                const active = (pageInfo.criteria.page === i) ? 'page-active' : '';
-               tag += "<li class='page-item'><a class='page-link page-custom " + active + "' href='" + i + "'>" +
+               tag += "<li class='page-item'><a class='page-link page-custom " + active + "' href='" + i +
+                  "'>" +
                   i + "</a></li>";
             }
 
@@ -353,7 +373,8 @@
                   boardNo: boardNo,
                   content: $('#newReplyText').val(),
                   nickName: $('#newReplyWriter').val(),
-                  anonymous: $('input:checkbox[id="anonymous"]').is(":checked") == true
+                  anonymous: $('input:checkbox[id="anonymous"]').is(":checked") ==
+                     true
                })
             };
             fetch('/api/v1/reply', reqInfo)
@@ -447,7 +468,6 @@
          });
       });
    </script>
-
 </body>
 
 </html>

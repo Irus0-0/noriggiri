@@ -97,6 +97,8 @@ CREATE TABLE nuri_reply(
 
 -- ALTER TABLE nuri_reply ADD CONSTRAINT
  --fk_nuri_reply FOREIGN KEY (board_no) REFERENCES nuri_board (board_no)
+ ALTER TABLE nuri_reply ADD anonymous VARCHAR2(10) DEFAULT 'false';
+
 
 
 
@@ -137,6 +139,14 @@ CREATE TABLE nuri_note(
 --    CONSTRAINT pk_nori_note_repository PRIMARY KEY (note_no)
 --);
 
+CREATE TABLE nuri_friend(
+    user_no NUMBER(10), --유저번호 PK FK
+    target_no NUMBER(10), -- 친구 타겟 유저번호 FK - 유저번호
+    relationship VARCHAR2(20) --친구 관계
+
+);
+
+
 COMMIT;
 
 
@@ -152,19 +162,71 @@ SELECT * FROM nuri_channel
 
 SELECT * FROM nuri_user;
 
+SELECT * FROM nuri_board;
+
 SELECT * FROM nuri_channel ORDER BY channel_no;
 
-SELECT * FROM nuri_channel_join_user;
+-- 채널+조인
+SELECT * FROM nuri_channel_join_user A, nuri_channel B
+WHERE b.channel_no = a.channel_no
+ORDER BY a.channel_no;
+
+-- 1번 채널에 1번 유저가 들어가 있는 조인유저리스트
+SELECT * FROM nuri_channel_join_user
+WHERE user_no = 1 AND channel_no = 1;
+
+
+--DELETE FROM nuri_channel_join_user WHERE join_seq_no = 1;
+
+-- 1번 채널에 1번 유저가 들어가 있는 조인시퀀스 조회
+SELECT join_seq_no FROM nuri_channel_join_user
+WHERE user_no = 1 AND channel_no = 1;
+
+
+-- 채널 나가기 쿼리
+DELETE FROM nuri_channel_join_user
+        WHERE join_seq_no = (
+        SELECT join_seq_no FROM nuri_channel_join_user
+        WHERE user_no = 1 AND channel_no = 32
+        );
+
+
+-- 채널+조인유저 이너조인
+SELECT
+*
+FROM nuri_channel A, nuri_channel_join_user B
+WHERE a.admin_user_no = b.user_no;
 
 
 --DROP TABLE nuri_channel_join_user;
 
+SELECT channel_no FROM nuri_channel_join_user
+WHERE user_no = 2;
 
+--2번 유저가 관리자인 채널 리스트
+SELECT b.* FROM
+(SELECT channel_no FROM nuri_channel_join_user WHERE user_no = 2) A,
+nuri_channel B
+WHERE a.channel_no = b.channel_no;
+
+
+--SELECT b.user_no, b.user_id, b.nick_name
+--        FROM
+--        (
+--        SELECT target_no FROM nuri_friend
+--        WHERE user_no = #{userNo}
+--        AND relationship = #{relationship}
+--        ) A
+--        , nuri_user B
+--        WHERE A.target_no = B.user_no;
+
+
+-- 조인 유저 생성 테스트
 INSERT INTO nuri_channel_join_user
         (join_seq_no, channel_no, user_no)
         VALUES
-        (seq_nuri_channel_join_user.nextval, 1, 2);
-
+        (seq_nuri_channel_join_user.nextval, 2, 1);
+-- 조인 유저 삭제 테스트
 DELETE FROM nuri_channel_join_user
         WHERE join_seq_no = 3;
 

@@ -13,7 +13,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="/dist/img/ssong6735.png" class="img-circle elevation-2" alt="User Image">
+                <img src="/dist/img/user.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 <a href="#" class="d-block">${loginUser.nickName}</a>
@@ -129,8 +129,8 @@
                 </p>
             </div>
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                <button type="button" class="btn btn-primary">수정</button>
             </div>
         </div> <!-- /.modal-content -->
     </div> <!-- /.modal-dialog -->
