@@ -24,8 +24,9 @@
             <ul id="target-ul" class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
 
                 <c:forEach var="TARGET" items="${friendListMap.get('TARGET')}">
-                    <div><a href="#">${TARGET.nickName}</a></div>
-                    <button id="accept-btn" type="button" value="${TARGET.userNo}">수락</button>
+                    <div><a href="#">${TARGET.nickName}</a>
+                        <button id="accept-btn" type="button" value="${TARGET.userNo}">수락</button>
+                    </div>
                     <a href='#'>거절</a>
         </div>
         </c:forEach>
@@ -57,7 +58,7 @@
         <ul id="block-ul" class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
             <c:forEach var="BLOCK" items="${friendListMap.get('BLOCK')}">
                 <div><a href="#">${BLOCK.nickName}</a>
-                    <button id="removeBlockFriend-btn" type="button" value="${BLOCK.userNo}">친구 삭제</button>
+                    <button id="removeBlockFriend-btn" type="button" value="${BLOCK.userNo}">차단 해제</button>
                 </div>
             </c:forEach>
         </ul>
@@ -82,15 +83,13 @@
 </aside>
 <script>
     $(function () {
-        $('#re-button').on('click', e => {
-            console.log("re버튼 클릭됨");
+        function processReBtn() {
             const reqInfo = {
                 method: 'GET', //요청 방식
                 headers: { //요청 헤더 내용
                     'content-type': 'application/json'
                 }
             };
-
             fetch('/friendListMap', reqInfo)
                 .then(res => res.json())
                 .then(stringListMap => {
@@ -99,6 +98,10 @@
                     makeFriendListDOM(stringListMap);
 
                 })
+        }
+        $('#re-button').on('click', e => {
+            console.log("re버튼 클릭됨");
+            processReBtn();
         });
 
         //검색 버튼
@@ -122,13 +125,12 @@
                 .then(infoNick => {
                     console.log("infoNick 데이터 " + infoNick);
                     makeSearchResult(infoNick);
-                })
-
+                });
 
         })
 
         // 친구수락
-        $('#accept-btn').on('click', e => {
+        $('#target-ul').on('click','#accept-btn', e => {
             e.preventDefault();
             const reqInfo = {
                 method: 'POSt', //요청 방식
@@ -136,26 +138,33 @@
                     'content-type': 'application/json'
                 }
             };
-            fetch('/friendAccept' + $('#accept-btn').val(), reqInfo);
-            $('#re-button').click();
+            fetch('/friendAccept' + $('#accept-btn').val(), reqInfo)
+                .then(res => res.text())
+                .then(txt => {
+                    processReBtn();
+                });
         });
 
 
         //친구요청 취소
-        $('#requestCancel-btn').on('click', e => {
+        $('#requset-Ul').on('click', '#requestCancel-btn' , e => {
             e.preventDefault();
+            console.log("친구요청 취소 로그");
             const reqInfo = {
                 method: 'delete', //요청 방식
                 headers: { //요청 헤더 내용
                     'content-type': 'application/json'
                 }
             };
-            fetch('/refuseFriend' + $('#requestCancel-btn').val(), reqInfo);
-            $('#re-button').click();
+            fetch('/refuseFriend' + $('#requestCancel-btn').val(), reqInfo)
+                .then(res => res.text())
+                .then(txt => {
+                    processReBtn();
+                });
         });
 
         //친구삭제
-        $('#removeFriend-btn').on('click', e => {
+        $('#friendList-div').on('click','#removeFriend-btn', e => {
             e.preventDefault();
             const reqInfo = {
                 method: 'delete', //요청 방식
@@ -163,12 +172,15 @@
                     'content-type': 'application/json'
                 }
             };
-            fetch('/removeFriend' + $('#removeFriend-btn').val(), reqInfo);
-            $('#re-button').click();
+            fetch('/removeFriend' + $('#removeFriend-btn').val(), reqInfo)
+                .then(res => res.text())
+                .then(txt => {
+                    processReBtn();
+                });
         });
 
         //친구 차단 해제 - 관계 삭제
-        $('#removeBlockFriend-btn').on('click', e => {
+        $('#block-ul').on('click', '#removeBlockFriend-btn', e => {
             e.preventDefault();
             const reqInfo = {
                 method: 'delete', //요청 방식
@@ -176,8 +188,11 @@
                     'content-type': 'application/json'
                 }
             };
-            fetch('/removeBlockFriend' + $('#removeBlockFriend-btn').val(), reqInfo);
-            $('#re-button').click();
+            fetch('/removeBlockFriend' + $('#removeBlockFriend-btn').val(), reqInfo)
+                .then(res => res.text())
+                .then(txt => {
+                    processReBtn();
+                });
         });
 
         //친추 요청
@@ -190,9 +205,12 @@
                     'content-type': 'application/json'
                 }
             };
-            fetch('/addFriend' + $('#friend-btn').val(), reqInfo);
+            fetch('/addFriend' + $('#friend-btn').val(), reqInfo)
+                .then(res => res.text())
+                .then(txt => {
+                    processReBtn();
+                });
 
-            $('#re-button').click();
         })
 
 
@@ -206,7 +224,8 @@
                 tag += "본인입니다 </a> </div>";
             } else {
                 tag += infoNick.nickName + " </a>" +
-                    "<button id='friend-btn' type='button' value='" + infoNick.userNo + "'>친구 요청</button> </div>";
+                    "<button id='friend-btn' type='button' value='" + infoNick.userNo +
+                    "'>친구 요청</button> </div>";
             }
 
             $('#search-result').html(tag);
@@ -214,34 +233,34 @@
 
         function makeFriendListDOM(stringListMap) {
             let tag = '';
-
+            // 친구 요청 취소
             for (let REQUEST of stringListMap.REQUEST) {
-                tag += "<div> <a href='#'>" + REQUEST.nickName +
-                    "<button id='requestCancel-btn' type='button' value='" + REQUEST.userNo +
-                    "'>요청 취소</button>";
+                tag += "<div> <a href='#'>" + REQUEST.nickName + "</a>" +
+                    "<button id='requestCancel-btn' type='button' value='" + REQUEST.userNo + "'>요청 취소</button> </div>";
             }
             $('#requset-Ul').html(tag);
 
-
+            //친구삭제
             tag = '나랑 친구 리스트';
             for (let DUDE of stringListMap.DUDE) {
-                tag += "<div> <a href='#'>" + DUDE.nickName +
-                    "<button id='removeFriend-btn' type='button' value='" + DUDE.userNo + "'>친구 삭제</button>";
+                tag += "<div> <a href='#'>" + DUDE.nickName + "</a>" +
+                    "<button id='removeFriend-btn' type='button' value='" + DUDE.userNo + "'>친구 삭제</button> </div>";
             }
             $('#friendList-div').html(tag);
 
+            //차단 
             tag = '';
             for (let BLOCK of stringListMap.BLOCK) {
-                tag += "<div> <a href='#'>" + BLOCK.nickName +
-                    " <button id='removeBlockFriend-btn' type='button' value='" + BLOCK.userNo +
-                    "'>친구 삭제</button>";
+                tag += "<div> <a href='#'>" + BLOCK.nickName + "</a>" +
+                    " <button id='removeBlockFriend-btn' type='button' value='" + BLOCK.userNo + "'>차단 해제</button> </div>";
             }
             $('#block-ul').html(tag);
 
+            //친구수락
             tag = '';
             for (let TARGET of stringListMap.TARGET) {
-                tag += "<div> <a href='#'>" + TARGET.nickName +
-                    " <button id='accept-btn' type='button' value='" + TARGET.userNo + "'>수락</button>";
+                tag += "<div> <a href='#'>" + TARGET.nickName + "</a>" +
+                    " <button id='accept-btn' type='button' value='" + TARGET.userNo + "'>수락</button> </div>";
             }
             $('#target-ul').html(tag);
 
