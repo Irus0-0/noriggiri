@@ -32,7 +32,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 
         //로그인을 안했을 경우
         if (session.getAttribute("loginUser") == null) {
-            response.sendRedirect("/member/sign-in");
+            response.sendRedirect("/sign/in");
             return false;
         }
         //로그인 성공 시

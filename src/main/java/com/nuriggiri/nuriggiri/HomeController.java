@@ -10,9 +10,5 @@ public class HomeController {
     public String home() {
         return "/user/signIn";
     }
-    @GetMapping("/member/sign-in")
-    public String signIn() {
-        return "/user/signIn";
-    }
 
 }
