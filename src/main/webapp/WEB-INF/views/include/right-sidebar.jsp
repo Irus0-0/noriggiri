@@ -26,8 +26,8 @@
                 <c:forEach var="TARGET" items="${friendListMap.get('TARGET')}">
                     <div><a href="#">${TARGET.nickName}</a>
                         <button id="accept-btn" type="button" value="${TARGET.userNo}">수락</button>
+                        <button id="refuse-btn" type="button" value="${TARGET.userNo}">거절</button>
                     </div>
-                    <a href='#'>거절</a>
         </div>
         </c:forEach>
         </ul>
@@ -83,6 +83,7 @@
 </aside>
 <script>
     $(function () {
+        //새로고침 기능 펑션
         function processReBtn() {
             const reqInfo = {
                 method: 'GET', //요청 방식
@@ -139,6 +140,21 @@
                 }
             };
             fetch('/friendAccept' + $('#accept-btn').val(), reqInfo)
+                .then(res => res.text())
+                .then(txt => {
+                    processReBtn();
+                });
+        });
+        //친구거절
+        $('#target-ul').on('click','#refuse-btn', e => {
+            e.preventDefault();
+            const reqInfo = {
+                method: 'DELETE', //요청 방식
+                headers: { //요청 헤더 내용
+                    'content-type': 'application/json'
+                }
+            };
+            fetch('/refuseFriend' + $('#accept-btn').val(), reqInfo)
                 .then(res => res.text())
                 .then(txt => {
                     processReBtn();
@@ -212,6 +228,7 @@
                 });
 
         })
+        
 
 
         //DOM
@@ -260,7 +277,8 @@
             tag = '';
             for (let TARGET of stringListMap.TARGET) {
                 tag += "<div> <a href='#'>" + TARGET.nickName + "</a>" +
-                    " <button id='accept-btn' type='button' value='" + TARGET.userNo + "'>수락</button> </div>";
+                    " <button id='accept-btn' type='button' value='" + TARGET.userNo + "'>수락</button> </div>" +
+                    "<button id='refuse-btn' type='button' value='"+TARGET.userNo+"''>거절</button>";
             }
             $('#target-ul').html(tag);
 

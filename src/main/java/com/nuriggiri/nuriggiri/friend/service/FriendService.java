@@ -67,20 +67,23 @@ public class FriendService {
     }
 
     //친구목록 (차단 , 내가보낸요청 , 친구, 나에게온 요청)
-    public Map<String, List<FriendList>> friendAllMap(int userNo) {
+    public Map<String, List<FriendList>> friendAllMap(HttpServletRequest request,int userNo) {
         Map<String, List<FriendList>> stringListMap = new HashMap<>();
         stringListMap.put("DUDE", friendList(userNo, Relation.DUDE));
         stringListMap.put("BLOCK", friendList(userNo, Relation.BLOCK));
         stringListMap.put("REQUEST", friendList(userNo, Relation.REQUEST));
         stringListMap.put("TARGET", targetFriendList(userNo, Relation.REQUEST));
 
+        log.info("친추요청들어온것" + stringListMap.get("TARGET"));
         log.info("친구 맵 가져오기12312313"+stringListMap);
+        request.getSession().setAttribute("friendListMap",stringListMap);
         return stringListMap;
     }
 
     public Map<String, List<FriendList>> friendMapSes(HttpServletRequest request) {
         int userNo = ((User) request.getSession().getAttribute("loginUser")).getUserNo();
-        Map<String, List<FriendList>> stringListMap = friendAllMap(userNo);
+        Map<String, List<FriendList>> stringListMap = friendAllMap(request, userNo);
+        request.getSession().setAttribute("friendListMap",stringListMap);
         return stringListMap;
     }
 

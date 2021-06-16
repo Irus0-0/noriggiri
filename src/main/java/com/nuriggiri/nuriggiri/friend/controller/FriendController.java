@@ -44,13 +44,13 @@ public class FriendController {
 
     }
 
-    //    테스트
+    //  정보 불러오기
     @GetMapping("/friendListMap")
     @ResponseBody
     public ResponseEntity<Map<String, List<FriendList>>> getList(HttpServletRequest request) {
         int userNo = ((User) request.getSession().getAttribute("loginUser")).getUserNo();
 
-        Map<String, List<FriendList>> stringListMap = friendService.friendAllMap(userNo);
+        Map<String, List<FriendList>> stringListMap = friendService.friendAllMap(request,userNo);
         request.getSession().setAttribute("friendListMap", stringListMap);
         log.info("stringListMap" + stringListMap);
         return new ResponseEntity<>(stringListMap, HttpStatus.OK);
@@ -75,7 +75,7 @@ public class FriendController {
     public ResponseEntity<String> friendAccept(HttpServletRequest request, @PathVariable int targetNo) {
         int userNo = ((User) request.getSession().getAttribute("loginUser")).getUserNo();
         log.info("친구수락 성공");
-        return friendService.approveFriend(userNo, targetNo)
+        return friendService.addFriend(userNo, targetNo)
                 ? new ResponseEntity<>("acceptSuccess", HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 
