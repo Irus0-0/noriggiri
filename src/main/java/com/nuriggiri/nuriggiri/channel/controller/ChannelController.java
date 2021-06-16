@@ -48,6 +48,14 @@ public class ChannelController {
         return "/channel/chMain";
     }
 
+    //검색된 채널 목록 가져오기
+    @GetMapping("/searchCh")
+    public String searchList(Criteria criteria, Model model) {
+        model.addAttribute("searchList", channelService.viewList(criteria));
+
+        return "/channel/searchCh";
+    }
+
 
 
     //채널 생성 화면 요청
@@ -85,7 +93,12 @@ public class ChannelController {
         List<Channel> channelList = channelService.viewList();
         model.addAttribute("list", channelList);
         model.addAttribute("userInfo",user);
-//        log.info("channel info: " + content);
+
+        /*List<User> joinUserList = channelService.joinUser(channelNo);
+        model.addAttribute("joinUserList", joinUserList);*/
+
+
+//        log.info("joinUserList: " + joinUserList);
         return "/channel/viewCh";
     }
 
@@ -123,14 +136,6 @@ public class ChannelController {
         channelService.delete(channelNo);
         return "redirect:/channel/chMain";
     }
-
-
-    //채널 접속 하기
-    //void join(int channelNo, String channelPw, User userNo);
-
-    //채널 접속 해제
-    //void exit(int channelNo, User userNo);
-
 
 
 

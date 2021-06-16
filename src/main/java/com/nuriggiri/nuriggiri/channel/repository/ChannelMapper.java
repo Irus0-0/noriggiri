@@ -12,15 +12,20 @@ public interface ChannelMapper {
     //채널 목록 가져오기
     List<Channel> viewList();
 
+    //검색 쿼리 추가 목록
+    List<Channel> getSearchArticles(Criteria criteria);
+
     //내가 관리자인 채널 리스트
     List<Channel> adminList(int userNo);
 
     //내가 참여중인 채널 리스트
     List<Channel> partiList(int userNo);
 
+    //채널에 참여중인 유저 정보 리스트
+    List<User> joinUser(int channelNo);
 
-    //검색 쿼리 추가 목록
-    List<Channel> getSearchArticles(Criteria criteria);
+
+
 
     // 총 채널 수 조회
     int getTotalCount(Criteria criteria);
@@ -36,13 +41,6 @@ public interface ChannelMapper {
 
     //채널 삭제
     void delete(int channelNo);
-
-
-    //채널 접속 하기
-    void join(int channelNo, String channelPw, User userNo);
-
-    //채널 접속 해제
-    void exit(int channelNo, User userNo);
 
 
 }

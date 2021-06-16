@@ -21,12 +21,15 @@ public class ChannelService {
         return channelMapper.viewList();
     }
 
+    // 검색 쿼리 추가 목록
+    public List<Channel> viewList(Criteria criteria) {
+        return channelMapper.getSearchArticles(criteria);
+    }
+
     // 채널 리스트 세션 등록
     public void chSecList(HttpSession session) {
-
         session.setAttribute("adminList", adminList(session));
         session.setAttribute("partiList", partiList(session));
-
     }
 
     //내가 관리자인 채널 리스트
@@ -41,9 +44,9 @@ public class ChannelService {
         return channelMapper.partiList(userNo);
     }
 
-    // 검색 쿼리 추가 목록
-    public List<Channel> viewList(Criteria criteria) {
-        return channelMapper.getSearchArticles(criteria);
+    //채널에 참여중인 유저 정보 리스트
+    public List<User> joinUser(int channelNo) {
+        return channelMapper.joinUser(channelNo);
     }
 
     // 총 채널 수 조회

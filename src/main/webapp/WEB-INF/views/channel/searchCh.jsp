@@ -25,12 +25,14 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">채널 메인</h1>
+                            <h1 class="m-0">채널검색</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <!-- <li class="breadcrumb-item"><a href="#">메인홈</a></li> -->
-                                <li class="breadcrumb-item active"><i class="fas fa-home"></i> 채널 메인</li>
+                                <li class="breadcrumb-item"><i class="fas fa-home"></i> <a
+                                        href="/channel/chMain">채널메인</a></li>
+                                <li class="breadcrumb-item active">채널검색</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -47,21 +49,19 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">로그인 후 첫 화면</h5>
+                                    <h5 class="card-title">검색된 채널 목록 화면</h5>
 
                                     <p class="card-text">
-                                        전체 채널 리스트 보기 화면<br>
-                                        만들어진 모든 채널들 보이게 하기<br>
+                                        상단 검색창에서 검색하면<br>
+                                        이 페이지에서 목록으로 뿌려주기<br>
                                     </p>
-
-                                    <a href="/channel/addCh" class="btn btn-outline-warning btn-xs">채널 생성</a>
                                 </div>
                             </div>
                         </div>
 
                         <!-- 채널 카드 -->
-                        <%-- 생성된 채널 개수가 0개일 경우 목록대신 "채널이 존재하지 않습니다." 출력 --%>
-                        <c:if test="${list.size() <= 0}">
+                        <%-- 검색된 채널 개수가 0개일 경우 목록대신 "채널이 존재하지 않습니다." 출력 --%>
+                        <c:if test="${searchList.size() <= 0}">
                             <div class="col-lg-12">
                                 <div class="card">
                                     <div class="card-body">
@@ -72,22 +72,20 @@
                         </c:if>
 
 
-                        <c:if test="${list.size() > 0}">
+                        <c:if test="${searchList.size() > 0}">
                             <%-- 컨트롤러가 가져온 채널 데이터를 반복하여 출력. --%>
-                            <c:forEach var="channel" items="${list}">
+                            <c:forEach var="search" items="${searchList}">
                                 <div class="col-lg-4">
                                     <div class="card card-primary card-outline">
                                         <div class="card-header">
-                                            <h5 class="m-0">CH.${channel.channelNo} [${channel.channelName}]</h5>
+                                            <h5 class="m-0">CH.${search.channelNo} [${search.channelName}]</h5>
                                         </div>
                                         <div class="card-body">
-                                            <h6 class="card-title"><span>#채널관리자: </span>${channel.adminUserNo}의 닉네임찾아넣기
-                                            </h6>
+                                            <h6 class="card-title"><span>#채널관리자: </span>${search.adminUserNo}</h6>
 
-                                            <p class="card-text">${channel.channelInfo}</p>
-                                            <!-- <a href="/channel/viewCh?channelNo=${channel.channelNo}"
-                                                class="btn btn-warning">채널참여</a> -->
-                                                <a class="btn btn-warning" href="/channelJoinUser/joinCh/${channel.channelNo}">채널참여</a>
+                                            <p class="card-text">${search.channelInfo}</p>
+                                            <a class="btn btn-warning"
+                                                href="/channelJoinUser/joinCh/${search.channelNo}">채널참여</a>
                                         </div>
                                     </div>
                                 </div>
