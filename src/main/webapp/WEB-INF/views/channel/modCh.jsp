@@ -7,7 +7,7 @@
 <!-- head(meta, link) include -->
 <%@include file="../include/static-head.jsp" %>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-footer-fixed">
     <div class="wrapper">
 
         <!-- header (top navbar) include -->

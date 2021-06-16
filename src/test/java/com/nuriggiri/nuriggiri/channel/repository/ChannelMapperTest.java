@@ -71,12 +71,12 @@ class ChannelMapperTest {
 
     @Test
     void bulkInsert() {
-        for (int i = 1; i <= 10 ; i++) {
+        for (int i = 1; i <= 9 ; i++) {
             Channel channel = new Channel();
             channel.setChannelName("test-ch" + i);
             channel.setChannelInfo("테스트 채널" + i);
             channel.setAdminUserNo(i);
-            channel.setChannelPw("1234");
+            channel.setChannelPw("1111");
 
             mapper.create(channel);
         }

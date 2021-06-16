@@ -24,9 +24,6 @@ public interface ChannelMapper {
     //채널에 참여중인 유저 정보 리스트
     List<User> joinUser(int channelNo);
 
-
-
-
     // 총 채널 수 조회
     int getTotalCount(Criteria criteria);
 

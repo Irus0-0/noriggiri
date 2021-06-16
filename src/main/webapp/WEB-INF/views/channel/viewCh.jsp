@@ -7,7 +7,7 @@
 <!-- head(meta, link) include -->
 <%@include file="../include/static-head.jsp" %>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-footer-fixed">
     <div class="wrapper">
 
         <!-- header (top navbar) include -->
@@ -81,39 +81,39 @@
                         <div class="col-lg-4">
                             <div class="card card-primary card-outline">
                                 <div class="card-header">
-                                    <h5 class="m-0">기능이름</h5>
+                                    <h5 class="m-0">통합 게시판</h5>
                                 </div>
                                 <div class="card-body">
-                                    <h6 class="card-title">ex)게시판 (게시판이름)</h6>
+                                    <h6 class="card-title">게시판</h6>
 
-                                    <p class="card-text">기능관련 설명</p>
-                                    <a href="/board/list" class="btn btn-primary">기능 들어가기</a>
+                                    <p class="card-text">전체 채널 통합 게시판 입니다.</p>
+                                    <a href="/board/list" class="btn btn-primary">게시판보기</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="card card-primary card-outline">
                                 <div class="card-header">
-                                    <h5 class="m-0">기능이름</h5>
+                                    <h5 class="m-0">채널 게시판</h5>
                                 </div>
                                 <div class="card-body">
-                                    <h6 class="card-title">ex)게시판 (게시판이름)</h6>
+                                    <h6 class="card-title">게시판</h6>
 
-                                    <p class="card-text">기능관련 설명</p>
-                                    <a href="#" class="btn btn-primary">기능 들어가기</a>
+                                    <p class="card-text">채널 게시판 입니다.</p>
+                                    <a href="/board/list" class="btn btn-primary">게시판보기</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="card card-primary card-outline">
                                 <div class="card-header">
-                                    <h5 class="m-0">기능이름</h5>
+                                    <h5 class="m-0">미니게임</h5>
                                 </div>
                                 <div class="card-body">
-                                    <h6 class="card-title">ex)게시판 (게시판이름)</h6>
+                                    <h6 class="card-title">사다리타기</h6>
 
-                                    <p class="card-text">기능관련 설명</p>
-                                    <a href="#" class="btn btn-primary">기능 들어가기</a>
+                                    <p class="card-text">사다리타기 미니게임 입니다.</p>
+                                    <a href="#" class="btn btn-primary">게임하기</a>
                                 </div>
                             </div>
                         </div>

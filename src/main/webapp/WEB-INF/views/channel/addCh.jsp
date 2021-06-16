@@ -7,7 +7,7 @@
 <!-- head(meta, link) include -->
 <%@include file="../include/static-head.jsp" %>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-footer-fixed">
     <div class="wrapper">
 
         <!-- header (top navbar) include -->
@@ -25,7 +25,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">${channel.channelName}</h1>
+                            <h1 class="m-0">채널생성</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">

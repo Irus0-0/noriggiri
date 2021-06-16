@@ -7,7 +7,7 @@
 <!-- head(meta, link) include -->
 <%@include file="../include/static-head.jsp" %>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-footer-fixed">
     <div class="wrapper">
 
         <!-- header (top navbar) include -->
@@ -47,11 +47,12 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">로그인 후 첫 화면</h5>
+                                    <h5 class="card-title">전체 채널 리스트</h5>
 
                                     <p class="card-text">
-                                        전체 채널 리스트 보기 화면<br>
-                                        만들어진 모든 채널들 보이게 하기<br>
+                                        현재 생성되어 있는 전체 채널의 리스트 입니다.<br>
+                                        상단 우측의 돋보기 아이콘을 눌러서 채널을 검색할 수 있습니다. (채널관리자, 채널정보로 검색)<br>
+                                        원하는 채널이 없다면 아래 채널생성 버튼을 눌러서 새 채널을 생성할 수 있습니다.<br>
                                     </p>
 
                                     <a href="/channel/addCh" class="btn btn-outline-warning btn-xs">채널 생성</a>
@@ -81,13 +82,11 @@
                                             <h5 class="m-0">CH.${channel.channelNo} [${channel.channelName}]</h5>
                                         </div>
                                         <div class="card-body">
-                                            <h6 class="card-title"><span>#채널관리자: </span>${channel.adminUserNo}의 닉네임찾아넣기
+                                            <h6 class="card-title"><span>#채널관리자: </span>${channel.adminUserNo}
                                             </h6>
-
                                             <p class="card-text">${channel.channelInfo}</p>
-                                            <!-- <a href="/channel/viewCh?channelNo=${channel.channelNo}"
-                                                class="btn btn-warning">채널참여</a> -->
-                                                <a class="btn btn-warning" href="/channelJoinUser/joinCh/${channel.channelNo}">채널참여</a>
+                                            <a class="btn btn-warning"
+                                                href="/channelJoinUser/joinCh/${channel.channelNo}">채널참여</a>
                                         </div>
                                     </div>
                                 </div>

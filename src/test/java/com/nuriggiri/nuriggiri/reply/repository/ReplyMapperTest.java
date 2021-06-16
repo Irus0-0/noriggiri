@@ -18,9 +18,9 @@ class ReplyMapperTest {
     @Test
     @DisplayName("특정 게시물에 댓글 20개를 삽입")
     void insertTest(){
-        for (int i = 1; i <= 20; i++) {
+        for (int i = 1; i <= 10; i++) {
             Reply reply = new Reply();
-            reply.setBoardNo(5);
+            reply.setBoardNo(100);
             reply.setContent("테스트댓글" + i);
             reply.setNickName("야옹이");
 

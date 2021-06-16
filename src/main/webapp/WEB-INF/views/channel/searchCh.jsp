@@ -7,7 +7,7 @@
 <!-- head(meta, link) include -->
 <%@include file="../include/static-head.jsp" %>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-footer-fixed">
     <div class="wrapper">
 
         <!-- header (top navbar) include -->
@@ -49,11 +49,11 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">검색된 채널 목록 화면</h5>
+                                    <h5 class="card-title">검색된 채널 리스트</h5>
 
                                     <p class="card-text">
-                                        상단 검색창에서 검색하면<br>
-                                        이 페이지에서 목록으로 뿌려주기<br>
+                                        검색된 채널 리스트 페이지 입니다.<br>
+                                        상단 우측의 돋보기 아이콘을 눌러서 채널을 검색할 수 있습니다. (채널관리자, 채널정보로 검색)<br>
                                     </p>
                                 </div>
                             </div>

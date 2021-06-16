@@ -50,7 +50,7 @@
     </select>
 
 
-    <!-- 3. 검색 쿼리 + 페이징 쿼리 적용 -->
+    <!-- 검색 쿼리 + 페이징 쿼리 적용 -->
     <select id="getSearchArticles" resultMap="channelMap">
         <![CDATA[
         SELECT

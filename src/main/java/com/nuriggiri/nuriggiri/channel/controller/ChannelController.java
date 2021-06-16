@@ -39,11 +39,8 @@ public class ChannelController {
     public String viewList(Criteria criteria, Model model, HttpSession session) {
         List<Channel> channelList = channelService.viewList();
         model.addAttribute("list", channelList);
-
-//        model.addAttribute("articles", channelService.viewList(criteria));
-        // 페이지 정보를 만들어서 jsp 에게 보내기
-        model.addAttribute("pageMaker", new PageMaker(criteria, channelService.getTotal(criteria)));
-
+        model.addAttribute("pageMaker",
+        new PageMaker(criteria, channelService.getTotal(criteria)));
         session.setAttribute("chList", channelList);
         return "/channel/chMain";
     }
@@ -52,18 +49,14 @@ public class ChannelController {
     @GetMapping("/searchCh")
     public String searchList(Criteria criteria, Model model) {
         model.addAttribute("searchList", channelService.viewList(criteria));
-
         return "/channel/searchCh";
     }
-
-
 
     //채널 생성 화면 요청
     @GetMapping("/addCh")
     public String create(Model model) {
         List<Channel> channelList = channelService.viewList();
         model.addAttribute("list", channelList);
-
         return "/channel/addCh";
     }
 
@@ -71,7 +64,6 @@ public class ChannelController {
     @PostMapping("/addCh")
     public String create(Channel channel) {
         try {
-//            log.info("channel: " + channel);
             channelService.create(channel);
         } catch (Exception e) {
             return "/channel/addCh";
@@ -82,23 +74,12 @@ public class ChannelController {
     //채널 정보 상세보기 요청
     @GetMapping("/viewCh/{channelNo}")
     public String viewInfo(@PathVariable int channelNo, Model model) {
-
-//        channelJoinUserService.joinCh(userNo, channelNo);
-
         Channel content = channelService.viewInfo(channelNo);
         model.addAttribute("channel", content);
-
         User user = userService.userInfoNo(content.getAdminUserNo());
-
         List<Channel> channelList = channelService.viewList();
         model.addAttribute("list", channelList);
         model.addAttribute("userInfo",user);
-
-        /*List<User> joinUserList = channelService.joinUser(channelNo);
-        model.addAttribute("joinUserList", joinUserList);*/
-
-
-//        log.info("joinUserList: " + joinUserList);
         return "/channel/viewCh";
     }
 
@@ -106,7 +87,6 @@ public class ChannelController {
     @GetMapping("/modCh")
     public String update(int channelNo, Model model) {
         model.addAttribute("channel", channelService.viewInfo(channelNo));
-
         List<Channel> channelList = channelService.viewList();
         model.addAttribute("list", channelList);
         return "/channel/modCh";
@@ -115,19 +95,19 @@ public class ChannelController {
     //채널 수정 처리 요청
     @PostMapping("/modCh")
     public String update(ModifyChannel modifyChannel) {
-        // 원본데이터를 찾아서 수정데이터로 변경하는 로직(서비스에 넣어주는게 좋다)
+        // 원본데이터를 찾아서 수정데이터로 변경하는 로직
         Channel channel = channelService.viewInfo(modifyChannel.getChannelNo());
         channel.setChannelName(modifyChannel.getChannelName());
         channel.setChannelInfo(modifyChannel.getChannelInfo());
         channel.setChannelPw(modifyChannel.getChannelPw());
-
-        log.info(channel);
         try {
             channelService.update(channel);
         } catch (Exception e) {
-            return "redirect:/channel/modCh?channelNo=" + modifyChannel.getChannelNo();
+            return "redirect:/channel/modCh?channelNo=" 
+            + modifyChannel.getChannelNo();
         }
-        return "redirect:/channel/viewCh?channelNo=" + modifyChannel.getChannelNo();
+        return "redirect:/channel/viewCh?channelNo=" 
+        + modifyChannel.getChannelNo();
     }
 
     //채널 삭제 요청
