@@ -111,7 +111,7 @@
                                        disabled>
                                     <input type="checkbox" id="anonymous" name="anonymous">
                                     <label for="anonymous">익명</label>
-                                    <button id="replyAddBtn" type="button" class="btn btn-dark form-control">등록</button>
+                                    <button id="replyAddBtn" type="button" class="btn btn-warning form-control">등록</button>
                                  </div>
                               </div>
                            </div>
@@ -383,7 +383,7 @@
                   if (msg === 'insertSuccess') {
                      getReplyList(1);
                      $('#newReplyText').val('');
-                     $('#newReplyWriter').val('');
+                     // $('#newReplyWriter').val('');
                   } else {
                      alert('댓글 등록에 실패했습니다.');
                   }
