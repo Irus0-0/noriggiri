@@ -6,7 +6,7 @@
         <h5>우측 사이드바</h5>
         <p>메세지 보기나 친구목록 같은거 넣으면 좋을듯</p>
         <label for="search-input">친구 검색!</label>
-        <input  id="userNickName" type="hidden" value="${loginUser.nickName}">
+        <input id="userNickName" type="hidden" value="${loginUser.nickName}">
         <input id="search-input" type="text" name="nickName">
         <button id="search-btn" class="bi bi-search"><span class="fas fa-search"></span></button>
         <div id="search-result">
@@ -18,15 +18,15 @@
 
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton3"
-                    data-bs-toggle="dropdown" aria-expanded="false">
+                data-bs-toggle="dropdown" aria-expanded="false">
                 받은 친구요청
             </button>
             <ul id="target-ul" class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
 
                 <c:forEach var="TARGET" items="${friendListMap.get('TARGET')}">
-                <div><a href="#">${TARGET.nickName}</a></div>
-                <button id="accept-btn" type="button" value="${TARGET.userNo}">수락</button>
-                <a href='#'>거절</a>
+                    <div><a href="#">${TARGET.nickName}</a></div>
+                    <button id="accept-btn" type="button" value="${TARGET.userNo}">수락</button>
+                    <a href='#'>거절</a>
         </div>
         </c:forEach>
         </ul>
@@ -35,7 +35,7 @@
 
     <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                data-bs-toggle="dropdown" aria-expanded="false">
+            data-bs-toggle="dropdown" aria-expanded="false">
             친구요청리스트
         </button>
         <ul id="requset-Ul" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -51,7 +51,7 @@
 
     <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2"
-                data-bs-toggle="dropdown" aria-expanded="false">
+            data-bs-toggle="dropdown" aria-expanded="false">
             친구차단리스트
         </button>
         <ul id="block-ul" class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
@@ -105,6 +105,12 @@
         $('#search-btn').on('click', e => {
             e.preventDefault();
             console.log("검색버튼 눌림");
+            if ($('#search-input').val() === "") {
+                let tag = '';
+                tag += "<div>잘못된 닉네임</div>";
+                $('#search-result').html(tag);
+                return;
+            }
             const reqInfo = {
                 method: 'POST', //요청 방식
                 headers: { //요청 헤더 내용
@@ -115,9 +121,9 @@
                 .then(res => res.json())
                 .then(infoNick => {
                     console.log("infoNick 데이터 " + infoNick);
-
                     makeSearchResult(infoNick);
                 })
+
 
         })
 
@@ -170,16 +176,32 @@
             fetch('/removeBlockFriend' + $('#removeBlockFriend-btn').val(), reqInfo)
         });
 
+        //친추 요청
+        $('#search-result').on('click', '#friend-btn', e => {
+            e.preventDefault();
+            console.log("친추버튼눌림");
+            const reqInfo = {
+                method: 'POST', //요청 방식
+                headers: { //요청 헤더 내용
+                    'content-type': 'application/json'
+                }
+            };
+            fetch('/addFriend' + $('#friend-btn').val(), reqInfo)
+        })
+
 
         //DOM
         function makeSearchResult(infoNick) {
             let tag = '';
             tag += "<div><a href='#'>";
-                if(infoNick.nickName === $('#userNickName').val() ) {
-                    tag += "본인입니다 </a> </div>";
-                }else{
-                    tag +=  infoNick.nickName + " </a> </div>";
-                }
+            if (infoNick == null) {
+                tag += '';
+            } else if (infoNick.nickName === $('#userNickName').val()) {
+                tag += "본인입니다 </a> </div>";
+            } else {
+                tag += infoNick.nickName + " </a>" +
+                    "<button id='friend-btn' type='button' value='" + infoNick.userNo + "'>친구 요청</button> </div>";
+            }
 
             $('#search-result').html(tag);
         }
@@ -189,7 +211,8 @@
 
             for (let REQUEST of stringListMap.REQUEST) {
                 tag += "<div> <a href='#'>" + REQUEST.nickName +
-                    "<button id='requestCancel-btn' type='button' value='" + REQUEST.userNo + "'>요청 취소</button>";
+                    "<button id='requestCancel-btn' type='button' value='" + REQUEST.userNo +
+                    "'>요청 취소</button>";
             }
             $('#requset-Ul').html(tag);
 
@@ -204,7 +227,8 @@
             tag = '';
             for (let BLOCK of stringListMap.BLOCK) {
                 tag += "<div> <a href='#'>" + BLOCK.nickName +
-                    " <button id='removeBlockFriend-btn' type='button' value='" + BLOCK.userNo + "'>친구 삭제</button>";
+                    " <button id='removeBlockFriend-btn' type='button' value='" + BLOCK.userNo +
+                    "'>친구 삭제</button>";
             }
             $('#block-ul').html(tag);
 
@@ -227,5 +251,4 @@
 
 
     });
-
 </script>

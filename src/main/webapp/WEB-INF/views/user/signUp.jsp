@@ -156,7 +156,7 @@
                             } else {
                                 //중복안됨
                                 currectId = true;
-                                $inputId.css('background', 'aqua');
+                                $inputId.css('background', '#66CDAA');
                                 $('#idChk').html(
                                     '<b style="color:green; font-size:14px;">[사용가능한 ID 입니다]</b>'
                                 );
@@ -175,12 +175,14 @@
                     $inputNick.css('background', 'pink');
                     $('#nickChk').html(
                         '<b style="color:red; font-size:14px;">[영문 또는 한글로 작성하세요]</b>');
-                } else if (!getNickCheck.test($inputNick.val())) {
-                    currectNick = false;
-                    $inputNick.css('background', 'pink');
-                    $('#nickChk').html(
-                        '<b style="color:red; font-size:14px;">[영문 또는 한글로 작성하세요]</b>');
-                } else {
+                } 
+                // else if (!getNickCheck.test($inputNick.val())) {
+                //     currectNick = false;
+                //     $inputNick.css('background', 'pink');
+                //     $('#nickChk').html(
+                //         '<b style="color:red; font-size:14px;">[영문 또는 한글로 작성하세요]</b>');
+                // }
+                 else {
                     fetch('/sign/up/nickCheck?nickName=' + $inputNick.val())
                         .then(res => res.text())
                         .then(text => {
@@ -195,7 +197,7 @@
                                 //중복안됨
                                 currectNick = true;
                                 console.log($inputNick.val());
-                                $inputNick.css('background', 'aqua');
+                                $inputNick.css('background', '#66CDAA');
                                 $('#nickChk').html(
                                     '<b style="color:green; font-size:14px;">[사용가능한 닉네임 입니다]</b>'
                                 );
@@ -215,7 +217,7 @@
                 } else {
                     if ($pwInput.val() === $rowPwInput.val()) {
                         currectPw = true;
-                        $pwInput.css('background', 'aqua');
+                        $pwInput.css('background', '#66CDAA');
                         $('#pwChk').html(
                             '<b style="color:green; font-size:14px;">[비밀번호가 같습니다]</b>'
                         );
@@ -243,7 +245,7 @@
                 //     currectRowPw = false;
                 // }
                  else {
-                    $('#rowPw').css("background-color", "aqua");
+                    $('#rowPw').css("background-color", "#66CDAA");
                     $('#rowPwChk').html(
                         '<b style="font-size:14px;color:green;">[사용가능한 비밀번호 입니다]</b>');
                     currectRowPw = true;

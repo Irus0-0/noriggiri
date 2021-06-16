@@ -119,6 +119,7 @@ public class FriendController {
     @ResponseBody
     public ResponseEntity<String> addFriend(HttpServletRequest request, @PathVariable int targetNo) {
         int userNo = ((User) request.getSession().getAttribute("loginUser")).getUserNo();
+        log.info("친구 추가 요청");
         return friendService.addFriend(userNo, targetNo)
                 ? new ResponseEntity<>("addFriendSuccess", HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -129,9 +130,10 @@ public class FriendController {
     @ResponseBody
     public ResponseEntity<User> searchFriend(@PathVariable String nickName) {
 
-        User infoNick = userService.userInfoNick(nickName);
 
-        return new ResponseEntity<>(infoNick, HttpStatus.OK);
+            User infoNick = userService.userInfoNick(nickName);
+            return new ResponseEntity<>(infoNick, HttpStatus.OK);
+
     }
 
 

@@ -49,10 +49,14 @@ public class UserService {
     public User userInfo(String userId) {
         return userMapper.userInfo(userId);
     }
+
     //유저 정보 보기
     public User userInfoNick(String nickName) {
+
         return userMapper.userInfoNick(nickName);
+
     }
+
     //유저 정보 보기
     public User userInfoNo(int userNo) {
         return userMapper.userInfoNo(userNo);
@@ -117,7 +121,7 @@ public class UserService {
     public void logout(String account) {
 
         Map<String, Object> logoutMap = new HashMap<>();
-        logoutMap.put("sid","none");
+        logoutMap.put("sid", "none");
         logoutMap.put("lt", new Date());
         logoutMap.put("acc", account);
         userMapper.saveKeepLogin(logoutMap);
