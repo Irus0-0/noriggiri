@@ -145,6 +145,7 @@
                     processReBtn();
                 });
         });
+        
         //친구거절
         $('#target-ul').on('click','#refuse-btn', e => {
             e.preventDefault();

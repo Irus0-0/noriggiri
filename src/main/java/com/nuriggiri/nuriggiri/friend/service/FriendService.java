@@ -25,15 +25,13 @@ public class FriendService {
 
     //    친구요청
     public boolean addFriend(int userNo, int targetNo) {
-        log.info("친구 여부 체크 로그" + checkRelation(userNo, targetNo));
-        log.info("친구 여부 체크 로그 반대로" + checkRelation(targetNo, userNo));
         if (checkRelation(targetNo, userNo) != null && checkRelation(targetNo, userNo) == Relation.REQUEST) {
             //만약 이미 친구요청이 있다면 친구수락으로
-            log.info("친구 수락으로 변경");
             approveFriend(userNo, targetNo);
             return true;
         } else if (checkRelation(userNo, targetNo) != null
                 && (checkRelation(userNo, targetNo) == Relation.REQUEST || checkRelation(userNo, targetNo) == Relation.DUDE)) {
+            //이미 친구이거나 내가 보낸 친구요청이 있는 경우
             log.info("이미 친구거나 친구요청 있음 체크 요망");
             return false;
         } else {
@@ -68,14 +66,17 @@ public class FriendService {
 
     //친구목록 (차단 , 내가보낸요청 , 친구, 나에게온 요청)
     public Map<String, List<FriendList>> friendAllMap(HttpServletRequest request,int userNo) {
+        //친구 관계목록에 사용할 맵
         Map<String, List<FriendList>> stringListMap = new HashMap<>();
+        //관계가 친구인 리스트
         stringListMap.put("DUDE", friendList(userNo, Relation.DUDE));
+        //관계가 차단인 리스트
         stringListMap.put("BLOCK", friendList(userNo, Relation.BLOCK));
+        //관계가 요청인 리스트
         stringListMap.put("REQUEST", friendList(userNo, Relation.REQUEST));
+        //나한테 들어온 친구요청 리스트
         stringListMap.put("TARGET", targetFriendList(userNo, Relation.REQUEST));
-
-        log.info("친추요청들어온것" + stringListMap.get("TARGET"));
-        log.info("친구 맵 가져오기12312313"+stringListMap);
+        //저장된 리스트들을 세션에 저장
         request.getSession().setAttribute("friendListMap",stringListMap);
         return stringListMap;
     }

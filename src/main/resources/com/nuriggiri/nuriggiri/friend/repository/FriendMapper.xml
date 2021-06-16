@@ -23,14 +23,6 @@
 
     <!--    친구 목록-->
     <select id="friendList" resultMap="friendMap">
-
-        <!--        SELECT * FROM nuri_user-->
-        <!--        WHERE(-->
-        <!--            SELECT target_no FROM nuri_friend-->
-        <!--            WHERE user_no = #{userNo}-->
-        <!--            AND relationship = #{relationship}-->
-        <!--            )-->
-
         SELECT b.user_no, b.user_id, b.nick_name
         FROM
         (
