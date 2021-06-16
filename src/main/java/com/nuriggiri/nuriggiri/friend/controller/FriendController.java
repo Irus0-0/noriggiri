@@ -6,6 +6,7 @@ import com.nuriggiri.nuriggiri.friend.domain.Relation;
 import com.nuriggiri.nuriggiri.friend.service.FriendService;
 import com.nuriggiri.nuriggiri.user.domain.User;
 import com.nuriggiri.nuriggiri.user.domain.UserNonSq;
+import com.nuriggiri.nuriggiri.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,7 @@ import java.util.Map;
 public class FriendController {
 
     private final FriendService friendService;
+    private final UserService userService;
 
     //로그인한 유저의 친구목록 가져오기
     @GetMapping("/friendList")
@@ -78,6 +80,7 @@ public class FriendController {
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 
     }
+
     //친구 요청취소 / 친구거절
     @DeleteMapping("/refuseFriend{targetNo}")
     @ResponseBody
@@ -99,6 +102,7 @@ public class FriendController {
                 ? new ResponseEntity<>("removeFriendSuccess", HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
     //친구 차단 해제 - 관계 삭제됨
     @DeleteMapping("/removeBlockFriend{targetNo}")
     @ResponseBody
@@ -115,12 +119,22 @@ public class FriendController {
     @ResponseBody
     public ResponseEntity<String> addFriend(HttpServletRequest request, @PathVariable int targetNo) {
         int userNo = ((User) request.getSession().getAttribute("loginUser")).getUserNo();
+        log.info("친구 추가 요청");
         return friendService.addFriend(userNo, targetNo)
                 ? new ResponseEntity<>("addFriendSuccess", HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    //검색
+    @PostMapping("/searchFriend{nickName}")
+    @ResponseBody
+    public ResponseEntity<User> searchFriend(@PathVariable String nickName) {
 
+
+            User infoNick = userService.userInfoNick(nickName);
+            return new ResponseEntity<>(infoNick, HttpStatus.OK);
+
+    }
 
 
 }
