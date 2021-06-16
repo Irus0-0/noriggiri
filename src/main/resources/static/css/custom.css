@@ -72,17 +72,32 @@ table {
 
 a {
     text-decoration: none;
+    color: orange;
 }
+
+a:hover {
+    text-decoration: none;
+    color: orangered;
+}
+
+/* adminLTE custom */
+.layout-footer-fixed .wrapper .content-wrapper {
+    padding-bottom: calc(2.5rem + 1px);
+}
+
+
 
 /* header */
 
 
 /* main-sidebar */
 .user-panel {}
+
 .user-panel .info-btn {
     /* border: 1px solid red; */
     margin-top: 20px;
 }
+
 .user-panel .info-btn .btn {
     font-size: 12px;
 }
@@ -168,3 +183,61 @@ a {
 .list-btn a {
     /* color: #fff; */
 }
+
+
+
+
+
+/* board */
+
+.board-content {}
+
+.board-content .card-title {
+    margin-bottom: 0;
+}
+
+.board-content a { 
+    /* display: block; */
+}
+
+.board-content .card-footer.justify-content-center button {
+    margin: 0 5px;
+}
+
+.board-content table th,
+.board-content table td {
+    text-align: center;
+}
+
+.board-content table tr td:nth-child(3) {
+    text-align: left;
+    text-indent: 10px;
+}
+
+.search select {
+    flex: 1;
+    border: 1px solid #ccc;
+    margin-right: 5px;
+}
+
+.search input {
+    flex: 3;
+    border: 1px solid #ccc;
+    margin-right: 5px;
+}
+
+.pagination {
+    margin-bottom: 0;
+}
+
+.pagination li {
+    margin-right: 5px;
+}
+
+.pagination li a {
+    color: #333;
+}
+
+
+
+
