@@ -136,7 +136,8 @@
                     'content-type': 'application/json'
                 }
             };
-            fetch('/friendAccept' + $('#accept-btn').val(), reqInfo)
+            fetch('/friendAccept' + $('#accept-btn').val(), reqInfo);
+            $('#re-button').click();
         });
 
 
@@ -149,7 +150,8 @@
                     'content-type': 'application/json'
                 }
             };
-            fetch('/refuseFriend' + $('#requestCancel-btn').val(), reqInfo)
+            fetch('/refuseFriend' + $('#requestCancel-btn').val(), reqInfo);
+            $('#re-button').click();
         });
 
         //친구삭제
@@ -161,7 +163,8 @@
                     'content-type': 'application/json'
                 }
             };
-            fetch('/removeFriend' + $('#removeFriend-btn').val(), reqInfo)
+            fetch('/removeFriend' + $('#removeFriend-btn').val(), reqInfo);
+            $('#re-button').click();
         });
 
         //친구 차단 해제 - 관계 삭제
@@ -173,7 +176,8 @@
                     'content-type': 'application/json'
                 }
             };
-            fetch('/removeBlockFriend' + $('#removeBlockFriend-btn').val(), reqInfo)
+            fetch('/removeBlockFriend' + $('#removeBlockFriend-btn').val(), reqInfo);
+            $('#re-button').click();
         });
 
         //친추 요청
@@ -186,7 +190,9 @@
                     'content-type': 'application/json'
                 }
             };
-            fetch('/addFriend' + $('#friend-btn').val(), reqInfo)
+            fetch('/addFriend' + $('#friend-btn').val(), reqInfo);
+
+            $('#re-button').click();
         })
 
 
