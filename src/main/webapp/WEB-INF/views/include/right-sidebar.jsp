@@ -8,7 +8,7 @@
         <label for="search-input">친구 검색!</label>
         <input id="userNickName" type="hidden" value="${loginUser.nickName}">
         <input id="search-input" type="text" name="nickName">
-        <button id="search-btn" class="bi bi-search"><span class="fas fa-search"></span></button>
+        <button id="search-btn" class="bi bi-search btn btn-warning"><span class="fas fa-search"></span></button>
         <div id="search-result">
 
         </div>
@@ -25,8 +25,8 @@
 
                 <c:forEach var="TARGET" items="${friendListMap.get('TARGET')}">
                     <div><a href="#">${TARGET.nickName}</a>
-                        <button id="accept-btn" type="button" value="${TARGET.userNo}">수락</button>
-                        <button id="refuse-btn" type="button" value="${TARGET.userNo}">거절</button>
+                        <button id="accept-btn" class="btn btn-warning" type="button" value="${TARGET.userNo}">수락</button>
+                        <button id="refuse-btn" class="btn btn-warning" type="button" value="${TARGET.userNo}">거절</button>
                     </div>
         </div>
         </c:forEach>
@@ -44,7 +44,7 @@
             <c:forEach var="REQUEST" items="${friendListMap.get('REQUEST')}">
                 <div>
                     <a href="#">${REQUEST.nickName}</a>
-                    <button id="requestCancel-btn" type="button" value="${REQUEST.userNo}">요청 취소</button>
+                    <button id="requestCancel-btn" class="btn btn-warning" type="button" value="${REQUEST.userNo}">요청 취소</button>
                 </div>
             </c:forEach>
         </ul>
@@ -58,7 +58,7 @@
         <ul id="block-ul" class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
             <c:forEach var="BLOCK" items="${friendListMap.get('BLOCK')}">
                 <div><a href="#">${BLOCK.nickName}</a>
-                    <button id="removeBlockFriend-btn" type="button" value="${BLOCK.userNo}">차단 해제</button>
+                    <button id="removeBlockFriend-btn" class="btn btn-warning" type="button" value="${BLOCK.userNo}">차단 해제</button>
                 </div>
             </c:forEach>
         </ul>
@@ -71,7 +71,7 @@
         <c:forEach var="DUDE" items="${friendListMap.get('DUDE')}">
             <div>
                 <a href="#">${DUDE.nickName}</a>
-                <button id="removeFriend-btn" type="button" value="${DUDE.userNo}">친구 삭제</button>
+                <button id="removeFriend-btn" type="button" class="btn btn-warning" value="${DUDE.userNo}">친구 삭제</button>
             </div>
 
 
@@ -241,7 +241,7 @@
                 tag += "본인입니다 </a> </div>";
             } else {
                 tag += infoNick.nickName + " </a>" +
-                    "<button id='friend-btn' type='button' value='" + infoNick.userNo +
+                    "<button id='friend-btn' class='btn btn-warning' type='button' value='" + infoNick.userNo +
                     "'>친구 요청</button> </div>";
             }
 
@@ -253,7 +253,7 @@
             // 친구 요청 취소
             for (let REQUEST of stringListMap.REQUEST) {
                 tag += "<div> <a href='#'>" + REQUEST.nickName + "</a>" +
-                    "<button id='requestCancel-btn' type='button' value='" + REQUEST.userNo + "'>요청 취소</button> </div>";
+                    "<button id='requestCancel-btn' class='btn btn-warning' type='button' value='" + REQUEST.userNo + "'>요청 취소</button> </div>";
             }
             $('#requset-Ul').html(tag);
 
@@ -261,7 +261,7 @@
             tag = '나랑 친구 리스트';
             for (let DUDE of stringListMap.DUDE) {
                 tag += "<div> <a href='#'>" + DUDE.nickName + "</a>" +
-                    "<button id='removeFriend-btn' type='button' value='" + DUDE.userNo + "'>친구 삭제</button> </div>";
+                    "<button id='removeFriend-btn' class='btn btn-warning' type='button' value='" + DUDE.userNo + "'>친구 삭제</button> </div>";
             }
             $('#friendList-div').html(tag);
 
@@ -269,7 +269,7 @@
             tag = '';
             for (let BLOCK of stringListMap.BLOCK) {
                 tag += "<div> <a href='#'>" + BLOCK.nickName + "</a>" +
-                    " <button id='removeBlockFriend-btn' type='button' value='" + BLOCK.userNo + "'>차단 해제</button> </div>";
+                    " <button id='removeBlockFriend-btn' class='btn btn-warning' type='button' value='" + BLOCK.userNo + "'>차단 해제</button> </div>";
             }
             $('#block-ul').html(tag);
 
@@ -277,8 +277,8 @@
             tag = '';
             for (let TARGET of stringListMap.TARGET) {
                 tag += "<div> <a href='#'>" + TARGET.nickName + "</a>" +
-                    " <button id='accept-btn' type='button' value='" + TARGET.userNo + "'>수락</button> </div>" +
-                    "<button id='refuse-btn' type='button' value='"+TARGET.userNo+"''>거절</button>";
+                    " <button id='accept-btn' class='btn btn-warning' type='button' value='" + TARGET.userNo + "'>수락</button> </div>" +
+                    "<button id='refuse-btn' class='btn btn-warning' type='button' value='"+TARGET.userNo+"''>거절</button>";
             }
             $('#target-ul').html(tag);
 
