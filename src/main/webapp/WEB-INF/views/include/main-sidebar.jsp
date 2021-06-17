@@ -3,7 +3,7 @@
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="/index.html" class="brand-link">
+    <a href="/channel/chMain" class="brand-link">
         <img src="/dist/img/logo.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">누리끼리</span>
     </a>
@@ -36,7 +36,6 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                 <li class="nav-item menu-open">
                     <a href="#" class="nav-link active">
                         <i class="fas fa-chess-king"></i>
@@ -46,12 +45,8 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <!-- <li class="nav-header">내가 생성한 채널</li> 
-                            채널 관리자 (adminUserNo)가 현재 로그인되어있는 유저일때만 보이게하기
-                        -->                        
                         <c:forEach var="channel" items="${adminList}">
                             <li class="nav-item" data-num="${channel.channelNo}">
-                                <!-- <a href="/channel/viewCh?channelNo=${channel.channelNo}" class="nav-link"> -->
                                 <a href="/channelJoinUser/joinCh/${channel.channelNo}" class="nav-link">
                                     <i class="far fa-heart"></i>
                                     <p>CH.${channel.channelNo} [${channel.channelName}]</p>
@@ -86,13 +81,8 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <!-- <li class="nav-header">내가 참여한 채널</li>
-                            채널 참여자 (joinUser)에 현재 로그인되어있는 유저가 있는 채널만 보이게하기
-                        -->
-
                         <c:forEach var="channel" items="${partiList}">
                             <li class="nav-item" data-num="${channel.channelNo}">
-                                <!-- <a href="/channel/viewCh?channelNo=${channel.channelNo}" class="nav-link"> -->
                                 <a href="/channelJoinUser/joinCh/${channel.channelNo}" class="nav-link">
                                     <i class="far fa-heart"></i>
                                     <p>CH.${channel.channelNo} [${channel.channelName}]</p>
@@ -128,9 +118,9 @@
                     <fmt:formatDate pattern="YYYY년 MM월 dd일 HH시" value="${loginUser.regDate}" /><br>
                 </p>
             </div>
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-                <button type="button" class="btn btn-primary">수정</button>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary">수정</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
             </div>
         </div> <!-- /.modal-content -->
     </div> <!-- /.modal-dialog -->

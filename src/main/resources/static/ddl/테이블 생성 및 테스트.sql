@@ -1,3 +1,5 @@
+-- ///// 테이블 세팅 /////
+-- 유저 테이블
 CREATE SEQUENCE SEQ_NURI_USER;
 
 CREATE TABLE nuri_user(
@@ -7,13 +9,14 @@ CREATE TABLE nuri_user(
     nick_name VARCHAR2(10)NOT NULL, --닉네임
     reg_date DATE DEFAULT sysdate NOT NULL, --가입일
     auth VARCHAR2(20) DEFAULT 'COMMON' NOT NULL, --유저권한
+    session_id VARCHAR2(200) DEFAULT 'none',
+    limit_time DATE,
 
     CONSTRAINT pk_nuri_user PRIMARY KEY (user_no)
 );
 
-ALTER TABLE nuri_user ADD session_id VARCHAR2(200) DEFAULT 'none';
-ALTER TABLE nuri_user ADD limit_time DATE;
 
+-- 채널 테이블
 CREATE SEQUENCE SEQ_NURI_CHANNEL;
 
 CREATE TABLE nuri_channel(
@@ -24,10 +27,11 @@ CREATE TABLE nuri_channel(
     channel_pw VARCHAR2(20), --채널 접속시 필요한 패스워드
     reg_date DATE DEFAULT SYSDATE NOT NULL, --채널 생성일
 
-
     CONSTRAINT pk_nuri_channel PRIMARY KEY (channel_no)
 );
 
+
+-- 채널 조인 유저 테이블
 CREATE SEQUENCE SEQ_NURI_CHANNEL_JOIN_USER;
 
 CREATE TABLE nuri_channel_join_user (
@@ -38,15 +42,14 @@ CREATE TABLE nuri_channel_join_user (
     CONSTRAINT pk_nuri_channel_join_user PRIMARY KEY (join_seq_no)
 );
 
---ALTER TABLE nuri_channel_join_user ADD join_seq_no NUMBER(10);
+-- ALTER TABLE nuri_channel_join_user ADD CONSTRAINT
+--fk_nuri_channel_join_user FOREIGN KEY (channel_no) REFERENCES nuri_channel (channel_no)
 
- -- ALTER TABLE nuri_channel_join_user ADD CONSTRAINT
- --fk_nuri_channel_join_user FOREIGN KEY (channel_no) REFERENCES nuri_channel (channel_no)
-
- -- ALTER TABLE nuri_channel_join_user ADD CONSTRAINT
- --fk_nuri_channel_join_user FOREIGN KEY (user_no) REFERENCES nuri_channel_join (user_no)
+-- ALTER TABLE nuri_channel_join_user ADD CONSTRAINT
+--fk_nuri_channel_join_user FOREIGN KEY (user_no) REFERENCES nuri_channel_join (user_no)
 
 
+-- 게시글 테이블
 CREATE SEQUENCE SEQ_NURI_BOARD;
 
 CREATE TABLE nuri_board (
@@ -61,9 +64,12 @@ CREATE TABLE nuri_board (
 
     CONSTRAINT pk_nuri_board PRIMARY KEY (board_no)
 );
- -- ALTER TABLE nuri_board ADD CONSTRAINT
- --fk_nuri_board FOREIGN KEY (channel_no) REFERENCES nuri_channel (channel_no)
 
+-- ALTER TABLE nuri_board ADD CONSTRAINT
+--fk_nuri_board FOREIGN KEY (channel_no) REFERENCES nuri_channel (channel_no)
+
+
+-- 게시글 추천 테이블
 CREATE TABLE nuri_recommend_list(
     board_no NUMBER(10) NOT NULL, --본문번호 FK PK
     user_no NUMBER(10) NOT NULL, --유저번호 FK
@@ -73,12 +79,13 @@ CREATE TABLE nuri_recommend_list(
 );
 
 -- ALTER TABLE nuri_recommend_list ADD CONSTRAINT
- --fk_nuri_recommend_list FOREIGN KEY (board_no) REFERENCES nuri_board (board_no)
+--fk_nuri_recommend_list FOREIGN KEY (board_no) REFERENCES nuri_board (board_no)
 
- -- ALTER TABLE nuri_recommend_list ADD CONSTRAINT
- --fk_nuri_recommend_list FOREIGN KEY (user_no) REFERENCES nuri_user (user_no)
+-- ALTER TABLE nuri_recommend_list ADD CONSTRAINT
+--fk_nuri_recommend_list FOREIGN KEY (user_no) REFERENCES nuri_user (user_no)
 
 
+-- 댓글 테이블
 CREATE SEQUENCE SEQ_NURI_REPLY;
 
 CREATE TABLE nuri_reply(
@@ -89,19 +96,19 @@ CREATE TABLE nuri_reply(
     nick_name VARCHAR2(10) NOT NULL, --댓글 작성자 이름
     reply_recommend NUMBER(10) DEFAULT 0 NOT NULL, --추천수
     reg_date DATE DEFAULT SYSDATE NOT NULL, --작성일
+    anonymous VARCHAR2(10) DEFAULT 'false',
 
    CONSTRAINT pk_nuri_reply PRIMARY KEY (reply_no)
 );
--- ALTER TABLE nuri_reply ADD CONSTRAINT
- --fk_nuri_reply FOREIGN KEY (channel_no) REFERENCES nuri_channel (channel_no)
 
 -- ALTER TABLE nuri_reply ADD CONSTRAINT
- --fk_nuri_reply FOREIGN KEY (board_no) REFERENCES nuri_board (board_no)
- ALTER TABLE nuri_reply ADD anonymous VARCHAR2(10) DEFAULT 'false';
+--fk_nuri_reply FOREIGN KEY (channel_no) REFERENCES nuri_channel (channel_no)
+
+-- ALTER TABLE nuri_reply ADD CONSTRAINT
+--fk_nuri_reply FOREIGN KEY (board_no) REFERENCES nuri_board (board_no)
 
 
-
-
+-- 댓글 추천 테이블
 CREATE TABLE nuri_reply_recommend_list(
     board_no NUMBER(10) NOT NULL, --본문번호 FK
     reply_no NUmBER(10) NOT NULL, --댓글 번호 FK PK
@@ -110,16 +117,18 @@ CREATE TABLE nuri_reply_recommend_list(
 
     CONSTRAINT pk_nuri_reply_recommend_list PRIMARY KEY (reply_no)
 );
+
 -- ALTER TABLE nuri_reply_recommend_list ADD CONSTRAINT
- --fk_nuri_reply_recommend_list FOREIGN KEY (board_no) REFERENCES nuri_board (board_no)
+--fk_nuri_reply_recommend_list FOREIGN KEY (board_no) REFERENCES nuri_board (board_no)
 
- -- ALTER TABLE nuri_reply_recommend_list ADD CONSTRAINT
- --fk_nuri_reply_recommend_list FOREIGN KEY (reply_no) REFERENCES nuri_reply (reply_no)
+-- ALTER TABLE nuri_reply_recommend_list ADD CONSTRAINT
+--fk_nuri_reply_recommend_list FOREIGN KEY (reply_no) REFERENCES nuri_reply (reply_no)
 
- -- ALTER TABLE nuri_reply_recommend_list ADD CONSTRAINT
- --fk_nuri_reply_recommend_list FOREIGN KEY (user_no) REFERENCES nuri_user (user_no)
+-- ALTER TABLE nuri_reply_recommend_list ADD CONSTRAINT
+--fk_nuri_reply_recommend_list FOREIGN KEY (user_no) REFERENCES nuri_user (user_no)
 
 
+-- 쪽지 테이블
 CREATE SEQUENCE SEQ_NURI_NOTE;
 
 CREATE TABLE nuri_note(
@@ -132,13 +141,16 @@ CREATE TABLE nuri_note(
     CONSTRAINT pk_nuri_note PRIMARY KEY (note_no)
 );
 
---CREATE TABLE nori_note_repository(
+
+-- CREATE TABLE nori_note_repository(
 --    note_no NUMBER(10),
 --    note_content VARCHAR2(200),
 --
 --    CONSTRAINT pk_nori_note_repository PRIMARY KEY (note_no)
 --);
 
+
+-- 친구 테이블
 CREATE TABLE nuri_friend(
     user_no NUMBER(10), --유저번호 PK FK
     target_no NUMBER(10), -- 친구 타겟 유저번호 FK - 유저번호
@@ -146,89 +158,81 @@ CREATE TABLE nuri_friend(
 
 );
 
-
 COMMIT;
 
 
-INSERT INTO nuri_channel
-        (channel_no, channel_name, channel_info, admin_user_no, channel_pw)
-        VALUES
-        (seq_nuri_channel.nextval, 'test2', 'test channel02', 2, '1111') ;
-
-SELECT * FROM nuri_channel
-        WHERE channel_no = 1;
-
-
-
+-- ///// 테이블 조회 /////
 SELECT * FROM nuri_user;
-
-SELECT * FROM nuri_board;
-
 SELECT * FROM nuri_channel ORDER BY channel_no;
+SELECT * FROM nuri_channel_join_user ORDER BY channel_no;
+SELECT * FROM nuri_board ORDER BY board_no DESC;
+SELECT * FROM nuri_recommend_list;
+SELECT * FROM nuri_reply;
+SELECT * FROM nuri_reply_recommend_list;
+SELECT * FROM nuri_note;
+SELECT * FROM nuri_friend;
 
--- 채널+조인
-SELECT * FROM nuri_channel_join_user A, nuri_channel B
-WHERE b.channel_no = a.channel_no
-ORDER BY a.channel_no;
+-- 채널+조인유저 조회 (전체 채널)
+SELECT * FROM nuri_channel A, nuri_channel_join_user B
+WHERE A.channel_no = B.channel_no
+ORDER BY A.channel_no;
 
--- 1번 채널에 1번 유저가 들어가 있는 조인유저리스트
-SELECT * FROM nuri_channel_join_user
-WHERE user_no = 1 AND channel_no = 1;
+-- 채널+조인유저 이너조인 (관리자=접속한유저): 내가 생성한 채널 조회
+SELECT * FROM nuri_channel A, nuri_channel_join_user B
+WHERE a.admin_user_no = b.user_no
+ORDER BY A.channel_no, B.channel_no;
 
-
---DELETE FROM nuri_channel_join_user WHERE join_seq_no = 1;
-
--- 1번 채널에 1번 유저가 들어가 있는 조인시퀀스 조회
-SELECT join_seq_no FROM nuri_channel_join_user
-WHERE user_no = 1 AND channel_no = 1;
-
-
--- 채널 나가기 쿼리
-DELETE FROM nuri_channel_join_user
-        WHERE join_seq_no = (
-        SELECT join_seq_no FROM nuri_channel_join_user
-        WHERE user_no = 1 AND channel_no = 32
-        );
-
-
--- 채널+조인유저 이너조인
-SELECT
-*
-FROM nuri_channel A, nuri_channel_join_user B
-WHERE a.admin_user_no = b.user_no;
-
-
---DROP TABLE nuri_channel_join_user;
-
+-- 내가 참여중인 채널 번호 리스트
 SELECT channel_no FROM nuri_channel_join_user
 WHERE user_no = 2;
 
+
+
+-- ///// 쿼리 테스트 /////
+
+-- 채널 생성 테스트
+INSERT INTO nuri_channel
+(channel_no, channel_name, channel_info, admin_user_no, channel_pw)
+VALUES
+(seq_nuri_channel.nextval, 'test2', 'test channel02', 2, '1111') ;
+
+-- 단일 채널 조회
+SELECT * FROM nuri_channel
+WHERE channel_no = 1;
+
+-- 조인유저 삭제 테스트(채널 나가기)
+DELETE FROM nuri_channel_join_user WHERE join_seq_no = 1;
+
+-- 채널 나가기 쿼리 (조건추가)
+DELETE FROM nuri_channel_join_user
+WHERE join_seq_no = (
+SELECT join_seq_no FROM nuri_channel_join_user
+WHERE user_no = 1 AND channel_no = 32
+);
+
+-- 1번 채널에 1번 유저가 들어가 있는 조인유저 리스트 조회
+SELECT * FROM nuri_channel_join_user
+WHERE user_no = 1 AND channel_no = 1;
+
+-- 1번 채널에 1번 유저가 들어가 있는 조인유저 시퀀스번호 조회
+SELECT join_seq_no FROM nuri_channel_join_user
+WHERE user_no = 1 AND channel_no = 1;
+
 --2번 유저가 관리자인 채널 리스트
-SELECT b.* FROM
+SELECT B.* FROM
 (SELECT channel_no FROM nuri_channel_join_user WHERE user_no = 2) A,
 nuri_channel B
-WHERE a.channel_no = b.channel_no;
+WHERE A.channel_no = B.channel_no;
 
-
---SELECT b.user_no, b.user_id, b.nick_name
---        FROM
---        (
---        SELECT target_no FROM nuri_friend
---        WHERE user_no = #{userNo}
---        AND relationship = #{relationship}
---        ) A
---        , nuri_user B
---        WHERE A.target_no = B.user_no;
-
-
--- 조인 유저 생성 테스트
+-- 조인 유저 생성 테스트 (채널 입장)
 INSERT INTO nuri_channel_join_user
-        (join_seq_no, channel_no, user_no)
-        VALUES
-        (seq_nuri_channel_join_user.nextval, 2, 1);
--- 조인 유저 삭제 테스트
+(join_seq_no, channel_no, user_no)
+VALUES
+(seq_nuri_channel_join_user.nextval, 2, 1);
+
+-- 조인 유저 삭제 테스트 (채널 나가기)
 DELETE FROM nuri_channel_join_user
-        WHERE join_seq_no = 3;
+WHERE join_seq_no = 3;
 
 
 

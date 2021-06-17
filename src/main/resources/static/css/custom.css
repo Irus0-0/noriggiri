@@ -49,8 +49,15 @@ table {
     box-shadow: none;
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-primary:focus {
     color: #000;
+    background-color: #ffec99;
+    border-color: #ffd43b;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+    color: #fff;
     background-color: #ffec99;
     border-color: #ffd43b;
 }
@@ -65,8 +72,13 @@ table {
     color: #000;
 }
 
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: #ffd43b;
+    color: #000;
+}
+
 /* common */
-*:focus {
+*:focus, a:focus {
     outline: none;
 }
 
@@ -84,6 +96,63 @@ a:hover {
 .layout-footer-fixed .wrapper .content-wrapper {
     padding-bottom: calc(2.5rem + 1px);
 }
+.navbar-search-block .input-group {
+    width: 100% !important;
+}
+
+/* adminLTE custom - right-sidebar */
+.layout-fixed .control-sidebar .control-sidebar-content {
+    height: calc(100vh - calc(3.5rem + 1px));
+    overflow-y: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    scrollbar-width: thin;
+    scrollbar-color: #a9a9a9 transparent;
+}
+.os-viewport {
+    direction: inherit!important;
+    box-sizing: inherit!important;
+    resize: none!important;
+    outline: 0!important;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    -webkit-overflow-scrolling: touch;
+}
+.os-content {
+    direction: inherit;
+    box-sizing: border-box!important;
+    position: relative;
+    display: block;
+    /* height: 100%; */
+    width: 100%;
+    visibility: visible;
+
+    height: calc(100% - (3.5rem + 1px));
+    overflow-x: none;
+    overflow-y: initial;
+    padding-bottom: 0;
+    padding-left: .5rem;
+    padding-right: .5rem;
+    padding-top: 0;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    scrollbar-width: thin;
+    scrollbar-color: #a9a9a9 transparent;
+}
+.os-content .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: #6c757d;
+    color: #fff;
+}
+.os-content button.btn-xs {
+    font-size: 12px;
+    padding: .375rem .75rem;
+    height: 35px;
+}
+
 
 
 
@@ -92,15 +161,119 @@ a:hover {
 
 /* main-sidebar */
 .user-panel {}
-
 .user-panel .info-btn {
     /* border: 1px solid red; */
     margin-top: 20px;
 }
-
 .user-panel .info-btn .btn {
     font-size: 12px;
 }
+
+/* right-sidebar */
+.friendSearch {
+
+}
+
+.friendSearch label {
+    display: block;
+    width: 100%;
+    margin-bottom: 3px;
+}
+
+.friendSearch #re-button {
+    width: 100%;
+}
+
+#search-result {
+    width: 100%;
+    margin: 10px auto;
+    padding-top: 10px;
+}
+#search-result div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+#search-result div a {
+    flex: 1;
+    vertical-align: middle;
+    line-height: 25px;
+    padding: 5px 10px;
+    color: orange;
+    font-weight: 600;
+    cursor: default;
+}
+
+#search-result div a:hover {
+    color: orange;
+}
+
+.friend-nav {
+
+}
+
+.friend-nav li.menu-open {
+    width: 100%;
+}
+
+.friend-nav  ul.nav-treeview {
+    margin: 10px auto;
+}
+
+.friend-nav  ul.nav-treeview li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+.friend-nav  ul.nav-treeview li a {
+    flex: 1;
+    vertical-align: middle;
+    line-height: 25px;
+    padding: 5px 10px;
+    color: orange;
+    font-weight: 600;
+    cursor: default;
+}
+
+.friend-nav  ul.nav-treeview li a:hover {
+    color: orange !important;
+}
+
+#friendList-div {
+
+}
+
+#friendList-div ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+#friendList-div ul li.list-header {
+    font-size: 16px;
+    color: #fff;
+}
+
+#friendList-div ul li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+#friendList-div ul li a {
+    flex: 1;
+    vertical-align: middle;
+    line-height: 25px;
+    padding: 5px 10px;
+    color: orange;
+    font-weight: 600;
+    cursor: default;
+}
+
+#friendList-div ul li a:hover {
+    color: orange;
+}
+
+
 
 
 
@@ -196,7 +369,7 @@ a:hover {
     margin-bottom: 0;
 }
 
-.board-content a { 
+.board-content a {
     /* display: block; */
 }
 
@@ -239,5 +412,11 @@ a:hover {
 }
 
 
+/* reply */
+#replies {
 
+}
 
+#replies .form-group {
+    margin-bottom: 0;
+}
