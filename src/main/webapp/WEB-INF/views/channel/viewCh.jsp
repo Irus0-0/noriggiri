@@ -113,6 +113,7 @@
                                     <h6 class="card-title">사다리타기</h6>
 
                                     <p class="card-text">사다리타기 미니게임 입니다.</p>
+                                    <!-- <a href="/ladder/ladder" class="btn btn-primary">게임하기</a> -->
                                     <a href="#" class="btn btn-primary">게임하기</a>
                                 </div>
                             </div>

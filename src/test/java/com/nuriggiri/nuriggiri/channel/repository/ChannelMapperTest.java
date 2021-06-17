@@ -99,7 +99,7 @@ class ChannelMapperTest {
 
     /*@Test
     void  joinUserTest() {
-        List<User> joinUserList = mapper.joinUser(2);
+        List<User> joinUserList = mapper.joinUser(1);
         System.out.println(joinUserList);
         System.out.println("================================================================");
         for (User user : joinUserList) {

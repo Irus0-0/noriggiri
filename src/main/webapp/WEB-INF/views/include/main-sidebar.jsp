@@ -118,9 +118,9 @@
                     <fmt:formatDate pattern="YYYY년 MM월 dd일 HH시" value="${loginUser.regDate}" /><br>
                 </p>
             </div>
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-                <button type="button" class="btn btn-primary">수정</button>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary">수정</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
             </div>
         </div> <!-- /.modal-content -->
     </div> <!-- /.modal-dialog -->

@@ -180,13 +180,11 @@
             if (infoNick == null) {
                 tag += '';
             } else if (infoNick.nickName === $('#userNickName').val()) {
-                tag += "본인입니다 </a> </div>";
+                tag += "본인입니다.</a></div>";
             } else {
-                tag += infoNick.nickName + " </a>" +
-                    "<button id='friend-btn' class='btn btn-warning btn-xs' type='button' value='" + infoNick.userNo +
-                    "'>친구 요청</button> </div>";
+                tag += infoNick.nickName + "</a>" +
+                    "<button id='friend-btn' class='btn btn-warning btn-xs' type='button' value='" + infoNick.userNo + "'>친구 요청</button></div>";
             }
-
             $('#search-result').html(tag);
         }
 
@@ -194,33 +192,35 @@
             let tag = '';
             // 친구 요청 취소
             for (let REQUEST of stringListMap.REQUEST) {
-                tag += "<div> <a href='#'>" + REQUEST.nickName + "</a>" +
-                    "<button id='requestCancel-btn' class='btn btn-warning btn-xs' type='button' value='" + REQUEST.userNo + "'>요청 취소</button> </div>";
+                tag += "<li class='nav-item'><a class='nav-link' href='#'>" + REQUEST.nickName + "</a>" +
+                    "<button id='requestCancel-btn' class='btn btn-warning btn-xs' type='button' value='" + REQUEST.userNo + "'>요청 취소</button></li>";
             }
             $('#requset-ul').html(tag);
 
             //친구삭제
-            tag = '나랑 친구 리스트';
+            // tag = '나랑 친구 리스트';
+            tag = '<li class="list-header">나랑 친구 리스트</li>';
             for (let DUDE of stringListMap.DUDE) {
-                tag += "<div> <a href='#'>" + DUDE.nickName + "</a>" +
-                    "<button id='removeFriend-btn' class='btn btn-warning btn-xs' type='button' value='" + DUDE.userNo + "'>친구 삭제</button> </div>";
+                tag += "<li><a href='#'>" + DUDE.nickName + "</a>" +
+                    "<button id='removeFriend-btn' class='btn btn-warning btn-xs' type='button' value='" + DUDE.userNo + "'>친구 삭제</button></li>";
             }
-            $('#friendList-div').html(tag);
+            // $('#friendList-div').html(tag);
+            $('#friendList-div#friend-ul').html(tag);
 
             //차단
             tag = '';
             for (let BLOCK of stringListMap.BLOCK) {
-                tag += "<div> <a href='#'>" + BLOCK.nickName + "</a>" +
-                    " <button id='removeBlockFriend-btn' class='btn btn-warning btn-xs' type='button' value='" + BLOCK.userNo + "'>차단 해제</button> </div>";
+                tag += "<li class='nav-item'><a class='nav-link' href='#'>" + BLOCK.nickName + "</a>" +
+                    " <button id='removeBlockFriend-btn' class='btn btn-warning btn-xs' type='button' value='" + BLOCK.userNo + "'>차단 해제</button></li>";
             }
             $('#block-ul').html(tag);
 
             //친구수락
             tag = '';
             for (let TARGET of stringListMap.TARGET) {
-                tag += "<div> <a href='#'>" + TARGET.nickName + "</a>" +
-                    " <button id='accept-btn' class='btn btn-warning btn-xs' type='button' value='" + TARGET.userNo + "'>수락</button> </div>" +
-                    "<button id='refuse-btn' class='btn btn-warning btn-xs' type='button' value='"+TARGET.userNo+"''>거절</button>";
+                tag += "<li class='nav-item'><a class='nav-link' href='#'>" + TARGET.nickName + "</a>" +
+                    "<button id='accept-btn' class='btn btn-warning btn-xs mr-1' type='button' value='" + TARGET.userNo + "'>수락</button>" +
+                    "<button id='refuse-btn' class='btn btn-warning btn-xs' type='button' value='" + TARGET.userNo + "'>거절</button></li>";
             }
             $('#target-ul').html(tag);
 

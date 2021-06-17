@@ -22,7 +22,7 @@
                     </div>
                     <!-- 검색결과 -->
                     <div id="search-result"></div>
-                    <button id="re-button" type="button" class="btn btn-dark form-control">새로고침</button>
+                    <button id="re-button" type="button" class="btn btn-outline-warning form-control">새로고침</button>
                 </div>
 
 
@@ -87,8 +87,8 @@
                         <li class="list-header">나랑 친구 리스트</li>                    
                         <!-- ${friendListMap.get("DUDE")} -->
                         <c:forEach var="DUDE" items="${friendListMap.get('DUDE')}">
-                            <li class="">
-                                <a class="" href="#">${DUDE.nickName}</a>
+                            <li>
+                                <a href="#">${DUDE.nickName}</a>
                                 <button id="removeFriend-btn" type="button" class="btn btn-warning btn-xs" value="${DUDE.userNo}">친구 삭제</button>
                             </li>
                         </c:forEach>

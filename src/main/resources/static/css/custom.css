@@ -49,8 +49,15 @@ table {
     box-shadow: none;
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-primary:focus {
     color: #000;
+    background-color: #ffec99;
+    border-color: #ffd43b;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+    color: #fff;
     background-color: #ffec99;
     border-color: #ffd43b;
 }
@@ -71,7 +78,7 @@ table {
 }
 
 /* common */
-*:focus {
+*:focus, a:focus {
     outline: none;
 }
 
@@ -413,6 +420,3 @@ a:hover {
 #replies .form-group {
     margin-bottom: 0;
 }
-
-
-

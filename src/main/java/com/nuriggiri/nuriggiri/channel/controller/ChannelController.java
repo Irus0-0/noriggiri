@@ -103,11 +103,9 @@ public class ChannelController {
         try {
             channelService.update(channel);
         } catch (Exception e) {
-            return "redirect:/channel/modCh?channelNo=" 
-            + modifyChannel.getChannelNo();
+            return "redirect:/channel/modCh?channelNo=" + modifyChannel.getChannelNo();
         }
-        return "redirect:/channel/viewCh?channelNo=" 
-        + modifyChannel.getChannelNo();
+        return "redirect:/channel/viewCh/" + modifyChannel.getChannelNo();
     }
 
     //채널 삭제 요청
@@ -116,6 +114,8 @@ public class ChannelController {
         channelService.delete(channelNo);
         return "redirect:/channel/chMain";
     }
+
+
 
 
 

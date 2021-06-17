@@ -92,6 +92,7 @@
                <!-- 댓글 영역 -->
                <div id="replies" class="row">
                   <div class="col-lg-12">
+
                      <!-- 댓글 쓰기 영역 -->
                      <div class="card">
                         <div class="card-body">
@@ -99,19 +100,16 @@
                               <div class="col-md-9">
                                  <div class="form-group">
                                     <label for="newReplyText" hidden>댓글 내용</label>
-                                    <textarea rows="3" id="newReplyText" name="replyText" class="form-control"
-                                       placeholder="댓글을 입력해주세요."></textarea>
+                                    <textarea rows="4" id="newReplyText" name="replyText" class="form-control" placeholder="댓글을 입력해주세요."></textarea>
                                  </div>
                               </div>
                               <div class="col-md-3">
                                  <div class="form-group">
                                     <label for="newReplyWriter" hidden>댓글 작성자</label>
-                                    <input id="newReplyWriter" type="text" class="form-control"
-                                       style="margin-bottom: 6px;" name="replyWriter" value="${loginUser.nickName}"
-                                       disabled>
+                                    <input id="newReplyWriter" type="text" class="form-control" name="replyWriter" value="${loginUser.nickName}" disabled>
                                     <input type="checkbox" id="anonymous" name="anonymous">
                                     <label for="anonymous">익명</label>
-                                    <button id="replyAddBtn" type="button" class="btn btn-warning form-control">등록</button>
+                                    <button id="replyAddBtn" type="button" class="btn btn-secondary form-control">등록</button>
                                  </div>
                               </div>
                            </div>
@@ -121,23 +119,19 @@
                      <!--댓글 내용 영역-->
                      <div class="card">
                         <!-- 댓글 내용 헤더 -->
-                        <div class="card-header m-0 text-white" style="background: #343A40; ">
+                        <div class="card-header m-0">
                            <div class="float-left">댓글 (<span id="replyCnt">0</span>)</div>
                         </div>
 
                         <!-- 댓글 내용 바디 -->
-                        <div id="replyCollapse" class="card">
+                        <div id="replyCollapse" class="card-body">
                            <div id="replyData">
-                              <!--
-             < JS로 댓글 정보 DIV삽입 > 
-          -->
+                              <!--             < JS로 댓글 정보 DIV삽입 >           -->
                            </div>
 
                            <!-- 댓글 페이징 영역 -->
                            <ul class="pagination justify-content-center">
-                              <!--
-             < JS로 댓글 페이징 DIV삽입 > 
-          -->
+                              <!--             < JS로 댓글 페이징 DIV삽입 >           -->
                            </ul>
                         </div>
                      </div> <!-- end reply content -->
@@ -150,7 +144,7 @@
                      <div class="modal-content">
 
                         <!-- Modal Header -->
-                        <div class="modal-header" style="background: #343A40; color: white;">
+                        <div class="modal-header">
                            <h4 class="modal-title">댓글 수정하기</h4>
                            <button type="button" class="close text-white" data-dismiss="modal">X</button>
                         </div>
@@ -160,15 +154,14 @@
                            <div class="form-group">
                               <input id="modReplyId" type="hidden">
                               <label for="modReplyText" hidden>댓글내용</label>
-                              <textarea id="modReplyText" class="form-control" placeholder="수정할 댓글 내용을 입력하세요."
-                                 rows="3"></textarea>
+                              <textarea id="modReplyText" class="form-control" placeholder="수정할 댓글 내용을 입력하세요." rows="4"></textarea>
                            </div>
                         </div>
 
                         <!-- Modal footer -->
                         <div class="modal-footer">
-                           <button id="replyModBtn" type="button" class="btn btn-dark">수정</button>
-                           <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+                           <button id="replyModBtn" type="button" class="btn btn-secondary">수정</button>
+                           <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
                         </div>
                      </div>
                   </div>
@@ -306,28 +299,30 @@
             let tag = '';
 
             for (let reply of replyMap.replyList) {
-               tag += "<div id='replyContent' class='card-body' data-replyId='" + reply.replyNo + "'>" +
-                  "    <div class='row user-block'>" +
-                  "       <span class='col-md-3'>";
+               tag += 
+                  "<div id='replyContent' data-replyId='" + reply.replyNo + "'>" +
+                  "   <div class='row'>" +
+                  "      <span class='col-md-3'>";
                if (reply.anonymous == 'true') {
                   tag += "<b>익명</b>";
                } else {
                   tag += "<b>" + reply.nickName + "</b>";
                }
                tag +=
-                  "       </span>" +
-                  "       <span class='offset-md-6 col-md-3 text-right'><b>" + formatDate(reply.regDate) +
-                  "</b></span>" +
-                  "    </div><br>" +
-                  "    <div class='row'>" +
-                  "       <div class='col-md-6'>" + reply.content + "</div>" +
-                  "       <div class='offset-md-2 col-md-2 text-right dom'>" +
-                  "         <button type='button' class='btn btn-block btn-warning btn-xs replybtn' id='replyRecBtn'>추천</button>" +
-                  "         <button type='button' class='btn btn-block btn-warning btn-xs replybtn' id='replyModBtn' data-toggle='modal'>수정</button>" +
-                  "         <button type='button' class='btn btn-block btn-danger btn-xs replybtn' id='replyDelBtn'>삭제</button>" +
-                  "       </div>" +
-                  "    </div>" +
-                  " </div>";
+                  "      </span>" +
+                  "      <span class='offset-md-6 col-md-3 text-right'><b>" + formatDate(reply.regDate) + "</b></span>" +
+                  "   </div><br>" +
+                  "   <div class='row'>" +
+                  "      <div class='col-md-9'>" +
+                  "<textarea rows='5' id='newReplyText' name='replyText' class='form-control' disabled>" + reply.content + "</textarea>" +
+                  "      </div>" +
+                  "      <div class='col-md-3 dom'>" +
+                  "         <button type='button' class='btn btn-block btn-secondary btn-xs replybtn' id='replyRecBtn'>추천</button>" +
+                  "         <button type='button' class='btn btn-block btn-secondary btn-xs replybtn' id='replyModBtn' data-toggle='modal'>수정</button>" +
+                  "         <button type='button' class='btn btn-block btn-outline-danger btn-xs replybtn' id='replyDelBtn'>삭제</button>" +
+                  "      </div>" +
+                  "   </div><br>" +
+                  "</div>";
             }
 
             //만든 태그를 댓글목록 안에 배치
@@ -373,8 +368,7 @@
                   boardNo: boardNo,
                   content: $('#newReplyText').val(),
                   nickName: $('#newReplyWriter').val(),
-                  anonymous: $('input:checkbox[id="anonymous"]').is(":checked") ==
-                     true
+                  anonymous: $('input:checkbox[id="anonymous"]').is(":checked") == true
                })
             };
             fetch('/api/v1/reply', reqInfo)
