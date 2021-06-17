@@ -205,7 +205,7 @@
                     "<button id='removeFriend-btn' class='btn btn-warning btn-xs' type='button' value='" + DUDE.userNo + "'>친구 삭제</button></li>";
             }
             // $('#friendList-div').html(tag);
-            $('#friendList-div#friend-ul').html(tag);
+            $('#friend-ul').html(tag);
 
             //차단
             tag = '';
